@@ -1,0 +1,17 @@
+@import '../theme/theme.scss';
+
+.app {
+  background-color: $primary;
+}
+
+.wrapper {
+  max-width: 1200px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+main {
+  flex-grow: 1;
+}
