@@ -1,3 +1,5 @@
+@import './theme.scss';
+
 *,
 *::before,
 *::after {
@@ -15,4 +17,15 @@ html {
 body {
   font-size: 1.6rem;
   font-family: 'Montserrat', sans-serif;
+}
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: $primary;
+  background: $orange;
+}
+
+::selection {
+  color: $primary;
+  background: $orange;
 }
