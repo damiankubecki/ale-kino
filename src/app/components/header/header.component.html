@@ -1,1 +1,25 @@
-<p>header works!</p>
+<header class="wrapper">
+  <h1 class="title">Ale kino!</h1>
+
+  <div class="buttons__container">
+    <button class="buttons__button">Koszyk <fa-icon [icon]="faShoppingCart"></fa-icon></button>
+
+    <div class="userActions__container">
+      <button class="buttons__button" id="userActionsBtn" *ngIf="isLoggedIn; else loggedOut">
+        Witaj, {{ name }}
+      </button>
+      <nav class="userActions__navigation" *ngIf="isLoggedIn">
+        <ul>
+          <a routerLink="/" class="userActions__navigation-item">Moje bilety</a>
+          <a routerLink="/" class="userActions__navigation-item">Chcę obejrzeć</a>
+          <a routerLink="/" class="userActions__navigation-item">Ustawienia</a>
+          <a routerLink="/" class="userActions__navigation-item">Wyloguj</a>
+        </ul>
+      </nav>
+    </div>
+
+    <ng-template #loggedOut>
+      <button class="buttons__button" #loggedOut>Zaloguj</button>
+    </ng-template>
+  </div>
+</header>
