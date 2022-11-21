@@ -12,6 +12,7 @@ import { BuyTicketViewComponent } from './views/buy-ticket-view/buy-ticket-view.
 import { SummaryViewComponent } from './views/summary-view/summary-view.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ListOfDaysComponent } from './components/subcomponents/list-of-days/list-of-days.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FooterComponent } from './components/footer/footer.component';
     SummaryViewComponent,
     HeaderComponent,
     FooterComponent,
+    ListOfDaysComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
   providers: [],
