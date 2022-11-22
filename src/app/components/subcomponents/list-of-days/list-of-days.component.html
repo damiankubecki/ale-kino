@@ -1,1 +1,11 @@
-<p>list-of-days works!</p>
+<section class="wrapper">
+  <div class="buttonsContainer">
+    <button
+      class="buttonsContainer__button"
+      *ngFor="let button of buttons"
+      (click)="setDayToDisplay($event, button.date)"
+    >
+      {{ button.content }}
+    </button>
+  </div>
+</section>
