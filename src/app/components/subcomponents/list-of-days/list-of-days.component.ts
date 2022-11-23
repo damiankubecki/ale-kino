@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { RepertoireService } from '@app/services/repertoire/repertoire.service';
 import * as moment from 'moment';
+
+interface IButton {
+  content: string;
+  date: string;
+}
 
 @Component({
   selector: 'app-list-of-days',
@@ -7,52 +13,28 @@ import * as moment from 'moment';
   styleUrls: ['./list-of-days.component.scss'],
 })
 export class ListOfDaysComponent implements OnInit {
-  buttons = [
-    {
-      content: 'Dziś',
-      date: moment().format('DD/MM/YYYY'),
-    },
-    {
-      content: 'Jutro',
-      date: this.getDateAfterXDays(1, 'long'),
-    },
-    {
-      content: this.getDateAfterXDays(2, 'short'),
-      date: this.getDateAfterXDays(2, 'long'),
-    },
-    {
-      content: this.getDateAfterXDays(3, 'short'),
-      date: this.getDateAfterXDays(3, 'long'),
-    },
-    {
-      content: this.getDateAfterXDays(4, 'short'),
-      date: this.getDateAfterXDays(4, 'long'),
-    },
-    {
-      content: this.getDateAfterXDays(5, 'short'),
-      date: this.getDateAfterXDays(5, 'long'),
-    },
-    {
-      content: this.getDateAfterXDays(6, 'short'),
-      date: this.getDateAfterXDays(6, 'long'),
-    },
+  buttons: IButton[] = [
+    { content: 'Dziś', date: moment().format('DD/MM/YYYY') },
+    { content: 'Jutro', date: this.getDateAfterXDays(1, 'long') },
   ];
 
-  constructor() {}
+  constructor(public RepertoireService: RepertoireService) {
+    for (let i = 2; i <= this.RepertoireService.NUMBER_OF_DAYS_TO_DISPLAY - 1; i++) {
+      this.buttons[i] = {
+        content: this.getDateAfterXDays(i, 'short'),
+        date: this.getDateAfterXDays(i, 'long'),
+      };
+    }
+  }
   ngOnInit(): void {}
+  // ngOnChanges(): void {
+  //   console.log('dziala');
+  // }
 
-  getDateAfterXDays(days: number, type: 'long' | 'short') {
+  private getDateAfterXDays(days: number, type: 'long' | 'short') {
     return moment()
       .locale('pl')
       .add(days, 'days')
       .format(type === 'long' ? 'DD/MM/YYYY' : 'DD/MM');
-  }
-
-  setDayToDisplay(e: Event, date: string) {
-    const allButtons = document.querySelectorAll('.buttonsContainer__button');
-    allButtons.forEach(button => button.classList.remove('active'));
-
-    const target = e.target as HTMLButtonElement;
-    target.classList.add('active');
   }
 }
