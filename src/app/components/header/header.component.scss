@@ -7,7 +7,6 @@
 
 .title {
   flex-grow: 1;
-  text-align: center;
   font-size: $font-XXL;
   color: $orange;
   animation: showTitle 0.3s linear both;
@@ -38,6 +37,7 @@
 .userActions {
   &__container {
     position: relative;
+    z-index: 1;
 
     &:hover .userActions__navigation {
       display: block;
@@ -47,8 +47,8 @@
   &__navigation {
     display: none;
     position: absolute;
-    left: 0;
-    right: 0;
+    left: -10px;
+    right: -10px;
     padding: 2px 0;
     border-top: 5px solid $primary;
     border-bottom-left-radius: 5px;
@@ -63,17 +63,17 @@
 
     &-item {
       display: block;
-      padding: 7px 0;
+      padding: 8px 0;
       text-decoration: none;
       font-size: $font-S;
+      font-weight: bold;
       color: $primary;
       text-align: center;
+      opacity: 0.7;
       transition: 0.1s;
 
       &:hover {
-        opacity: 0.9;
-        border-left: 3px solid $secondary;
-        border-right: 3px solid $secondary;
+        opacity: 1;
       }
     }
   }
