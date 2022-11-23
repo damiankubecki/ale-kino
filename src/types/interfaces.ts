@@ -13,6 +13,7 @@ export interface IMovie {
   title: string;
   dates: Date[];
   description: string;
+  isPremiere: boolean;
   fullDescription?: string;
   duration?: string;
   minAge?: number;
