@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
+import { LongDate } from '@myTypes/types';
 import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RepertoireService {
-  // on init displays today
-  private _DAY_TO_DISPLAY = moment().format('DD/MM/YYYY');
-  // on init displays list of 7 days
+  private _DAY_TO_DISPLAY: LongDate = moment().format('DD/MM/YYYY') as LongDate; // today
   private _NUMBER_OF_DAYS_TO_DISPLAY = 7;
 
   constructor() {}
@@ -16,8 +15,8 @@ export class RepertoireService {
     return this._DAY_TO_DISPLAY;
   }
 
-  public set DAY_TO_DISPLAY(day: string) {
-    if (day) this._DAY_TO_DISPLAY = day;
+  public setDayToDisplay(date: LongDate) {
+    this._DAY_TO_DISPLAY = date;
   }
 
   public get NUMBER_OF_DAYS_TO_DISPLAY() {
