@@ -1,4 +1,4 @@
-import { TicketTypes } from './types';
+import { Hour, LongDate, TicketTypes } from './types';
 
 export interface IRouterPaths {
   home: string;
@@ -8,10 +8,15 @@ export interface IRouterPaths {
   summary: string;
 }
 
+export interface IMovieDate {
+  day: LongDate;
+  hours: Hour[];
+}
+
 export interface IMovie {
   id: string;
   title: string;
-  dates: Date[];
+  dates: IMovieDate[];
   description: string;
   isPremiere: boolean;
   fullDescription?: string;
