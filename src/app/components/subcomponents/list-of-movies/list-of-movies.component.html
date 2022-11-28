@@ -1,0 +1,33 @@
+<section class="wrapper">
+  <div class="movieItem" *ngFor="let movie of moviesCollection">
+    <div class="movieItem__image">
+      <img src="{{ movie.imageURL }}" alt="" />
+      <p *ngIf="movie.isPremiere" class="movieItem__image-premiere">Premiera</p>
+    </div>
+    <div class="movieItem__details">
+      <h3 class="movieItem__details-title">{{ movie.title }}</h3>
+      <p class="movieItem__details-subtitle">
+        <span *ngFor="let genre of movie.genres"> {{ genre }} | </span> {{ movie.duration }} minut |
+        <span *ngIf="movie.minAge; else forEveryone">{{ movie.minAge }}+</span>
+        <ng-template #forEveryone>Dla wszystkich</ng-template>
+      </p>
+      <div class="movieItem__details-description">
+        <p>
+          {{ movie.description }}
+        </p>
+        <button
+          class="movieItem__details-description-toggleBtn"
+          (click)="toggleFullDescriptionActivity(movie.id)"
+        >
+          {{ movie.isFullDescriptionActive ? 'Ukryj' : 'Pokaż więcej' }}
+        </button>
+        <p
+          class="movieItem__details-description-fullDescription"
+          *ngIf="movie.isFullDescriptionActive"
+        >
+          {{ movie.fullDescription }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

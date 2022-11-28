@@ -13,6 +13,7 @@ import { SummaryViewComponent } from './views/summary-view/summary-view.componen
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ListOfDaysComponent } from './components/subcomponents/list-of-days/list-of-days.component';
+import { ListOfMoviesComponent } from './components/subcomponents/list-of-movies/list-of-movies.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ListOfDaysComponent } from './components/subcomponents/list-of-days/lis
     HeaderComponent,
     FooterComponent,
     ListOfDaysComponent,
+    ListOfMoviesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
   providers: [],
