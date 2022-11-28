@@ -19,12 +19,12 @@ export interface IMovie {
   dates: IMovieDate[];
   description: string;
   isPremiere: boolean;
-  fullDescription?: string;
-  duration?: string;
-  minAge?: number;
-  imageURL?: string;
-  genres?: string[];
-  rate?: number;
+  fullDescription: string | null;
+  duration: string;
+  minAge: number | null;
+  imageURL: string | null;
+  genres: string[];
+  rate: number;
 }
 
 export interface ITicket {
