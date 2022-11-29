@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IMovie } from '@myTypes/interfaces';
-import { moviesCollection } from 'data/movies';
 import { notFoundImageURL } from 'assets/imagesURL';
+import { IMovieWithHours, RepertoireService } from '@app/services/repertoire/repertoire.service';
+import { map } from 'rxjs';
 
-interface IMovieExtended extends IMovie {
+interface IMovieExtended extends IMovieWithHours {
   isFullDescriptionActive: boolean;
 }
 
@@ -13,21 +13,27 @@ interface IMovieExtended extends IMovie {
   styleUrls: ['./list-of-movies.component.scss'],
 })
 export class ListOfMoviesComponent implements OnInit {
-  moviesCollection: IMovieExtended[] = moviesCollection.map(movie => ({
-    ...movie,
-    isFullDescriptionActive: false,
-  }));
+  moviesToDisplay: IMovieExtended[] = [];
 
-  constructor() {}
+  constructor(private RepertoireService: RepertoireService) {}
 
   ngOnInit(): void {
-    this.moviesCollection.forEach(movie => {
-      if (!movie.imageURL) movie.imageURL = notFoundImageURL;
+    this.RepertoireService.MOVIES_TO_DISPLAY.pipe(
+      map(movies =>
+        movies.map(movie => ({
+          ...movie,
+          isFullDescriptionActive: false,
+          imageURL: movie.imageURL || notFoundImageURL,
+        }))
+      )
+    ).subscribe(movies => {
+      console.log(movies);
+      this.moviesToDisplay = movies;
     });
   }
 
   toggleFullDescriptionActivity(movieID: string) {
-    const movie = this.moviesCollection.find(movie => movie.id === movieID);
+    const movie = this.moviesToDisplay.find(movie => movie.id === movieID);
 
     if (!movie) return;
     movie.isFullDescriptionActive = !movie?.isFullDescriptionActive;

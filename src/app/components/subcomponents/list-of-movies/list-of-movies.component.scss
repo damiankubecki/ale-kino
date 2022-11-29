@@ -29,6 +29,8 @@
   }
 
   &__details {
+    display: flex;
+    flex-direction: column;
     padding: 0 15px;
     max-width: 55%;
 
@@ -57,16 +59,60 @@
       }
 
       &-toggleBtn {
+        width: 100px;
         align-self: flex-end;
-        margin: 10px 0;
-        padding: 2px 5px;
+        margin: 8px 0;
+        padding: 4px 8px;
         border: none;
-        border-bottom: 2px solid $orange;
-        font-size: $font-S;
+        border-radius: 5px;
+        font-size: $font-XS;
         color: $white;
-        background-color: transparent;
+        background-color: $secondary;
         cursor: pointer;
+        transition: 0.1s;
+
+        &:hover {
+          opacity: 0.85;
+        }
       }
+    }
+
+    &-hours {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: 25px;
+
+      &-btn {
+        width: 80px;
+        padding: 7px 15px;
+        border: 1px solid $primary;
+        border-radius: 5px;
+        background-color: $orange;
+        font-size: $font-M;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        color: $primary;
+        cursor: pointer;
+        transition: 0.1s;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  &__rates {
+    margin-top: 20px;
+    flex-grow: 1;
+
+    &-rate {
+      text-align: center;
+      color: $white;
+      font-size: $font-L;
     }
   }
 }

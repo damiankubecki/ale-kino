@@ -1,5 +1,5 @@
 <section class="wrapper">
-  <div class="movieItem" *ngFor="let movie of moviesCollection">
+  <div class="movieItem" *ngFor="let movie of moviesToDisplay">
     <div class="movieItem__image">
       <img src="{{ movie.imageURL }}" alt="" />
       <p *ngIf="movie.isPremiere" class="movieItem__image-premiere">Premiera</p>
@@ -28,6 +28,17 @@
           {{ movie.fullDescription }}
         </p>
       </div>
+      <div class="movieItem__details-hours">
+        <a routerLink="/" class="movieItem__details-hours-btn" *ngFor="let hour of movie.hours">
+          {{ hour }}
+        </a>
+      </div>
+    </div>
+    <div class="movieItem__rates">
+      <p class="movieItem__rates-rate">Ocena filmu:</p>
+      <p class="movieItem__rates-rate">{{ movie.rate }}/10</p>
+      <button>Oceń ten film!</button>
+      <button>Chcę zobaczyć</button>
     </div>
   </div>
 </section>
