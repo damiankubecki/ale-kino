@@ -3,7 +3,7 @@
     <button
       class="buttonsContainer__button"
       *ngFor="let button of buttons"
-      [class.active]="button.date === this.RepertoireService.DAY_TO_DISPLAY"
+      [class.active]="button.date === this.activeDay"
       (click)="this.RepertoireService.setDayToDisplay(button.date)"
     >
       {{ button.content }}

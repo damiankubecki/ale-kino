@@ -14,12 +14,17 @@ interface IButton {
   styleUrls: ['./list-of-days.component.scss'],
 })
 export class ListOfDaysComponent {
+  activeDay: string = '';
   buttons: IButton[] = [
     { content: 'Dziś', date: moment().format('DD/MM/YYYY') as LongDate },
     { content: 'Jutro', date: this.getDateAfterXDays(1, 'long') as LongDate },
   ];
 
   constructor(public RepertoireService: RepertoireService) {
+    this.RepertoireService.DAY_TO_DISPLAY.subscribe(day => {
+      this.activeDay = day;
+    });
+
     for (let i = 2; i <= this.RepertoireService.NUMBER_OF_DAYS_TO_DISPLAY - 1; i++) {
       this.buttons[i] = {
         content: this.getDateAfterXDays(i, 'short') as ShortDate,
