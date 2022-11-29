@@ -8,15 +8,9 @@ export interface IRouterPaths {
   summary: string;
 }
 
-export interface IMovieDate {
-  day: LongDate;
-  hours: Hour[];
-}
-
 export interface IMovie {
   id: string;
   title: string;
-  dates: IMovieDate[];
   description: string;
   isPremiere: boolean;
   fullDescription: string | null;
@@ -25,6 +19,16 @@ export interface IMovie {
   imageURL: string | null;
   genres: string[];
   rate: number;
+}
+
+export interface IDate {
+  day: LongDate;
+  hours: Hour[];
+}
+
+export interface IMovieDates {
+  id: IMovie['id'];
+  dates: IDate[];
 }
 
 export interface ITicket {
