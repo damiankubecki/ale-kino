@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: paths.home, component: HomeViewComponent },
   { path: paths.admin, component: AdminViewComponent },
   { path: paths.buyTicket, component: BuyTicketViewComponent },
-  { path: paths.reservation, component: ReservationViewComponent },
+  { path: `${paths.reservation}/:id/:day/:hour`, component: ReservationViewComponent },
   { path: paths.summary, component: SummaryViewComponent },
 ];
 

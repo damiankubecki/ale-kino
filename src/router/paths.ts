@@ -1,6 +1,6 @@
 import { IRouterPaths } from 'types/interfaces';
 
-const routes: IRouterPaths = {
+const paths: IRouterPaths = {
   home: '',
   admin: 'admin',
   buyTicket: 'kup_bilet',
@@ -8,4 +8,4 @@ const routes: IRouterPaths = {
   summary: 'podsumowanie',
 };
 
-export default routes;
+export default paths;
