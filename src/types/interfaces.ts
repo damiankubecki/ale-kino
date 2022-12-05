@@ -9,31 +9,34 @@ export interface IRouterPaths {
 }
 
 export interface IMovie {
-  id: string;
+  id: number;
   title: string;
-  description: string;
+  description: {
+    short: string;
+    long: string;
+  };
   isPremiere: boolean;
-  fullDescription: string | null;
   duration: string;
   minAge: number | null;
   imageURL: string | null;
   genres: string[];
-  rate: number;
+  rate: string;
 }
 
-export interface IDate {
+export interface IShowing {
   day: LongDate;
   hours: Hour[];
+  roomId: number;
 }
 
-export interface IMovieDates {
+export interface IRepertoireForMovie {
   id: IMovie['id'];
-  dates: IDate[];
+  showings: IShowing[];
 }
 
 export interface ITicket {
   id: string;
-  owner: `${IUser['firstname']} ${IUser['lastname']}`;
+  owner: `${IUserInfo['firstname']} ${IUserInfo['lastname']}`;
   movie: IMovie['title'];
   date: Date;
   price: string;
@@ -43,21 +46,32 @@ export interface ITicket {
   codeQR: string;
 }
 
-export interface IUser {
+export interface IOrder {
+  firstname: IUserInfo['firstname'];
+  lastname: IUserInfo['lastname'];
+  email: IUserInfo['email'];
+  sendPromo: boolean;
+  totalPrice: number;
+  phone?: IUserInfo['phone'];
+  discountCode?: string;
+}
+
+export interface IRatedMovie {
+  id: IMovie['id'];
+  rate: number;
+}
+
+export interface IUserInfo {
   firstname: string;
   lastname: string;
   email: string;
   phone: number;
-  tickets: ITicket['id'][];
-  wantToWatchIds: IMovie['id'];
+  ordersIds: ITicket['id'][];
+  wantToWatchIds: IMovie['id'][];
+  ratedMovies: IRatedMovie[];
 }
 
-export interface IOrder {
-  firstname: IUser['firstname'];
-  lastname: IUser['lastname'];
-  email: IUser['email'];
-  sendPromo: boolean;
-  totalPrice: number;
-  phone?: IUser['phone'];
-  discountCode?: string;
+export interface IUser {
+  type: 'user' | 'admin';
+  info?: IUserInfo;
 }
