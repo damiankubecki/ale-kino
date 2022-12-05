@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ListOfDaysComponent } from './components/subcomponents/list-of-days/list-of-days.component';
 import { ListOfMoviesComponent } from './components/subcomponents/list-of-movies/list-of-movies.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ListOfMoviesComponent } from './components/subcomponents/list-of-movies
     ListOfDaysComponent,
     ListOfMoviesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],
 })
