@@ -1,64 +1,44 @@
 import { Injectable } from '@angular/core';
-import { IMovie } from '@myTypes/interfaces';
+import { IRepertoireForMovie } from '@myTypes/interfaces';
 import { LongDate } from '@myTypes/types';
-import { moviesCollection, moviesDates } from 'data/movies';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { config } from 'config';
-
-export interface IMovieWithHours extends IMovie {
-  hours: string[];
-}
+import { API_URL, REPERTOIRE_ENDPOINT } from 'api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RepertoireService {
   private _DAY_TO_DISPLAY = new BehaviorSubject<LongDate>(config.repertoire.DAY_TO_DISPLAY_ON_INIT);
-  private _NUMBER_OF_DAYS_TO_DISPLAY = config.repertoire.NUMBER_OF_DAYS_TO_DISPLAY;
-  private _MOVIES_TO_DISPLAY = new BehaviorSubject<IMovieWithHours[]>([]);
+  private _REPERTOIRE = new BehaviorSubject<IRepertoireForMovie[]>([]);
 
-  constructor() {
-    this.setDayToDisplay(config.repertoire.DAY_TO_DISPLAY_ON_INIT);
-  }
-
-  public setDayToDisplay(date: LongDate) {
-    this._DAY_TO_DISPLAY.next(date);
-
-    this._MOVIES_TO_DISPLAY.next(
-      moviesCollection
-        .filter(movie => {
-          const movieDates = moviesDates.find(m => m.id === movie.id);
-
-          const isMoviePlayToday = movieDates?.dates.filter(
-            date => date.day === this._DAY_TO_DISPLAY.value
-          ).length;
-
-          return isMoviePlayToday;
-        })
-        .map(movie => {
-          const movieDates = moviesDates.find(m => m.id === movie.id);
-
-          const hours = movieDates?.dates
-            .filter(date => date.day === this.DAY_TO_DISPLAY.value)
-            .map(date => date.hours)
-            .flat();
-
-          const movieWithHours = { ...movie, hours: hours } as IMovieWithHours;
-
-          return movieWithHours;
-        })
-    );
-  }
-
-  public get DAY_TO_DISPLAY() {
+  get DAY_TO_DISPLAY() {
     return this._DAY_TO_DISPLAY;
   }
 
-  public get NUMBER_OF_DAYS_TO_DISPLAY() {
-    return this._NUMBER_OF_DAYS_TO_DISPLAY;
+  get REPERTOIRE() {
+    return this._REPERTOIRE;
   }
 
-  public get MOVIES_TO_DISPLAY() {
-    return this._MOVIES_TO_DISPLAY;
+  constructor(private http: HttpClient) {
+    this.fetchRepertoire();
+  }
+
+  fetchRepertoire() {
+    const observableResult = this.http.get<IRepertoireForMovie[]>(
+      `${API_URL}/${REPERTOIRE_ENDPOINT}`
+    );
+    observableResult.subscribe({
+      next: response => {
+        this.REPERTOIRE.next(response);
+      },
+    });
+
+    return observableResult;
+  }
+
+  setDayToDisplay(date: LongDate) {
+    this._DAY_TO_DISPLAY.next(date);
   }
 }
