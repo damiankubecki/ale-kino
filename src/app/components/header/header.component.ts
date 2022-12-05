@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserService } from '@app/services/user/user.service';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { IUser } from '@myTypes/interfaces';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   faShoppingCart = faShoppingCart;
-  isLoggedIn = true;
-  name = 'Damian';
+  user: IUser | null = null;
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-
+  constructor(private userService: UserService) {
+    this.userService.USER_DATA.subscribe(user => {
+      if (user) this.user = user;
+    });
+  }
 }

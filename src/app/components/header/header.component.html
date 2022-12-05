@@ -1,18 +1,31 @@
 <header class="wrapper">
-  <h1 class="title">Ale kino!</h1>
+  <a class="title" routerLink="/">
+    <h1 class="title">Ale kino!</h1>
+  </a>
 
   <div class="buttons__container">
-    <button class="buttons__button">Koszyk <fa-icon [icon]="faShoppingCart"></fa-icon></button>
+    <button class="buttons__button" *ngIf="user?.type === 'user'">
+      Koszyk <fa-icon [icon]="faShoppingCart"></fa-icon>
+    </button>
 
     <div class="userActions__container">
-      <button class="buttons__button" id="userActionsBtn" *ngIf="isLoggedIn; else loggedOut">
-        Witaj, {{ name }}
+      <button class="buttons__button" id="userActionsBtn" *ngIf="user; else loggedOut">
+        {{ user.type === 'user' ? 'Witaj, ' + user.info?.firstname : 'Panel administratora' }}
       </button>
-      <nav class="userActions__navigation" *ngIf="isLoggedIn">
+      <nav class="userActions__navigation" *ngIf="user?.type === 'user'">
         <ul>
           <a routerLink="/" class="userActions__navigation-item">Moje bilety</a>
           <a routerLink="/" class="userActions__navigation-item">Chcę obejrzeć</a>
           <a routerLink="/" class="userActions__navigation-item">Ustawienia</a>
+          <a routerLink="/" class="userActions__navigation-item">Wyloguj</a>
+        </ul>
+      </nav>
+      <nav class="userActions__navigation" *ngIf="user?.type === 'admin'">
+        <ul>
+          <a routerLink="/" class="userActions__navigation-item">Sale kinowe</a>
+          <a routerLink="/" class="userActions__navigation-item">Repertuar</a>
+          <a routerLink="/" class="userActions__navigation-item">Użytkownicy</a>
+          <a routerLink="/" class="userActions__navigation-item">Kody zniżkowe</a>
           <a routerLink="/" class="userActions__navigation-item">Wyloguj</a>
         </ul>
       </nav>
