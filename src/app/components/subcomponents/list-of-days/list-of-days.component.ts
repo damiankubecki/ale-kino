@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RepertoireService } from '@app/services/repertoire/repertoire.service';
 import { ShortDate, LongDate } from '@myTypes/types';
+import { config } from 'config';
 import * as moment from 'moment';
 
 interface IButton {
   content: ShortDate | string;
   date: LongDate;
+  disabled: boolean;
 }
 
 @Component({
@@ -15,30 +17,48 @@ interface IButton {
 })
 export class ListOfDaysComponent {
   activeDay: string = '';
-  buttons: IButton[] = [
-    { content: 'Dziś', date: moment().format('DD/MM/YYYY') as LongDate },
-    { content: 'Jutro', date: this.getDateAfterXDays(1, 'long') as LongDate },
-  ];
+  buttonsCollection: IButton[] = [];
 
-  constructor(public RepertoireService: RepertoireService) {
-    this.RepertoireService.DAY_TO_DISPLAY.subscribe(day => {
-      this.activeDay = day;
-    });
+  constructor(private RepertoireService: RepertoireService) {}
 
-    for (let i = 2; i <= this.RepertoireService.NUMBER_OF_DAYS_TO_DISPLAY - 1; i++) {
-      this.buttons[i] = {
-        content: this.getDateAfterXDays(i, 'short') as ShortDate,
-        date: this.getDateAfterXDays(i, 'long') as LongDate,
-      };
+  ngOnInit() {
+    this.activeDay = this.RepertoireService.DAY_TO_DISPLAY.value;
+
+    for (let i = 0; i <= config.repertoire.NUMBER_OF_DAYS_TO_DISPLAY - 1; i++) {
+      this.buttonsCollection.push(this.getButtonProps(i));
     }
   }
 
-  private getDateAfterXDays(days: number, type: 'long' | 'short') {
-    if (!days) return null;
+  setDayToDisplay(date: LongDate) {
+    this.activeDay = date;
+    this.RepertoireService.setDayToDisplay(date);
+  }
 
-    return moment()
+  private getButtonProps(dayFromToday: number) {
+    const longDate = moment()
       .locale('pl')
-      .add(days, 'days')
-      .format(type === 'long' ? 'DD/MM/YYYY' : 'DD/MM') as LongDate | ShortDate;
+      .startOf('week')
+      .add(dayFromToday, 'days')
+      .format('DD/MM/YYYY') as LongDate;
+
+    const shortDate = longDate.slice(0, 5) as ShortDate;
+
+    const today = moment().locale('pl').format('DD/MM');
+
+    let isDisabled = true;
+    if (
+      !moment().isAfter(moment().locale('pl').startOf('week').add(dayFromToday, 'days')) ||
+      today === shortDate
+    ) {
+      isDisabled = false;
+    }
+
+    const buttonProps: IButton = {
+      content: shortDate,
+      date: longDate,
+      disabled: isDisabled,
+    };
+
+    return buttonProps;
   }
 }
