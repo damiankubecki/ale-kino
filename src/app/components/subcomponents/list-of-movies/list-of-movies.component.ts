@@ -1,38 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { notFoundImageURL } from 'assets/imagesURL';
-import { IMovieWithHours, RepertoireService } from '@app/services/repertoire/repertoire.service';
-import { map } from 'rxjs';
-
-interface IMovieExtended extends IMovieWithHours {
-  isFullDescriptionActive: boolean;
-}
+import { Component } from '@angular/core';
+import { IUser } from '@myTypes/interfaces';
+import { RepertoireService } from '@app/services/repertoire/repertoire.service';
+import { IMovieExpanded, MoviesService } from '@app/services/movies/movies.service';
+import { UserService } from '@app/services/user/user.service';
+import paths from 'router/paths';
 
 @Component({
   selector: 'app-list-of-movies',
   templateUrl: './list-of-movies.component.html',
   styleUrls: ['./list-of-movies.component.scss'],
 })
-export class ListOfMoviesComponent implements OnInit {
-  moviesToDisplay: IMovieExtended[] = [];
+export class ListOfMoviesComponent {
+  moviesToDisplay: IMovieExpanded[] = [];
+  reservationPath: string = paths.reservation;
+  user: IUser | null = null;
 
-  constructor(private RepertoireService: RepertoireService) {}
+  constructor(
+    private repertoireService: RepertoireService,
+    private moviesService: MoviesService,
+    private userService: UserService
+  ) {
+    this.userService.USER_DATA.subscribe(user => {
+      if (user) {
+        this.user = user;
+      } else user = null;
+    });
 
-  ngOnInit(): void {
-    this.RepertoireService.MOVIES_TO_DISPLAY.pipe(
-      map(movies =>
-        movies.map(movie => ({
-          ...movie,
-          isFullDescriptionActive: false,
-          imageURL: movie.imageURL || notFoundImageURL,
-        }))
-      )
-    ).subscribe(movies => {
-      console.log(movies);
-      this.moviesToDisplay = movies;
+    this.repertoireService.DAY_TO_DISPLAY.subscribe({
+      next: newDay => {
+        this.moviesService.setMoviesToDisplay(newDay, this.repertoireService.REPERTOIRE.value);
+        this.moviesService.MOVIES_TO_DISPLAY.subscribe(movies => {
+          this.moviesToDisplay = movies;
+        });
+      },
     });
   }
 
-  toggleFullDescriptionActivity(movieID: string) {
+  toggleFullDescriptionActivity(movieID: number) {
     const movie = this.moviesToDisplay.find(movie => movie.id === movieID);
 
     if (!movie) return;

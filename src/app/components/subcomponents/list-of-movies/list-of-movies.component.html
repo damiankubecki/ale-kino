@@ -1,9 +1,10 @@
 <section class="wrapper">
   <div class="movieItem" *ngFor="let movie of moviesToDisplay">
     <div class="movieItem__image">
-      <img src="{{ movie.imageURL }}" alt="" />
+      <img src="{{ movie.imageURL }}" alt="Okładka filmu" />
       <p *ngIf="movie.isPremiere" class="movieItem__image-premiere">Premiera</p>
     </div>
+
     <div class="movieItem__details">
       <h3 class="movieItem__details-title">{{ movie.title }}</h3>
       <p class="movieItem__details-subtitle">
@@ -13,7 +14,13 @@
       </p>
       <div class="movieItem__details-description">
         <p>
-          {{ movie.description }}
+          {{ movie.description.short }}
+        </p>
+        <p
+          class="movieItem__details-description-fullDescription"
+          *ngIf="movie.isFullDescriptionActive"
+        >
+          {{ movie.description.long }}
         </p>
         <button
           class="movieItem__details-description-toggleBtn"
@@ -21,24 +28,23 @@
         >
           {{ movie.isFullDescriptionActive ? 'Ukryj' : 'Pokaż więcej' }}
         </button>
-        <p
-          class="movieItem__details-description-fullDescription"
-          *ngIf="movie.isFullDescriptionActive"
-        >
-          {{ movie.fullDescription }}
-        </p>
       </div>
       <div class="movieItem__details-hours">
-        <a routerLink="/" class="movieItem__details-hours-btn" *ngFor="let hour of movie.hours">
+        <a
+          [routerLink]="[reservationPath, movie.id, movie.day, hour]"
+          class="movieItem__details-hours-btn"
+          *ngFor="let hour of movie.hours"
+        >
           {{ hour }}
         </a>
       </div>
     </div>
+
     <div class="movieItem__rates">
       <p class="movieItem__rates-rate">Ocena filmu:</p>
       <p class="movieItem__rates-rate">{{ movie.rate }}/10</p>
-      <button>Oceń ten film!</button>
-      <button>Chcę zobaczyć</button>
+      <button class="movieItem__rates-btn" *ngIf="user">Oceń ten film!</button>
+      <button class="movieItem__rates-btn" *ngIf="user">Chcę zobaczyć</button>
     </div>
   </div>
 </section>
