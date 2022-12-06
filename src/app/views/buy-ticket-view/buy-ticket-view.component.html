@@ -1,1 +1,106 @@
-<p>buy-ticket-view works!</p>
+<section class="wrapper">
+  <h3 class="title">Co w duszy gra, 06/12/2022, 15:30</h3>
+
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="form">
+    <ng-container *ngIf="form.controls['firstname'] as control">
+      <div class="form__itemContainer narrow">
+        <label class="form__label">Imię: </label>
+        <input
+          formControlName="firstname"
+          type="text"
+          class="form__input form__input-narrow"
+          placeholder="Jan"
+        />
+        <ng-container *ngIf="form.controls['firstname'].errors as error">
+          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
+            *obowiązkowe
+          </p>
+          <p *ngIf="error['minlength'] && control.touched" class="form__errorParagraph">
+            wymagana liczba znaków 3-99
+          </p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['lastname'] as control">
+      <div class="form__itemContainer narrow">
+        <label class="form__label">Nazwisko:</label>
+        <input formControlName="lastname" type="text" class="form__input" placeholder="Kowalski" />
+        <ng-container *ngIf="form.controls['lastname'].errors as error">
+          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
+            *obowiązkowe
+          </p>
+          <p *ngIf="error['minlength'] && control.touched" class="form__errorParagraph">
+            wymagana liczba znaków 3-99
+          </p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['phone'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Numer telefonu (opcjonalne):</label>
+        <input
+          formControlName="phone"
+          type="text"
+          class="form__input"
+          placeholder="+48 123 456 789"
+        />
+        <ng-container *ngIf="form.controls['phone'].errors as error">
+          <p *ngIf="error['minlength'] && control.touched" class="form__errorParagraph">
+            liczba wymaganych znaków: 9
+          </p>
+          <p *ngIf="error['maxlength'] && control.touched" class="form__errorParagraph">
+            liczba wymaganych znaków: 9
+          </p>
+          <p *ngIf="error['pattern'] && control.touched" class="form__errorParagraph">
+            tylko liczby 0-9
+          </p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['email'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Adres e-mail:</label>
+        <input
+          formControlName="email"
+          type="text"
+          class="form__input"
+          placeholder="jan.kowalski@xyz.com"
+        />
+        <ng-container *ngIf="form.controls['email'].errors as error">
+          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
+            *obowiązkowe
+          </p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['emailRepeat'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Powtórz adres e-mail:</label>
+        <input
+          formControlName="emailRepeat"
+          type="text"
+          class="form__input"
+          placeholder="jan.kowalski@xyz.com"
+        />
+        <ng-container *ngIf="form.controls['emailRepeat'].errors as error">
+          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
+            *obowiązkowe
+          </p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <div *ngIf="message" class="form__itemContainer">
+      <p class="form__messageParagraph">Błąd! {{ message }}</p>
+    </div>
+
+    <div class="form__itemContainer">
+      <button type="submit" class="form__submitButton">Zamawiam</button>
+    </div>
+  </form>
+</section>
+ds

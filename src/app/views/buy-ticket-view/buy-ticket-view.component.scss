@@ -1,0 +1,80 @@
+@import '../../../theme/theme.scss';
+
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  line-height: 32px;
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+.form {
+  width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &__narrowInputsContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__itemContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    width: 100%;
+
+    &.narrow {
+      width: 45%;
+    }
+  }
+
+  &__errorParagraph {
+    margin-left: 10px;
+    color: $red;
+    font-size: $font-XS;
+    font-weight: bold;
+  }
+
+  &__messageParagraph {
+    color: $red;
+    font-size: $font-XS;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__label {
+    margin-left: 10px;
+    color: $white;
+    font-size: $font-M;
+  }
+
+  &__input {
+    margin: 5px 0;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: $secondary;
+    color: $white;
+    font-size: $font-M;
+    outline: none;
+  }
+
+  &__submitButton {
+    min-width: 150px;
+    margin: 0 auto;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 2px solid $orange;
+    font-size: $font-M;
+    background-color: $orange;
+    color: $primary;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
