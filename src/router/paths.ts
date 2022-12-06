@@ -3,7 +3,7 @@ import { IRouterPaths } from 'types/interfaces';
 const paths: IRouterPaths = {
   home: '',
   admin: 'admin',
-  buyTicket: 'kup_bilet',
+  buyTicket: 'kup-bilet',
   reservation: 'rezerwacja',
   summary: 'podsumowanie',
 };
