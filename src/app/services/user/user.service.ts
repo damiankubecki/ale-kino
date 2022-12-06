@@ -13,9 +13,9 @@ export class UserService {
       type: 'user',
       info: {
         firstname: 'Damian',
-        lastname: '',
-        email: 'd',
-        phone: 123456789,
+        lastname: 'Damian',
+        email: 'damian@example.com',
+        phone: '',
         ordersIds: [],
         wantToWatchIds: [],
         ratedMovies: [],
@@ -25,13 +25,13 @@ export class UserService {
     this.setUser(newUser);
   }
 
-  public setUser(userData?: IUser) {
+  setUser(userData?: IUser) {
     if (userData) {
       this._USER_DATA.next(userData);
     } else this.USER_DATA.next(null);
   }
 
-  public get USER_DATA() {
+  get USER_DATA() {
     return this._USER_DATA;
   }
 }

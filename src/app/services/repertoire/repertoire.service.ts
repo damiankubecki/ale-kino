@@ -25,7 +25,11 @@ export class RepertoireService {
     this.fetchRepertoire();
   }
 
-  fetchRepertoire() {
+  setDayToDisplay(date: LongDate) {
+    this._DAY_TO_DISPLAY.next(date);
+  }
+
+  private fetchRepertoire() {
     const observableResult = this.http.get<IRepertoireForMovie[]>(
       `${API_URL}/${REPERTOIRE_ENDPOINT}`
     );
@@ -36,9 +40,5 @@ export class RepertoireService {
     });
 
     return observableResult;
-  }
-
-  setDayToDisplay(date: LongDate) {
-    this._DAY_TO_DISPLAY.next(date);
   }
 }

@@ -37,7 +37,18 @@ export class MoviesService {
     });
   }
 
-  fetchMovies() {
+  setMoviesToDisplay(dayToDisplay: LongDate, repertoire: IRepertoireForMovie[]) {
+    this._MOVIES_TO_DISPLAY.next(
+      this._MOVIES_COLLECTION.value
+        .map(movie => this.getMovieWithAdditionalProps(movie))
+        .map(movie => this.getMovieWithScreenings(dayToDisplay, movie, repertoire))
+        .map(movie => this.getOnlyFutureHours(movie))
+        .filter(movie => movie.hours.length)
+        .filter(movie => this.isMoviePlayToday(dayToDisplay, movie, repertoire))
+    );
+  }
+
+  private fetchMovies() {
     const observableResult = this.http.get<IMovie[]>(`${API_URL}/${MOVIES_ENDPOINT}`);
     observableResult.subscribe({
       next: response => {
@@ -46,17 +57,6 @@ export class MoviesService {
     });
 
     return observableResult;
-  }
-
-  setMoviesToDisplay(dayToDisplay: LongDate, repertoire: IRepertoireForMovie[]) {
-    this._MOVIES_TO_DISPLAY.next(
-      this._MOVIES_COLLECTION.value
-        .map(movie => this.getMovieWithAdditionalProps(movie))
-        .map(movie => this.getMovieWithScreenings(dayToDisplay, movie, repertoire))
-        .map(movie => ({ ...movie, hours: this.getOnlyFutureHours(movie.hours) }))
-        .filter(movie => movie.hours.length)
-        .filter(movie => this.isMoviePlayToday(dayToDisplay, movie, repertoire))
-    );
   }
 
   private isMoviePlayToday(day: LongDate, movie: IMovie, repertoire: IRepertoireForMovie[]) {
@@ -76,8 +76,12 @@ export class MoviesService {
     return { ...movie, hours: hours, day } as IMovieExpanded;
   }
 
-  private getOnlyFutureHours(hours: Hour[]) {
-    const futureHours = hours.filter(hour => {
+  private getOnlyFutureHours(movie: IMovieExpanded) {
+    const todayDate = moment().format('DD/MM/YYYY');
+
+    if (todayDate !== movie.day) return movie;
+
+    const futureHours = movie?.hours.filter(hour => {
       const timeNow = moment().locale('pl').format('HH:mm');
       const passedTime = moment(hour, 'HH:mm').locale('pl').format('HH:mm');
 
@@ -86,7 +90,7 @@ export class MoviesService {
       return isAfter;
     });
 
-    return futureHours;
+    return { ...movie, hours: futureHours };
   }
 
   private getMovieWithAdditionalProps(movie: IMovie) {
