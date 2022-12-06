@@ -65,7 +65,7 @@ export interface IUserInfo {
   firstname: string;
   lastname: string;
   email: string;
-  phone: number;
+  phone: string;
   ordersIds: ITicket['id'][];
   wantToWatchIds: IMovie['id'][];
   ratedMovies: IRatedMovie[];
