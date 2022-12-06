@@ -12,7 +12,7 @@ export interface IConfig {
 
 export const config: IConfig = {
   repertoire: {
-    DAY_TO_DISPLAY_ON_INIT: moment().format('DD/MM/YYYY') as LongDate,
+    DAY_TO_DISPLAY_ON_INIT: moment().add(0, 'days').format('DD/MM/YYYY') as LongDate,
     NUMBER_OF_DAYS_TO_DISPLAY: 7,
   },
 };
