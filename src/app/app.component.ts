@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
-import { RepertoireService } from './services/repertoire/repertoire.service';
+import { Component, Type } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [RepertoireService],
+  providers: [],
 })
 export class AppComponent {
-  title = 'ale-kino';
+  topbarContent: Type<unknown> | string | null = null;
 }
