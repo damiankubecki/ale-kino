@@ -1,0 +1,13 @@
+@import '../../../theme/theme.scss';
+
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  line-height: 32px;
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
