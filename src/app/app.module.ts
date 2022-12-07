@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -14,7 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ListOfDaysComponent } from './components/subcomponents/list-of-days/list-of-days.component';
 import { ListOfMoviesComponent } from './components/subcomponents/list-of-movies/list-of-movies.component';
-import { HttpClientModule } from '@angular/common/http';
+import { TypeofPipe } from './pipes/typeof.pipe';
 
 @NgModule({
   declarations: [
@@ -28,8 +30,15 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     ListOfDaysComponent,
     ListOfMoviesComponent,
+    TypeofPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
