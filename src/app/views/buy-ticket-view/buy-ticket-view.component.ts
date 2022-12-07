@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { UserService } from '@app/services/user/user.service';
-import { IUser, IUserInfo } from '@myTypes/interfaces';
+import { IUserInfo } from '@myTypes/interfaces';
 
 type Form = FormGroup<{
   firstname: FormControl<string>;
@@ -23,13 +23,13 @@ export class BuyTicketViewComponent {
 
   handleSubmit() {
     this.form.markAllAsTouched();
-    console.log(this.form.controls.phone.errors);
+
     if (this.form.invalid) return;
 
     if (this.form.controls['email'].value !== this.form.controls['emailRepeat'].value) {
       this.message = 'Podane maile są różne';
     }
-    console.log(this.form.value);
+    this.message = '<- nie. wszystko ok';
   }
 
   constructor(private builder: NonNullableFormBuilder, private userService: UserService) {
@@ -52,6 +52,7 @@ export class BuyTicketViewComponent {
 
   private createForm(userInfo: IUserInfo | null) {
     const create = this.builder;
+    const phoneRegEx = new RegExp('[1-9][0-9]{8}');
 
     const form: Form = create.group({
       firstname: create.control(userInfo?.firstname || '', {
@@ -61,7 +62,11 @@ export class BuyTicketViewComponent {
         validators: [Validators.required, Validators.minLength(3), Validators.maxLength(99)],
       }),
       phone: create.control(userInfo?.phone || '', {
-        validators: [Validators.minLength(9), Validators.maxLength(9)],
+        validators: [
+          Validators.minLength(9),
+          Validators.maxLength(9),
+          Validators.pattern(phoneRegEx),
+        ],
       }),
       email: create.control(userInfo?.email || '', {
         validators: [Validators.required],

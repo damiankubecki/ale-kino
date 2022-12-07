@@ -11,13 +11,9 @@
           class="form__input form__input-narrow"
           placeholder="Jan"
         />
-        <ng-container *ngIf="form.controls['firstname'].errors as error">
-          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
-            *obowiązkowe
-          </p>
-          <p *ngIf="error['minlength'] && control.touched" class="form__errorParagraph">
-            wymagana liczba znaków 3-99
-          </p>
+        <ng-container *ngIf="control.touched && form.controls['firstname'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+          <p *ngIf="error['minlength']" class="form__errorParagraph">wymagana liczba znaków 3-99</p>
         </ng-container>
       </div>
     </ng-container>
@@ -26,13 +22,9 @@
       <div class="form__itemContainer narrow">
         <label class="form__label">Nazwisko:</label>
         <input formControlName="lastname" type="text" class="form__input" placeholder="Kowalski" />
-        <ng-container *ngIf="form.controls['lastname'].errors as error">
-          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
-            *obowiązkowe
-          </p>
-          <p *ngIf="error['minlength'] && control.touched" class="form__errorParagraph">
-            wymagana liczba znaków 3-99
-          </p>
+        <ng-container *ngIf="control.touched && form.controls['lastname'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+          <p *ngIf="error['minlength']" class="form__errorParagraph">wymagana liczba znaków 3-99</p>
         </ng-container>
       </div>
     </ng-container>
@@ -40,21 +32,15 @@
     <ng-container *ngIf="form.controls['phone'] as control">
       <div class="form__itemContainer">
         <label class="form__label">Numer telefonu (opcjonalne):</label>
-        <input
-          formControlName="phone"
-          type="text"
-          class="form__input"
-          placeholder="+48 123 456 789"
-        />
-        <ng-container *ngIf="form.controls['phone'].errors as error">
-          <p *ngIf="error['minlength'] && control.touched" class="form__errorParagraph">
-            liczba wymaganych znaków: 9
-          </p>
-          <p *ngIf="error['maxlength'] && control.touched" class="form__errorParagraph">
-            liczba wymaganych znaków: 9
-          </p>
-          <p *ngIf="error['pattern'] && control.touched" class="form__errorParagraph">
-            tylko liczby 0-9
+        <input formControlName="phone" type="text" class="form__input" placeholder="333444555" />
+        <ng-container *ngIf="control.touched && form.controls['phone'].errors as error">
+          <p *ngIf="error['minlength']" class="form__errorParagraph">liczba wymaganych znaków: 9</p>
+          <p *ngIf="error['maxlength']" class="form__errorParagraph">liczba wymaganych znaków: 9</p>
+          <p
+            *ngIf="error['pattern'] && !error['minlength'] && !error['maxlength']"
+            class="form__errorParagraph"
+          >
+            podaj poprawny numer telefonu
           </p>
         </ng-container>
       </div>
@@ -69,27 +55,23 @@
           class="form__input"
           placeholder="jan.kowalski@xyz.com"
         />
-        <ng-container *ngIf="form.controls['email'].errors as error">
-          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
-            *obowiązkowe
-          </p>
+        <ng-container *ngIf="control.touched && form.controls['email'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
         </ng-container>
       </div>
     </ng-container>
 
     <ng-container *ngIf="form.controls['emailRepeat'] as control">
       <div class="form__itemContainer">
-        <label class="form__label">Powtórz adres e-mail:</label>
+        <label class="form__label">Powtórz e-mail:</label>
         <input
           formControlName="emailRepeat"
           type="text"
           class="form__input"
           placeholder="jan.kowalski@xyz.com"
         />
-        <ng-container *ngIf="form.controls['emailRepeat'].errors as error">
-          <p *ngIf="error['required'] && control.touched" class="form__errorParagraph">
-            *obowiązkowe
-          </p>
+        <ng-container *ngIf="control.touched && form.controls['emailRepeat'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
         </ng-container>
       </div>
     </ng-container>
