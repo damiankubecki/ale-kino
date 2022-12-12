@@ -17,6 +17,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ListOfDaysComponent } from './components/subcomponents/list-of-days/list-of-days.component';
 import { ListOfMoviesComponent } from './components/subcomponents/list-of-movies/list-of-movies.component';
 import { TypeofPipe } from './pipes/typeof.pipe';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     ListOfDaysComponent,
     ListOfMoviesComponent,
     TypeofPipe,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

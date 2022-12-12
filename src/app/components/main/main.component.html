@@ -1,0 +1,16 @@
+<main class="wrapper">
+  <div class="topbar">
+    <ng-container *ngIf="(topbarContent | typeof) === 'string'; else component">
+      <h3 class="title">{{ topbarContent }}</h3>
+    </ng-container>
+    <ng-template #component>
+      <ng-container *ngIf="topbarContent">
+        <ng-container *ngComponentOutlet="forceComponent"></ng-container>
+      </ng-container>
+    </ng-template>
+  </div>
+
+  <div class="contentContainer">
+    <ng-content></ng-content>
+  </div>
+</main>
