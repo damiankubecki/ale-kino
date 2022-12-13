@@ -1,22 +1,16 @@
 <footer class="wrapper">
   <section class="navigation">
     <nav class="navigation__socialMedia">
-      <a href="" class="navigation__socialMedia-item">
-        <fa-icon [icon]="facebookIcon"></fa-icon>
-      </a>
-      <a href="" class="navigation__socialMedia-item">
-        <fa-icon [icon]="instagramIcon"></fa-icon>
-      </a>
-      <a href="" class="navigation__socialMedia-item">
-        <fa-icon [icon]="youtubeIcon"></fa-icon>
-      </a>
+      <ng-container *ngFor="let item of socialMediaItems">
+        <app-social-media-item [item]="item"></app-social-media-item>
+      </ng-container>
     </nav>
 
     <nav class="navigation__others">
-      <a href="" class="navigation__others-link">O nas</a> |
-      <a href="" class="navigation__others-link">Praca</a> |
-      <a href="" class="navigation__others-link">Regulamin</a> |
-      <a href="" class="navigation__others-link">Wynajem sal</a>
+      <ng-container *ngFor="let item of otherLinks; last as last">
+        <a [href]="item.link" class="navigation__others-link">{{ item.name }}</a>
+        {{ !last ? ' | ' : '' }}
+      </ng-container>
     </nav>
   </section>
 

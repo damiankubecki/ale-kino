@@ -15,19 +15,11 @@
   align-items: center;
   margin-bottom: 15px;
 
-  &__socialMedia {
-    &-item {
-      margin: 0 8px;
-      color: $orange;
-      font-size: $font-XL;
-    }
-  }
-
   &__others {
     color: $white;
-    font-size: $font-S;
 
     &-link {
+      font-size: $font-S;
       color: $white;
       text-decoration: none;
 

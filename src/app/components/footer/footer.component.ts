@@ -1,17 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { Component } from '@angular/core';
+import { config, IFooterLinkItem, ISocialMediaItem } from 'config';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
-  facebookIcon = faFacebook;
-  instagramIcon = faInstagram;
-  youtubeIcon = faYoutube;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+export class FooterComponent {
+  socialMediaItems: ISocialMediaItem[] = config.socialMedia.filter(item => item.inFooter);
+  otherLinks: IFooterLinkItem[] = config.footerLinks;
 }
