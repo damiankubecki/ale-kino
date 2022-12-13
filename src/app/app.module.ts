@@ -18,6 +18,8 @@ import { ListOfDaysComponent } from './components/subcomponents/list-of-days/lis
 import { ListOfMoviesComponent } from './components/subcomponents/list-of-movies/list-of-movies.component';
 import { TypeofPipe } from './pipes/typeof.pipe';
 import { MainComponent } from './components/main/main.component';
+import { MovieItemComponent } from './components/subcomponents/movie-item/movie-item.component';
+import { SocialMediaItemComponent } from './components/subcomponents/social-media-item/social-media-item.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { MainComponent } from './components/main/main.component';
     ListOfMoviesComponent,
     TypeofPipe,
     MainComponent,
+    MovieItemComponent,
+    SocialMediaItemComponent,
   ],
   imports: [
     BrowserModule,
