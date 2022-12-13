@@ -1,4 +1,5 @@
-import { Hour, LongDate, TicketTypes } from './types';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { ExternalLink, Hour, LongDate, TicketTypes } from './types';
 
 export interface IRouterPaths {
   home: string;
@@ -6,6 +7,7 @@ export interface IRouterPaths {
   buyTicket: string;
   reservation: string;
   summary: string;
+  login: string;
 }
 
 export interface IMovie {
