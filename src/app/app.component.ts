@@ -1,4 +1,4 @@
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +6,4 @@ import { Component, Type } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   providers: [],
 })
-export class AppComponent {
-  topbarContent: Type<unknown> | string | null = null;
-}
+export class AppComponent {}
