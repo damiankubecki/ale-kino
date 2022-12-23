@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ListOfDaysComponent } from '@app/components/subcomponents/list-of-days/list-of-days.component';
+import { TopbarService } from '@app/services/topbar/topbar.service';
 import { UserService } from '@app/services/user/user.service';
-import paths from 'router/paths';
+import { paths } from 'router/paths';
 
 @Component({
   selector: 'app-home-view',
@@ -9,9 +11,15 @@ import paths from 'router/paths';
   styleUrls: ['./home-view.component.scss'],
 })
 export class HomeViewComponent {
-  constructor(private userService: UserService, private router: Router) {
-    this.userService.USER_DATA.subscribe(user => {
-      if (user?.type === 'admin') {
+  private userService = inject(UserService);
+  private topbarService = inject(TopbarService);
+  private router = inject(Router);
+
+  constructor() {
+    this.topbarService.setTopbarContent(ListOfDaysComponent);
+
+    this.userService.user$.subscribe(user => {
+      if (user.role === 'admin') {
         this.router.navigate([paths.admin]);
       }
     });

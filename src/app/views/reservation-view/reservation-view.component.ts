@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TopbarService } from '@app/services/topbar/topbar.service';
 
 @Component({
   selector: 'app-reservation-view',
@@ -8,5 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ReservationViewComponent {
   title = 'Film';
 
-  constructor() {}
+  constructor(private topbarService: TopbarService) {
+    this.topbarService.setTopbarContent('Rezerwacja');
+  }
 }

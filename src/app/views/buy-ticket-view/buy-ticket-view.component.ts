@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { TopbarService } from '@app/services/topbar/topbar.service';
 import { UserService } from '@app/services/user/user.service';
 import { IUserInfo } from '@myTypes/interfaces';
 
@@ -17,25 +18,20 @@ type Form = FormGroup<{
   styleUrls: ['./buy-ticket-view.component.scss'],
 })
 export class BuyTicketViewComponent {
+  private builder = inject(NonNullableFormBuilder);
+  private userService = inject(UserService);
+  private topbarService = inject(TopbarService);
+
   userInfo: IUserInfo | null = null;
   form!: Form;
   message = '';
 
-  handleSubmit() {
-    this.form.markAllAsTouched();
+  constructor() {
+    this.topbarService.setTopbarContent('Apokawixa, 12/12/2022, 14:30');
 
-    if (this.form.invalid) return;
-
-    if (this.form.controls['email'].value !== this.form.controls['emailRepeat'].value) {
-      this.message = 'Podane maile są różne';
-    }
-    this.message = '<- nie. wszystko ok';
-  }
-
-  constructor(private builder: NonNullableFormBuilder, private userService: UserService) {
-    this.userService.USER_DATA.subscribe({
+    this.userService.user$.subscribe({
       next: user => {
-        if (user?.type === 'user' && user?.info) {
+        if (user.role === 'user' && user?.info) {
           this.userInfo = user.info;
         }
 
@@ -48,6 +44,16 @@ export class BuyTicketViewComponent {
         this.message = '';
       },
     });
+  }
+
+  handleSubmit() {
+    this.form.markAllAsTouched();
+
+    if (this.form.invalid) return;
+
+    if (this.form.controls['email'].value !== this.form.controls['emailRepeat'].value) {
+      this.message = 'Podane maile są różne';
+    } else this.message = '<- nie. wszystko ok';
   }
 
   private createForm(userInfo: IUserInfo | null) {
