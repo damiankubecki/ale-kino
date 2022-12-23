@@ -1,20 +1,27 @@
-import { Component } from '@angular/core';
-import { UserService } from '@app/services/user/user.service';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { IUser } from '@myTypes/interfaces';
+import { Component, inject, OnInit } from '@angular/core';
+import { IUser, UserService } from '@app/services/user/user.service';
+import { config, IHeaderActionMenu } from 'config';
+import { paths } from 'router/paths';
+import { icons } from 'assets/icons';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-  faShoppingCart = faShoppingCart;
-  user: IUser | null = null;
+export class HeaderComponent implements OnInit {
+  private userService = inject(UserService);
 
-  constructor(private userService: UserService) {
-    this.userService.USER_DATA.subscribe(user => {
-      if (user) this.user = user;
+  user: IUser = { role: 'guest', info: null };
+  actionMenu: IHeaderActionMenu = config.headerActionMenu;
+  paths = paths;
+  icons = icons;
+
+  ngOnInit() {
+    this.userService.user$.subscribe({
+      next: user => {
+        this.user = user;
+      },
     });
   }
 }

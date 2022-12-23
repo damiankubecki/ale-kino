@@ -1,38 +1,21 @@
 <header class="wrapper">
-  <a class="title" routerLink="/">
+  <a class="title" [routerLink]="paths.home">
     <h1 class="title">Ale kino!</h1>
   </a>
 
-  <div class="buttons__container">
-    <button class="buttons__button" *ngIf="user?.type === 'user'">
-      Koszyk <fa-icon [icon]="faShoppingCart"></fa-icon>
-    </button>
+  <div class="buttonsContainer">
+    <ng-container *ngIf="user.role === 'guest' || user.role === 'user'">
+      <app-nav-button [icon]="icons.shoppingCart">Koszyk</app-nav-button>
+    </ng-container>
 
-    <div class="userActions__container">
-      <button class="buttons__button" id="userActionsBtn" *ngIf="user; else loggedOut">
-        {{ user.type === 'user' ? 'Witaj, ' + user.info?.firstname : 'Panel administratora' }}
-      </button>
-      <nav class="userActions__navigation" *ngIf="user?.type === 'user'">
-        <ul>
-          <a routerLink="/" class="userActions__navigation-item">Moje bilety</a>
-          <a routerLink="/" class="userActions__navigation-item">Chcę obejrzeć</a>
-          <a routerLink="/" class="userActions__navigation-item">Ustawienia</a>
-          <a routerLink="/" class="userActions__navigation-item">Wyloguj</a>
-        </ul>
-      </nav>
-      <nav class="userActions__navigation" *ngIf="user?.type === 'admin'">
-        <ul>
-          <a routerLink="/" class="userActions__navigation-item">Sale kinowe</a>
-          <a routerLink="/" class="userActions__navigation-item">Repertuar</a>
-          <a routerLink="/" class="userActions__navigation-item">Użytkownicy</a>
-          <a routerLink="/" class="userActions__navigation-item">Kody zniżkowe</a>
-          <a routerLink="/" class="userActions__navigation-item">Wyloguj</a>
-        </ul>
-      </nav>
-    </div>
+    <ng-container *ngIf="user.role === 'guest'">
+      <app-nav-button [link]="paths.login">Zaloguj</app-nav-button>
+    </ng-container>
 
-    <ng-template #loggedOut>
-      <button class="buttons__button" #loggedOut>Zaloguj</button>
-    </ng-template>
+    <ng-container *ngIf="user.role === 'user' || user.role === 'admin'">
+      <app-nav-button [menuItems]="actionMenu[user.role]">
+        {{ user.role === 'user' ? 'Witaj, ' + user.info!.firstname : 'Panel administratora' }}
+      </app-nav-button>
+    </ng-container>
   </div>
 </header>
