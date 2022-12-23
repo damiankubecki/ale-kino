@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IRepertoireForMovie } from '@myTypes/interfaces';
 import { LongDate } from '@myTypes/types';
 import { HttpClient } from '@angular/common/http';
@@ -10,32 +10,43 @@ import { API_URL, REPERTOIRE_ENDPOINT } from 'api';
   providedIn: 'root',
 })
 export class RepertoireService {
-  private _DAY_TO_DISPLAY = new BehaviorSubject<LongDate>(config.repertoire.DAY_TO_DISPLAY_ON_INIT);
-  private _REPERTOIRE = new BehaviorSubject<IRepertoireForMovie[]>([]);
+  private http = inject(HttpClient);
 
-  get DAY_TO_DISPLAY() {
-    return this._DAY_TO_DISPLAY;
+  private dayToDisplay$$ = new BehaviorSubject<LongDate>(config.repertoire.dayToDisplayOnInit);
+  private repertoire$$ = new BehaviorSubject<IRepertoireForMovie[]>([]);
+
+  get dayToDisplay$() {
+    return this.dayToDisplay$$.asObservable();
   }
 
-  get REPERTOIRE() {
-    return this._REPERTOIRE;
+  get dayToDisplay() {
+    return this.dayToDisplay$$.value;
   }
 
-  constructor(private http: HttpClient) {
+  get repertoire$() {
+    return this.repertoire$$.asObservable();
+  }
+
+  get repertoire() {
+    return this.repertoire$$.value;
+  }
+
+  constructor() {
     this.fetchRepertoire();
   }
 
   setDayToDisplay(date: LongDate) {
-    this._DAY_TO_DISPLAY.next(date);
+    this.dayToDisplay$$.next(date);
   }
 
   private fetchRepertoire() {
     const observableResult = this.http.get<IRepertoireForMovie[]>(
       `${API_URL}/${REPERTOIRE_ENDPOINT}`
     );
+
     observableResult.subscribe({
       next: response => {
-        this.REPERTOIRE.next(response);
+        this.repertoire$$.next(response);
       },
     });
 

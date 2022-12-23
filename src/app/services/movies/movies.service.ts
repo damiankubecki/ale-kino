@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IMovie, IRepertoireForMovie } from '@myTypes/interfaces';
 import { Hour, LongDate } from '@myTypes/types';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { API_URL, MOVIES_ENDPOINT } from 'api';
-import { RepertoireService } from '../repertoire/repertoire.service';
 import { notFoundImageURL } from 'assets/imagesURL';
 import * as moment from 'moment';
+import { RepertoireService } from '../repertoire/repertoire.service';
 
 export interface IMovieExpanded extends IMovie {
   day: LongDate;
@@ -18,28 +18,43 @@ export interface IMovieExpanded extends IMovie {
   providedIn: 'root',
 })
 export class MoviesService {
-  private _MOVIES_TO_DISPLAY = new BehaviorSubject<IMovieExpanded[]>([]);
-  private _MOVIES_COLLECTION = new BehaviorSubject<IMovie[]>([]);
+  private http = inject(HttpClient);
+  private repertoireService = inject(RepertoireService);
 
-  get MOVIES_TO_DISPLAY() {
-    return this._MOVIES_TO_DISPLAY;
+  private moviesToDisplay$$ = new BehaviorSubject<IMovieExpanded[]>([]);
+  private moviesCollection$$ = new BehaviorSubject<IMovie[]>([]);
+
+  get moviesToDisplay$() {
+    return this.moviesToDisplay$$.asObservable();
   }
 
-  constructor(private http: HttpClient, private repertoireService: RepertoireService) {
+  get moviesCollection$() {
+    return this.moviesCollection$$.asObservable();
+  }
+
+  get moviesToDisplay() {
+    return this.moviesCollection$$.value;
+  }
+
+  get moviesCollection() {
+    return this.moviesCollection$$.value;
+  }
+
+  constructor() {
     this.fetchMovies();
 
-    combineLatest([this._MOVIES_COLLECTION, this.repertoireService.REPERTOIRE]).subscribe({
+    combineLatest([this.moviesCollection$$, this.repertoireService.repertoire$]).subscribe({
       next: ([movies, repertoire]) => {
         if (!movies.length || !repertoire.length) return;
 
-        this.setMoviesToDisplay(this.repertoireService.DAY_TO_DISPLAY.value, repertoire);
+        this.setMoviesToDisplay(this.repertoireService.dayToDisplay, repertoire);
       },
     });
   }
 
   setMoviesToDisplay(dayToDisplay: LongDate, repertoire: IRepertoireForMovie[]) {
-    this._MOVIES_TO_DISPLAY.next(
-      this._MOVIES_COLLECTION.value
+    this.moviesToDisplay$$.next(
+      this.moviesCollection$$.value
         .map(movie => this.getMovieWithAdditionalProps(movie))
         .map(movie => this.getMovieWithScreenings(dayToDisplay, movie, repertoire))
         .map(movie => this.getOnlyFutureHours(movie))
@@ -50,9 +65,10 @@ export class MoviesService {
 
   private fetchMovies() {
     const observableResult = this.http.get<IMovie[]>(`${API_URL}/${MOVIES_ENDPOINT}`);
+
     observableResult.subscribe({
       next: response => {
-        this._MOVIES_COLLECTION.next(response);
+        this.moviesCollection$$.next(response);
       },
     });
 
@@ -94,12 +110,10 @@ export class MoviesService {
   }
 
   private getMovieWithAdditionalProps(movie: IMovie) {
-    const newMovieObject = {
+    return {
       ...movie,
       isFullDescriptionActive: false,
       imageURL: movie.imageURL || notFoundImageURL,
     };
-
-    return newMovieObject;
   }
 }
