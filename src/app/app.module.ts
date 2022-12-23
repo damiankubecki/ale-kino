@@ -20,6 +20,7 @@ import { TypeofPipe } from './pipes/typeof.pipe';
 import { MainComponent } from './components/main/main.component';
 import { MovieItemComponent } from './components/subcomponents/movie-item/movie-item.component';
 import { SocialMediaItemComponent } from './components/subcomponents/social-media-item/social-media-item.component';
+import { NavButtonComponent } from './components/subcomponents/nav-button/nav-button.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SocialMediaItemComponent } from './components/subcomponents/social-medi
     MainComponent,
     MovieItemComponent,
     SocialMediaItemComponent,
+    NavButtonComponent,
   ],
   imports: [
     BrowserModule,
