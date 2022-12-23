@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <button [routerLink]="link || null" class="button">
+    <ng-content></ng-content>{{ ' ' }}
+    <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+  </button>
+
+  <ng-container *ngIf="menuItems">
+    <nav class="menu">
+      <ul>
+        <a *ngFor="let item of menuItems" [routerLink]="item.path" class="menu__item">{{
+          item.title
+        }}</a>
+      </ul>
+    </nav>
+  </ng-container>
+</div>
