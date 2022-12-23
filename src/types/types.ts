@@ -9,3 +9,5 @@ export type LongDate = `${string}/${string}/${string}`;
 export type Repertoire = IRepertoireForMovie[];
 
 export type ExternalLink = `https://${string}`;
+
+export type UsersRoles = 'admin' | 'user' | 'guest';

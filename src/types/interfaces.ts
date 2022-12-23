@@ -1,14 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { ExternalLink, Hour, LongDate, TicketTypes } from './types';
-
-export interface IRouterPaths {
-  home: string;
-  admin: string;
-  buyTicket: string;
-  reservation: string;
-  summary: string;
-  login: string;
-}
+import { Hour, LongDate, TicketTypes } from './types';
 
 export interface IMovie {
   id: number;
@@ -73,7 +63,4 @@ export interface IUserInfo {
   ratedMovies: IRatedMovie[];
 }
 
-export interface IUser {
-  type: 'user' | 'admin';
-  info?: IUserInfo;
-}
+
