@@ -7,7 +7,7 @@ import {
   ReservationViewComponent,
   SummaryViewComponent,
 } from '@app/views/views';
-import paths from './paths';
+import { paths } from './paths';
 
 const routes: Routes = [
   { path: paths.home, component: HomeViewComponent },
