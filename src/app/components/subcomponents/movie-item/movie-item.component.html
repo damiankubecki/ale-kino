@@ -42,7 +42,7 @@
   <div class="movieItem__rates">
     <p class="movieItem__rates-rate">Ocena filmu:</p>
     <p class="movieItem__rates-rate">{{ movie.rate }}/10</p>
-    <button class="movieItem__rates-btn" *ngIf="user">Oceń ten film!</button>
-    <button class="movieItem__rates-btn" *ngIf="user">Chcę zobaczyć</button>
+    <button class="movieItem__rates-btn" *ngIf="isUserLogged">Oceń ten film!</button>
+    <button class="movieItem__rates-btn" *ngIf="isUserLogged">Chcę zobaczyć</button>
   </div>
 </div>

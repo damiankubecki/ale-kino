@@ -22,9 +22,9 @@ export class ListOfDaysComponent {
   constructor(private RepertoireService: RepertoireService) {}
 
   ngOnInit() {
-    this.activeDay = this.RepertoireService.DAY_TO_DISPLAY.value;
+    this.activeDay = this.RepertoireService.dayToDisplay;
 
-    for (let i = 0; i <= config.repertoire.NUMBER_OF_DAYS_TO_DISPLAY - 1; i++) {
+    for (let i = 0; i <= config.repertoire.numberOfDaysToDisplay - 1; i++) {
       this.buttonsCollection.push(this.getButtonProps(i));
     }
   }

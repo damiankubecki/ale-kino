@@ -1,50 +1,10 @@
 <section class="wrapper">
-  <div class="movieItem" *ngFor="let movie of moviesToDisplay">
-    <div class="movieItem__image">
-      <img src="{{ movie.imageURL }}" alt="Okładka filmu" />
-      <p *ngIf="movie.isPremiere" class="movieItem__image-premiere">Premiera</p>
-    </div>
-
-    <div class="movieItem__details">
-      <h3 class="movieItem__details-title">{{ movie.title }}</h3>
-      <p class="movieItem__details-subtitle">
-        <span *ngFor="let genre of movie.genres"> {{ genre }} | </span> {{ movie.duration }} minut |
-        <span *ngIf="movie.minAge; else forEveryone">{{ movie.minAge }}+</span>
-        <ng-template #forEveryone>Dla wszystkich</ng-template>
-      </p>
-      <div class="movieItem__details-description">
-        <p>
-          {{ movie.description.short }}
-        </p>
-        <p
-          class="movieItem__details-description-fullDescription"
-          *ngIf="movie.isFullDescriptionActive"
-        >
-          {{ movie.description.long }}
-        </p>
-        <button
-          class="movieItem__details-description-toggleBtn"
-          (click)="toggleFullDescriptionActivity(movie.id)"
-        >
-          {{ movie.isFullDescriptionActive ? 'Ukryj' : 'Pokaż więcej' }}
-        </button>
-      </div>
-      <div class="movieItem__details-hours">
-        <a
-          [routerLink]="[reservationPath, movie.id, movie.day, hour]"
-          class="movieItem__details-hours-btn"
-          *ngFor="let hour of movie.hours"
-        >
-          {{ hour }}
-        </a>
-      </div>
-    </div>
-
-    <div class="movieItem__rates">
-      <p class="movieItem__rates-rate">Ocena filmu:</p>
-      <p class="movieItem__rates-rate">{{ movie.rate }}/10</p>
-      <button class="movieItem__rates-btn" *ngIf="user">Oceń ten film!</button>
-      <button class="movieItem__rates-btn" *ngIf="user">Chcę zobaczyć</button>
-    </div>
-  </div>
+  <p *ngIf="!moviesToDisplay.length; else moviesList" class="message">
+    Brak seansów na wybrany dzień
+  </p>
+  <ng-template #moviesList>
+    <ng-container *ngFor="let movie of moviesToDisplay">
+      <app-movie-item [movie]="movie"></app-movie-item>
+    </ng-container>
+  </ng-template>
 </section>
