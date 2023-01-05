@@ -8,14 +8,25 @@ import {
   SummaryViewComponent,
 } from '@app/views/views';
 import { IsAdminGuard } from './guards/is-admin.guard';
+import { IsNotAdminGuard } from './guards/is-not-admin.guard';
 import { paths } from './paths';
 
 const routes: Routes = [
-  { path: paths.home, component: HomeViewComponent },
-  { path: paths.admin, canActivate: [IsAdminGuard], component: AdminViewComponent },
-  { path: paths.buyTicket, component: BuyTicketViewComponent },
-  { path: `${paths.reservation}/:id/:day/:hour`, component: ReservationViewComponent },
-  { path: paths.summary, component: SummaryViewComponent },
+  {
+    path: paths.home,
+    canActivate: [IsNotAdminGuard],
+    children: [
+      { path: paths.home, component: HomeViewComponent },
+      { path: paths.buyTicket, component: BuyTicketViewComponent },
+      { path: `${paths.reservation}/:id/:day/:hour`, component: ReservationViewComponent },
+      { path: paths.summary, component: SummaryViewComponent },
+    ],
+  },
+  {
+    path: paths.admin,
+    canActivate: [IsAdminGuard],
+    component: AdminViewComponent,
+  },
 ];
 
 @NgModule({
