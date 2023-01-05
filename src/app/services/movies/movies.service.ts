@@ -32,18 +32,10 @@ export class MoviesService {
     return this.moviesCollection$$.asObservable();
   }
 
-  get moviesToDisplay() {
-    return this.moviesCollection$$.value;
-  }
-
-  get moviesCollection() {
-    return this.moviesCollection$$.value;
-  }
-
   constructor() {
     this.fetchMovies();
 
-    combineLatest([this.moviesCollection$$, this.repertoireService.repertoire$]).subscribe({
+    combineLatest([this.moviesCollection$, this.repertoireService.repertoire$]).subscribe({
       next: ([movies, repertoire]) => {
         if (!movies.length || !repertoire.length) return;
 

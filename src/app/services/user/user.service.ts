@@ -1,33 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUserInfo } from '@myTypes/interfaces';
 import { UsersRoles } from '@myTypes/types';
-import { BehaviorSubject, filter, map, of } from 'rxjs';
-
-// role Roles = 'admin' | 'user'
-
-// const menus = new Map<Roles, {title: string; path: string}[]>([
-//   ['admin', [
-//     { title: 'Moje bilety', path: '/' },
-//     { title: 'Chcę obejrzeć', path: '/' },
-//     { title: 'Ustawienia', path: '/' },
-//     { title: 'Wyloguj', path: '/' },
-//   ]],
-//   ['user', [
-//     { title: 'Moje bilety', path: '/' },
-//     { title: 'Chcę obejrzeć', path: '/' },
-//     { title: 'Ustawienia', path: '/' },
-//     { title: 'Wyloguj', path: '/' },
-//   ]]
-// ]);
-
-// const user$ = of<{role: Roles, id: number}>({
-//   role: 'admin',
-//   id:3225
-// })
-
-// const menuConfig$ = user$.pipe(map(user => menus.get(user.role)));
-
-// <menu *ngIf="menuConfig$ | async as cpmfog"  [config]="config"></menu>
+import { BehaviorSubject } from 'rxjs';
 
 export interface IUser {
   role: UsersRoles;
