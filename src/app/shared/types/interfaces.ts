@@ -15,13 +15,18 @@ export interface IMovie {
   rate: string;
 }
 
+interface OccupiedSeats {
+  [hour: Hour]: number[];
+}
+
 export interface IShowing {
   day: LongDate;
   hours: Hour[];
+  occupiedSeatsIds: OccupiedSeats[];
   roomId: number;
 }
 
-export interface IRepertoireForMovie {
+export interface IMovieRepertoire {
   id: IMovie['id'];
   showings: IShowing[];
 }
@@ -62,5 +67,3 @@ export interface IUserInfo {
   wantToWatchIds: IMovie['id'][];
   ratedMovies: IRatedMovie[];
 }
-
-
