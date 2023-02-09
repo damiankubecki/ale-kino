@@ -1,0 +1,39 @@
+<section class="wrapper">
+  <h2 class="title">
+    {{ order?.movie?.title }}, {{ order?.showing?.day }}, godzina: {{ order?.showing?.hour }}
+  </h2>
+  <p class="screen-subtitle">Ekran</p>
+  <div class="screen"></div>
+
+  <div *ngIf="room" class="room">
+    <div class="row" *ngFor="let row of room?.rows; let rowIndex = index">
+      <button
+        *ngFor="let id of row.seats; let colIndex = index"
+        (click)="handleSeatClick($event)"
+        [attr.data-id]="id"
+        [attr.data-row-index]="rowIndex"
+        [attr.data-col-index]="colIndex"
+        [disabled]="occupiedSeatsIds.includes(id)"
+        [class.inOrder]="isSeatInOrder(id)"
+        class="seat"
+      >
+        {{ colIndex + 1 }}
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="order?.reservedSeats?.length; else selectSeats">
+    <app-order-items-list></app-order-items-list>
+    <div class="submit-button-container">
+      <app-button (click)="back()" [secondary]="true">Powrót</app-button>
+      <app-button (click)="handleSubmit()">Dalej</app-button>
+    </div>
+  </ng-container>
+
+  <ng-template #selectSeats>
+    <p class="select-seats-info">Wybierz miejsca</p>
+    <div class="button-container">
+      <app-button (click)="back()" [secondary]="true">Powrót</app-button>
+    </div>
+  </ng-template>
+</section>

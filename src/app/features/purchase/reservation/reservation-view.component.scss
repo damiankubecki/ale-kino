@@ -1,0 +1,78 @@
+@import '../../../../theme/theme.scss';
+
+.title {
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+.screen {
+  margin-bottom: 20px;
+  width: 550px;
+  height: 8px;
+  background-color: $disabled;
+  border-radius: 5px;
+
+  &-subtitle {
+    margin-top: 15px;
+    text-align: center;
+    color: $white;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+
+  .seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    height: 34px;
+    width: 34px;
+    border-radius: 3px;
+    border: none;
+    background-color: $disabled;
+    color: $white;
+    font-weight: bold;
+    font-size: $font-S;
+    cursor: pointer;
+    transform: 0.1s;
+
+    &.inOrder {
+      background-color: $green;
+    }
+
+    &:disabled {
+      background-color: $red;
+      color: $white;
+      cursor: default;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.submit-button-container {
+  text-align: center;
+  margin: 25px auto 0;
+}
+
+.select-seats-info {
+  margin: 10px 0;
+  text-align: center;
+  color: $white;
+}
+
+.button-container {
+  margin: 20px auto;
+  text-align: center;
+}
