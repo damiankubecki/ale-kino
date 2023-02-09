@@ -1,28 +1,22 @@
 @import '../../../../theme/theme.scss';
 
 .wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   text-align: center;
 }
 
 .buttonsContainer {
-  color: $orange;
+  color: $primary;
   padding: 3px 0;
 
   &__button {
     opacity: 0.3;
-    width: 50px;
-    margin: 0 8px;
-    padding: 3px 0;
+    width: 70px;
+    padding: 4px 0;
     border: none;
-    border-bottom: 2px solid $orange;
+    border-bottom: 2px solid $disabled;
     background-color: transparent;
     font-size: $font-M;
-    font-weight: bold;
-    color: $orange;
+    color: $white;
     cursor: pointer;
     transition: 0.1s;
 

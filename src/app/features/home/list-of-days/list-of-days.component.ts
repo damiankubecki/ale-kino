@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RepertoireService } from '@app/services/repertoire/repertoire.service';
-import { ShortDate, LongDate } from '@myTypes/types';
-import { config } from 'config';
+import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
+import { ShortDate, LongDate } from '@app/shared/types/types';
+import { config } from '@app/config';
 import * as moment from 'moment';
 
 interface IButton {
