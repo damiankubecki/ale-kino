@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <ng-container *ngIf="(order$ | async)?.reservedSeats?.length; else emptyOrder">
+    <ng-container *ngIf="order$ | async as order">
+      <h2 class="title">
+        Bilety na film: {{ order.movie?.title }} w dniu {{ order.showing?.day }}, godzina
+        {{ order.showing?.hour }}
+      </h2>
+
+      <app-order-items-list></app-order-items-list>
+
+      <a
+        *ngIf="order$ | async as order"
+        [routerLink]="[
+          '/',
+          paths.reservation,
+          order.movie?.id,
+          order.showing?.day,
+          order.showing?.hour
+        ]"
+        class="link"
+        >Przejdź do zamówienia</a
+      >
+    </ng-container>
+  </ng-container>
+
+  <ng-template #emptyOrder>
+    <h2 class="title">Brak biletów w koszyku</h2>
+  </ng-template>
+
+  <div class="button-container">
+    <app-button (click)="back()" [secondary]="true">Powrót</app-button>
+  </div>
+</div>

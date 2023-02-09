@@ -1,0 +1,20 @@
+@import '../../../../theme/globalStyle.scss';
+
+.wrapper {
+  text-align: center;
+
+  .title {
+    font-size: $font-L;
+    font-weight: normal;
+    color: $white;
+  }
+
+  .link {
+    font-size: $font-M;
+    color: $orange;
+  }
+
+  .button-container {
+    margin: 20px auto;
+  }
+}
