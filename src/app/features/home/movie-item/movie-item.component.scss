@@ -66,10 +66,10 @@
         margin: 8px 0;
         padding: 4px 8px;
         border: none;
-        border-radius: 5px;
         font-size: $font-XS;
         color: $white;
-        background-color: $secondary;
+        background-color: transparent;
+        border-bottom: 2px solid $disabled;
         cursor: pointer;
         transition: 0.1s;
 
