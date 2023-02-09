@@ -44,3 +44,22 @@ body {
   border: 8px solid $primary;
   border-radius: 25px;
 }
+
+input {
+  padding: 8px 15px;
+  border: none;
+  border-bottom: 3px solid $disabled;
+  border-radius: 2px;
+  background-color: $primaryLight;
+  color: $white;
+  font-size: $font-M;
+  outline: none;
+
+  &:focus {
+    border-bottom: 3px solid $orange;
+  }
+}
+
+button {
+  border: none;
+}
