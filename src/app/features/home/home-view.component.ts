@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ListOfDaysComponent } from '@app/components/subcomponents/list-of-days/list-of-days.component';
-import { TopbarService } from '@app/services/topbar/topbar.service';
+import { TopbarService } from '@app/topbar.service';
 
 @Component({
   selector: 'app-home-view',
@@ -11,6 +10,6 @@ export class HomeViewComponent {
   private topbarService = inject(TopbarService);
 
   constructor() {
-    this.topbarService.setTopbarContent(ListOfDaysComponent);
+    this.topbarService.setTopbarContent('Repertuar');
   }
 }
