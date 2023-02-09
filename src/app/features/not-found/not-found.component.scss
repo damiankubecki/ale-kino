@@ -1,0 +1,25 @@
+@import '../../../theme/theme.scss';
+
+.wrapper {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: $red;
+}
+
+h2 {
+  margin: 10px 0;
+  font-weight: normal;
+  color: $white;
+}
