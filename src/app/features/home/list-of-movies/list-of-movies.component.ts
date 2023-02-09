@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { RepertoireService } from '@app/services/repertoire/repertoire.service';
-import { IMovieExpanded, MoviesService } from '@app/services/movies/movies.service';
+import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
+import { IMovieExpanded, MoviesService } from '@app/shared/data/movies/movies.service';
 
 @Component({
   selector: 'app-list-of-movies',

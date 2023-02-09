@@ -1,6 +1,8 @@
 @import '../../../../theme/theme.scss';
 
 .message {
+  margin: 20px 0;
   font-size: $font-M;
   color: $white;
+  text-align: center;
 }
