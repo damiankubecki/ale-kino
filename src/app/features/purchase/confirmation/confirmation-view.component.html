@@ -1,0 +1,103 @@
+<section class="wrapper">
+  <h3 class="title">Apokawixa</h3>
+
+  <div class="order-container">
+    <div *ngFor="let item of reservedSeats; last as last" [class.last]="last" class="order-item">
+      <p>Rząd: {{ item.row }}</p>
+      <p>Miejsce: {{ item.seat }}</p>
+      <p>bilet {{ item.ticketType.name }}</p>
+      <p>Cena: {{ item.ticketType.price }}zł</p>
+    </div>
+    <div class="order-summary">
+      <p>Ilość biletów: {{ reservedSeats.length }}</p>
+      <p>Cena całkowita: {{ orderPrice }}zł</p>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="form">
+    <ng-container *ngIf="form.controls['firstname'] as control">
+      <div class="form__itemContainer narrow">
+        <label class="form__label">Imię: </label>
+        <input
+          formControlName="firstname"
+          type="text"
+          class="form__input form__input-narrow"
+          placeholder="Jan"
+        />
+        <ng-container *ngIf="control.touched && form.controls['firstname'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+          <p *ngIf="error['minlength']" class="form__errorParagraph">wymagana liczba znaków 3-99</p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['lastname'] as control">
+      <div class="form__itemContainer narrow">
+        <label class="form__label">Nazwisko:</label>
+        <input formControlName="lastname" type="text" class="form__input" placeholder="Kowalski" />
+        <ng-container *ngIf="control.touched && form.controls['lastname'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+          <p *ngIf="error['minlength']" class="form__errorParagraph">wymagana liczba znaków 3-99</p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['phone'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Numer telefonu (opcjonalne):</label>
+        <input formControlName="phone" type="text" class="form__input" placeholder="333444555" />
+        <ng-container *ngIf="control.touched && form.controls['phone'].errors as error">
+          <p *ngIf="error['minlength']" class="form__errorParagraph">liczba wymaganych znaków: 9</p>
+          <p *ngIf="error['maxlength']" class="form__errorParagraph">liczba wymaganych znaków: 9</p>
+          <p
+            *ngIf="error['pattern'] && !error['minlength'] && !error['maxlength']"
+            class="form__errorParagraph"
+          >
+            podaj poprawny numer telefonu
+          </p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['email'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Adres e-mail:</label>
+        <input
+          formControlName="email"
+          type="text"
+          class="form__input"
+          placeholder="jan.kowalski@xyz.com"
+        />
+        <ng-container *ngIf="control.touched && form.controls['email'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+          <p *ngIf="error['pattern']" class="form__errorParagraph">podaj poprawny adres email</p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['emailConfirm'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Powtórz e-mail:</label>
+        <input
+          formControlName="emailConfirm"
+          type="text"
+          class="form__input"
+          placeholder="jan.kowalski@xyz.com"
+        />
+        <ng-container *ngIf="control.touched && form.controls['emailConfirm'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+          <p *ngIf="error['pattern']" class="form__errorParagraph">podaj poprawny adres email</p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <div *ngIf="message" class="form__itemContainer">
+      <p class="form__messageParagraph">Błąd! {{ message }}</p>
+    </div>
+  </form>
+
+  <div class="button-container">
+    <app-button (click)="back()" [secondary]="true">Powrót</app-button>
+    <app-button (click)="handleSubmit()">Zamawiam</app-button>
+  </div>
+</section>
