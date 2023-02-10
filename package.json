@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "server": "npx json-server-auth src/data/db.json",
+    "server": "npx json-server-auth src/db/db.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

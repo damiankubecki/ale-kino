@@ -1,0 +1,369 @@
+{
+  "users": [
+    {
+      "email": "admin@admin.com",
+      "password": "$2a$10$yeE5F3.s8dHK7kfcrUNAGO9p2Qp.D9hJAGwsnTGu8AW4EF6/.SEoS",
+      "id": 1,
+      "data": {
+        "role": "admin"
+      }
+    },
+    {
+      "email": "user@user.com",
+      "password": "$2a$10$quWUzJAXg77yzZpj31Be7efcWQrS1jfkJmMQuworMaiy/ryc8LpP6",
+      "id": 2,
+      "data": {
+        "role": "user",
+        "info": {
+          "firstname": "Andrzej",
+          "lastname": "Kowalski",
+          "email": "user@user.com",
+          "phone": 123456789,
+          "orderIds": [],
+          "wantToWatchIds": [],
+          "ratedMovies": []
+        }
+      }
+    }
+  ],
+  "rooms": [
+    {
+      "id": 1,
+      "rows": [
+        {
+          "seats": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "seats": [
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ]
+        },
+        {
+          "seats": [
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36
+          ]
+        },
+        {
+          "seats": [
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+          ]
+        }
+      ]
+    }
+  ],
+  "repertoire": [
+    {
+      "id": 1,
+      "movieId": 1,
+      "showings": [
+        {
+          "day": "09/02/2023",
+          "hours": [
+            "12:00",
+            "18:55"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "12:00": [
+                2,
+                3
+              ]
+            },
+            {
+              "18:55": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "roomId": 1
+        },
+        {
+          "day": "10/02/2023",
+          "hours": [
+            "08:00",
+            "19:15"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "08:00": [
+                2,
+                3,
+                43,
+                42,
+                44
+              ]
+            },
+            {
+              "19:15": [
+                1,
+                2,
+                3,
+                41,
+                36,
+                35,
+                34,
+                33,
+                42,
+                43,
+                40,
+                39,
+                26,
+                5,
+                6,
+                10,
+                11,
+                16,
+                17,
+                30,
+                31,
+                7,
+                8
+              ]
+            }
+          ],
+          "roomId": 1
+        },
+        {
+          "day": "11/02/2023",
+          "hours": [
+            "14:20",
+            "20:15"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "14:20": [
+                2,
+                3,
+                25,
+                26,
+                27,
+                28,
+                44,
+                45,
+                37,
+                38,
+                20,
+                21,
+                19,
+                12,
+                11,
+                10,
+                9
+              ]
+            },
+            {
+              "20:15": [
+                1,
+                2,
+                3,
+                18,
+                19,
+                20,
+                25,
+                26,
+                31,
+                40,
+                41,
+                42,
+                12,
+                24,
+                36
+              ]
+            }
+          ],
+          "roomId": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "movieId": 2,
+      "showings": [
+        {
+          "day": "10/02/2023",
+          "hours": [
+            "08:00",
+            "17:15"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "08:00": [
+                2,
+                3
+              ]
+            },
+            {
+              "17:15": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "roomId": 1
+        },
+        {
+          "day": "11/02/2023",
+          "hours": [
+            "07:00",
+            "18:20"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "07:00": [
+                2,
+                3
+              ]
+            },
+            {
+              "18:20": [
+                1,
+                2,
+                3,
+                15,
+                16,
+                18,
+                33,
+                34
+              ]
+            }
+          ],
+          "roomId": 1
+        },
+        {
+          "day": "12/02/2023",
+          "hours": [
+            "09:50",
+            "19:15"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "09:50": [
+                2,
+                3
+              ]
+            },
+            {
+              "19:15": [
+                1,
+                2,
+                3,
+                45,
+                44,
+                43
+              ]
+            }
+          ],
+          "roomId": 1
+        }
+      ]
+    }
+  ],
+  "movies": [
+    {
+      "id": 1,
+      "title": "Apokawixa",
+      "isPremiere": true,
+      "description": {
+        "short": "Lorem ipsum dolor, sit amet consectetur adipisicing ciatis ratione, nesciunt at labore nostrum possimus eos recusandae, quisquam unde, alias sint cum ipsam consequuntur deleniti magnam sit? Atque dolorum minus ullam quo numquam? Saepe aut at asperiores.",
+        "long": " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis hic porro facere enim incidunt saepe iste quo laboriosam accusantium, quam temporibus consequuntur natus et rem similique impedit perspiciatis labore cumque cum, voluptates in harum? Autem neque unde reiciendis ratione delectus odio, fugit debitis, rem quasi blanditiis veritatis? Vitae, eius praesentium."
+      },
+      "duration": "120",
+      "minAge": 13,
+      "rate": 8,
+      "genres": [
+        "Horror"
+      ],
+      "imageURL": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSrIBRbDsn0IVu-O91QK94ChYiO0UXW_RJyTb2GooRrQvdLUPCD"
+    },
+    {
+      "id": 2,
+      "title": "Co w duszy gra",
+      "isPremiere": false,
+      "description": {
+        "short": "Lorem ipsum dolor, alias sint cum ipsam consequuntur deleniti magnam sit? Atque dolorum minus ullam quo numquam? Saepe aut at asperiores.",
+        "long": " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis hic porro facere enim incidunt saepe iste quo laboriosam accusantium, quam temporibus consequuntur natus et rem similique impedit perspiciatis labore cumque cum, voluptates in harum? Autem neque unde reiciendis ratione delectus odio, fugit debitis, rem quasi blanditiis veritatis? Vitae, eius praesentium."
+      },
+      "duration": "120",
+      "minAge": null,
+      "rate": 8.5,
+      "genres": [
+        "Animowany",
+        "Obyczajowy"
+      ],
+      "imageURL": null
+    }
+  ],
+  "ticketTypes": [
+    {
+      "id": 1,
+      "name": "normalny",
+      "description": "Zwykły bilet",
+      "price": 30
+    },
+    {
+      "id": 2,
+      "name": "ulgowy",
+      "description": "Bilet dla uczniów",
+      "price": 15
+    },
+    {
+      "id": 3,
+      "name": "senior",
+      "description": "Bilet dla osób starszych",
+      "price": 10
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "aa": "przyklad",
+      "usersId": 2
+    }
+  ]
+}

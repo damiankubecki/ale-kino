@@ -1,15 +1,16 @@
-import { icons } from 'assets/icons';
-import { ExternalLink, LongDate } from '@myTypes/types';
+import { icons } from '@app/shared/assets/icons';
+import { ExternalLink, LongDate } from '@app/shared/types/types';
 import * as moment from 'moment';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { IMenuItem } from '@app/components/subcomponents/nav-button/nav-button.component';
+import { IMenuItem } from '@app/core/header/nav-button/nav-button.component';
+import { paths } from './shared/router/paths';
 
 export interface IRepertoireConfig {
   dayToDisplayOnInit: LongDate;
   numberOfDaysToDisplay: number;
 }
 
-export interface IHeaderActionMenu {
+export interface IHeaderNavigation {
   user: IMenuItem[];
   admin: IMenuItem[];
 }
@@ -28,7 +29,7 @@ export interface IFooterLinkItem {
 
 export interface IConfig {
   repertoire: IRepertoireConfig;
-  headerActionMenu: IHeaderActionMenu;
+  headerNavigation: IHeaderNavigation;
   socialMedia: ISocialMediaItem[];
   footerLinks: IFooterLinkItem[];
 }
@@ -40,19 +41,17 @@ export const config: IConfig = {
     dayToDisplayOnInit: today,
     numberOfDaysToDisplay: 7,
   },
-  headerActionMenu: {
+  headerNavigation: {
     user: [
       { title: 'Moje bilety', path: '/' },
       { title: 'Chcę obejrzeć', path: '/' },
-      { title: 'Ustawienia', path: '/' },
-      { title: 'Wyloguj', path: '/' },
+      { title: 'Wyloguj', path: paths.logout },
     ],
     admin: [
       { title: 'Sale kinowe', path: '/' },
       { title: 'Repertuar', path: '/' },
-      { title: 'Użytkownicy', path: '/' },
       { title: 'Kody zniżkowe', path: '/' },
-      { title: 'Wyloguj', path: '/' },
+      { title: 'Wyloguj', path: paths.logout },
     ],
   },
   socialMedia: [

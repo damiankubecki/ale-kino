@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { map } from 'rxjs';
+import { ApiService } from './shared/data/api/api.service';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   providers: [],
 })
-export class AppComponent {}
+export class AppComponent {
+  private api = inject(ApiService);
+
+  isLoading = true;
+
+  constructor() {
+    this.api.status$
+      .pipe(map(status => status.isLoading))
+      .subscribe(isLoading => (this.isLoading = isLoading));
+  }
+}
