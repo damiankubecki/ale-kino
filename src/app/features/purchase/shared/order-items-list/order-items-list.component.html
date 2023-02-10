@@ -1,0 +1,20 @@
+<div *ngIf="order$ | async as order" class="order">
+  <div *ngFor="let item of order?.reservedSeats" class="order-item">
+    <p class="row">Rząd: {{ item.row }}</p>
+    <p class="seat">Miejsce: {{ item.seat }}</p>
+    <select (change)="handleTicketTypeChange($event)">
+      <option
+        *ngFor="let ticket of ticketsTypes"
+        [value]="ticket.name"
+        [attr.data-seatid]="item.seatId"
+        [selected]="ticket.name === item.ticketType.name"
+      >
+        {{ 'bilet ' + ticket.name }}
+      </option>
+    </select>
+    <p>cena: {{ item.ticketType.price }}zł</p>
+    <button (click)="handleTrashClick(item.seatId)" title="Usuń">
+      <fa-icon [icon]="trashIcon"></fa-icon>
+    </button>
+  </div>
+</div>
