@@ -1,0 +1,37 @@
+<section class="wrapper">
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="form">
+    <ng-container *ngIf="form.controls['email'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Email: </label>
+        <input
+          formControlName="email"
+          type="email"
+          class="form__input form__input-narrow"  
+          placeholder="example@example.com"
+        />
+        <ng-container *ngIf="control.touched && form.controls['email'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+          <p *ngIf="error['pattern']" class="form__errorParagraph">podaj poprawny adres email</p>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="form.controls['password'] as control">
+      <div class="form__itemContainer">
+        <label class="form__label">Hasło:</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="form__input"
+          placeholder="********"
+        />
+        <ng-container *ngIf="control.touched && form.controls['password'].errors as error">
+          <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <div class="button-container">
+      <app-button type="submit">Zaloguj</app-button>
+    </div>
+  </form>
+</section>

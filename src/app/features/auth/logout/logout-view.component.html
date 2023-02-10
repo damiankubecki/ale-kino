@@ -1,0 +1,7 @@
+<section class="wrapper">
+  <p>Czy na pewno chcesz się wylogować?</p>
+  <div>
+    <app-button (click)="handleClick()" [secondary]="true">Powrót</app-button>
+    <app-button (click)="handleClick(); logout()">Wyloguj</app-button>
+  </div>
+</section>

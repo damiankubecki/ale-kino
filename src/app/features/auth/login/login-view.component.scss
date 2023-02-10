@@ -1,0 +1,49 @@
+@import '../../../../theme/theme.scss';
+
+.form {
+  width: 275px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &__itemContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    width: 100%;
+
+    &.narrow {
+      width: 45%;
+    }
+  }
+
+  &__errorParagraph {
+    margin-left: 10px;
+    color: $red;
+    font-size: $font-XS;
+    font-weight: bold;
+  }
+
+  &__messageParagraph {
+    color: $red;
+    font-size: $font-XS;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__label {
+    margin-left: 10px;
+    color: $white;
+    font-size: $font-M;
+  }
+
+  &__input {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+.button-container {
+  margin: 0 auto;
+  text-align: center;
+}
