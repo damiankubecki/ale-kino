@@ -1,0 +1,26 @@
+@import '../../../../theme/theme.scss';
+
+.title {
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-XL;
+}
+
+.text {
+  margin: 30px 0;
+  color: $white;
+  font-style: italic;
+  font-size: $font-L;
+
+  &-email {
+    font-weight: bold;
+  }
+}
+
+.link {
+  display: block;
+  text-align: center;
+  color: $orange;
+  font-size: $font-M;
+}
