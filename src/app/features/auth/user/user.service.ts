@@ -7,12 +7,13 @@ import { BehaviorSubject } from 'rxjs';
 import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
 
 export interface IUser {
+  id?: number;
   role: UsersRoles;
   info?: IUserInfo | null;
 }
 
 interface ApiGetMeResponse {
-  id: string;
+  id: number;
   email: string;
   data: IUser;
 }
@@ -42,6 +43,17 @@ export class UserService {
     }
   }
 
+  assignOrderToUser(orderId: number) {
+    const { id, role, info } = this.user$$.value;
+
+    if (!id || !role || !info) return;
+
+
+    return this.http.patch(`${API_URL}/users/${id}`, {
+      data: { role, info: { ...info, ordersIds: [...info.ordersIds, orderId] } },
+    });
+  }
+
   auth(email: string, password: string) {
     this.http.post<ApiAuthResponse>(`${API_URL}/login`, { email, password }).subscribe({
       next: response => {
@@ -67,16 +79,16 @@ export class UserService {
       })
       .subscribe({
         next: user => {
-          this.setUser(user.data);
+          this.setUser({ id: user.id, ...user.data });
         },
       });
   }
 
-  private setUser({ role, info }: IUser) {
+  private setUser({ id, role, info }: IUser) {
     if (role === 'admin') {
-      this.user$$.next({ role, info: null });
+      this.user$$.next({ id, role, info: null });
     } else if (role === 'user') {
-      this.user$$.next({ role, info });
+      this.user$$.next({ id, role, info });
     } else {
       this.user$$.next({ role: 'guest', info: null });
     }
