@@ -1,0 +1,34 @@
+@import '../../../theme/globalStyle.scss';
+
+.title {
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+.order-item {
+  margin: 25px 0;
+  display: flex;
+  flex-direction: column;
+
+  & > h3 {
+    color: $orange;
+    font-size: $font-L;
+  }
+
+  & > p {
+    color: $white;
+    font-size: $font-M;
+  }
+
+  .movie {
+    margin: 15px 0 8px;
+    text-align: center;
+  }
+
+  .order-ticket {
+    color: $white;
+    font-size: $font-M;
+  }
+}
