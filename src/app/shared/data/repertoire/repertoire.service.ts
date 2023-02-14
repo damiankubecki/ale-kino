@@ -91,9 +91,6 @@ export class RepertoireService {
   }
 
   updateShowings(movieId: number, showings: IShowing[]) {
-    this.http.patch(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`, { showings }).subscribe(() => {
-      this.purchaseService.clearOrder();
-      window.location.reload();
-    });
+    return this.http.patch(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`, { showings });
   }
 }

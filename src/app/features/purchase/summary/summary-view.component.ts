@@ -2,9 +2,10 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { paths } from '@app/shared/router/paths';
 import { TopbarService } from '@app/topbar.service';
 import { IOrderInProgress, PurchaseService } from '../purchase.service';
-import { Subscription } from 'rxjs';
+import { filter, of, Subscription, switchMap, tap } from 'rxjs';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 import { Router } from '@angular/router';
+import { UserService } from '@app/features/auth/user/user.service';
 
 @Component({
   selector: 'app-summary-view',
@@ -16,6 +17,7 @@ export class SummaryViewComponent implements OnDestroy {
   private topbarService = inject(TopbarService);
   private purchaseService = inject(PurchaseService);
   private repertoireService = inject(RepertoireService);
+  private userService = inject(UserService);
 
   private subscription$: Subscription;
 
@@ -59,8 +61,24 @@ export class SummaryViewComponent implements OnDestroy {
           })
           .flat();
 
-        this.repertoireService.updateShowings(order.movie.id, updatedShowings);
-      } else return;
+        const movieId = order.movie.id;
+
+        this.purchaseService
+          .sendOrder()
+          .pipe(
+            switchMap(order => {
+              return this.userService.assignOrderToUser(order.id) || of(null);
+            }),
+            switchMap(() => {
+              return this.repertoireService.updateShowings(movieId, updatedShowings);
+            }),
+            tap(() => {
+              this.purchaseService.clearOrder();
+              window.location.reload()
+            })
+          )
+          .subscribe();
+      }
     });
   }
 

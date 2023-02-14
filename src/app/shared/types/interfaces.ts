@@ -32,7 +32,7 @@ export interface IMovieRepertoire {
 }
 
 export interface ITicket {
-  id: string;
+  id: number;
   owner: `${IUserInfo['firstname']} ${IUserInfo['lastname']}`;
   movie: IMovie['title'];
   date: Date;

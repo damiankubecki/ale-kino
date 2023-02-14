@@ -8,6 +8,7 @@ import { IRoom, RoomsService } from '@app/shared/data/rooms/rooms.service';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 import { ITicketType, TicketsService } from '@app/shared/data/tickets/tickets.service';
 import { IOrderInProgress, IReservedSeat, PurchaseService } from '../purchase.service';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-view',
@@ -89,7 +90,15 @@ export class ReservationViewComponent {
     this.occupiedSeatsIds = showing.occupiedSeatsIds;
     this.purchaseService.setShowing(day, hour);
     this.purchaseService.setMovie(movie.id);
-    this.roomsService.getRoomById(showing.roomId).subscribe(response => (this.room = response));
+    this.roomsService
+      .getRoomById(showing.roomId)
+      .pipe(
+        tap(room => {
+          this.room = room;
+          this.purchaseService.setRoom(room.id);
+        })
+      )
+      .subscribe();
   }
 
   back() {

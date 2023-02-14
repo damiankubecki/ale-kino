@@ -1,8 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, OnDestroy } from '@angular/core';
+import { API_URL } from '@app/shared/data/api/api';
 import { MoviesService } from '@app/shared/data/movies/movies.service';
 import { ITicketType } from '@app/shared/data/tickets/tickets.service';
 import { IMovie } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
+import * as moment from 'moment';
 import { BehaviorSubject, skip, Subscription } from 'rxjs';
 
 export interface IReservedSeat {
@@ -26,16 +29,30 @@ export interface IOrderInProgress {
     day: LongDate;
     hour: Hour;
   };
+  roomId?: number;
   reservedSeats: IReservedSeat[];
+}
+
+export interface IOrder {
+  id: number;
+  movie: IMovie;
+  owner: IOrderOwner;
+  showing: {
+    day: LongDate;
+    hour: Hour;
+  };
+  reservedSeats: IReservedSeat[];
+  date: string;
+  roomId: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class PurchaseService implements OnDestroy {
+export class PurchaseService {
+  private http = inject(HttpClient);
   private moviesService = inject(MoviesService);
   private order$$ = new BehaviorSubject<IOrderInProgress>({ reservedSeats: [] });
-  private subscription$: Subscription;
 
   get order$() {
     return this.order$$.asObservable();
@@ -95,8 +112,33 @@ export class PurchaseService implements OnDestroy {
     });
   }
 
+  setRoom(roomId: number) {
+    this.order$$.next({
+      ...this.order$$.value,
+      roomId,
+    });
+  }
+
+  sendOrder() {
+    const { movie, owner, reservedSeats, showing, roomId } = this.order$$.value;
+
+    return this.http.post<IOrder>(`${API_URL}/orders`, {
+      id: NaN,
+      movie: { id: movie?.id, title: movie?.title, minAge: movie?.minAge },
+      owner: {
+        name: `${owner?.firstname} ${owner?.lastname}`,
+        email: owner?.email,
+        phone: owner?.phone || null,
+      },
+      reservedSeats,
+      showing,
+      roomId,
+      date: `${moment().format('DD/MM/YYYY')} ${moment().format('HH:mm')}`,
+    });
+  }
+
   constructor() {
-    this.subscription$ = this.order$$.pipe(skip(1)).subscribe(value => {
+    this.order$$.pipe(skip(1)).subscribe(value => {
       window.localStorage.setItem('order-in-progress', JSON.stringify(value));
     });
 
@@ -104,9 +146,5 @@ export class PurchaseService implements OnDestroy {
     if (savedOrder) {
       this.order$$.next(savedOrder);
     }
-  }
-
-  ngOnDestroy() {
-    this.subscription$.unsubscribe();
   }
 }

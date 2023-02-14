@@ -5,6 +5,7 @@ export const paths = {
   buyTicket: 'confirmation',
   reservation: 'booking',
   summary: 'summary',
+  myTickets: 'my-tickets',
   login: 'auth',
   logout: 'logout',
   notFound: '404',
