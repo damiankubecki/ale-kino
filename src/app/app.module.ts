@@ -27,6 +27,7 @@ import { ApiService } from './shared/data/api/api.service';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { BasketComponent } from './features/purchase/basket/basket.component';
 import { OrderItemsListComponent } from './features/purchase/shared/order-items-list/order-items-list.component';
+import { MyTicketsComponent } from './features/my-tickets/my-tickets.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { OrderItemsListComponent } from './features/purchase/shared/order-items-
     NotFoundComponent,
     BasketComponent,
     OrderItemsListComponent,
+    MyTicketsComponent,
   ],
   imports: [
     BrowserModule,
