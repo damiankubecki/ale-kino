@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PaymentViewComponent } from '@app/features/purchase/payment-view/payment-view.component';
 import {
   RepertoireViewComponent,
   AdminViewComponent,
@@ -14,9 +15,7 @@ import {
   LoginViewComponent,
   LogoutViewComponent,
 } from '@app/views';
-import { IsAdminGuard } from './guards/is-admin.guard';
-import { IsNotAdminGuard } from './guards/is-not-admin.guard';
-import { IsGuestGuard } from './guards/is-guest.guard';
+import { IsAdminGuard, IsNotAdminGuard, IsGuestGuard } from './guards';
 import { paths } from './paths';
 
 const routes: Routes = [
@@ -28,6 +27,7 @@ const routes: Routes = [
       { path: `${paths.repertoire}/:date`, pathMatch: 'full', component: RepertoireViewComponent },
       { path: paths.confirmation, component: BuyTicketViewComponent },
       { path: `${paths.reservation}/:id/:day/:hour`, component: ReservationViewComponent },
+      { path: paths.payment, component: PaymentViewComponent },
       { path: `${paths.summary}/:id`, component: SummaryViewComponent },
       { path: paths.basket, component: BasketComponent },
       { path: paths.myTickets, component: MyTicketsComponent },

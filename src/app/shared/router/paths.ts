@@ -5,6 +5,7 @@ export const paths = {
   basket: 'basket',
   confirmation: 'confirmation',
   reservation: 'booking',
+  payment: 'payment',
   summary: 'summary',
   myTickets: 'my-tickets',
   orders: 'orders',

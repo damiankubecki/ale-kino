@@ -1,0 +1,57 @@
+@import '../../../../theme/theme.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+.payment-container {
+  display: flex;
+  //   flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+
+  .code-container {
+    text-align: center;
+
+    .text {
+      margin: 15px 30px;
+      color: $white;
+      font-size: $font-M;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 30px;
+      position: relative;
+
+      input {
+        width: 120px;
+        font-size: $font-L;
+      }
+
+      .error-text {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        color: $red;
+        font-size: $font-S;
+      }
+    }
+  }
+}
+
+.buttons-container {
+  margin: 30px 0;
+  display: flex;
+}

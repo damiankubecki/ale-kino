@@ -28,7 +28,10 @@
             7,
             8,
             9,
-            10
+            10,
+            11,
+            12,
+            13
           ],
           "wantToWatchIds": [],
           "ratedMovies": [
@@ -273,7 +276,12 @@
                 41,
                 43,
                 40,
-                39
+                39,
+                44,
+                11,
+                12,
+                7,
+                8
               ]
             }
           ],
@@ -1003,6 +1011,124 @@
       },
       "roomId": 1,
       "date": "20/02/2023 12:31"
+    },
+    {
+      "id": 11,
+      "movie": {
+        "id": 1,
+        "title": "Apokawixa",
+        "minAge": 13
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 44,
+          "row": 4,
+          "seat": 8
+        }
+      ],
+      "showing": {
+        "day": "20/02/2023",
+        "hour": "18:55"
+      },
+      "roomId": 1,
+      "date": "20/02/2023 17:02"
+    },
+    {
+      "id": 12,
+      "movie": {
+        "id": 1,
+        "title": "Apokawixa",
+        "minAge": 13
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 11,
+          "row": 1,
+          "seat": 11
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 12,
+          "row": 1,
+          "seat": 12
+        }
+      ],
+      "showing": {
+        "day": "20/02/2023",
+        "hour": "18:55"
+      },
+      "roomId": 1,
+      "date": "20/02/2023 18:18"
+    },
+    {
+      "id": 13,
+      "movie": {
+        "id": 1,
+        "title": "Apokawixa",
+        "minAge": 13
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 7,
+          "row": 1,
+          "seat": 7
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 8,
+          "row": 1,
+          "seat": 8
+        }
+      ],
+      "showing": {
+        "day": "20/02/2023",
+        "hour": "18:55"
+      },
+      "roomId": 1,
+      "date": "20/02/2023 18:23"
     }
   ],
   "rates": [

@@ -32,6 +32,7 @@ import { WatchlistComponent } from './features/watchlist/watchlist.component';
 import { OrdersComponent } from './features/orders/orders.component';
 import { ConfirmationFormComponent } from './features/purchase/confirmation/confirmation-form/confirmation-form.component';
 import { OnlyNumbersDirective } from './shared/directives/only-numbers.directive';
+import { PaymentViewComponent } from './features/purchase/payment-view/payment-view.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { OnlyNumbersDirective } from './shared/directives/only-numbers.directive
     OrdersComponent,
     ConfirmationFormComponent,
     OnlyNumbersDirective,
+    PaymentViewComponent,
   ],
   imports: [
     BrowserModule,
