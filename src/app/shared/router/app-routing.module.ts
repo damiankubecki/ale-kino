@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginViewComponent } from '@app/features/auth/login/login-view.component';
 import {
-  HomeViewComponent,
+  RepertoireViewComponent,
   AdminViewComponent,
   BuyTicketViewComponent,
   ReservationViewComponent,
@@ -16,18 +16,23 @@ import { paths } from './paths';
 import { LogoutViewComponent } from '@app/features/auth/logout/logout-view.component';
 import { BasketComponent } from '@app/features/purchase/basket/basket.component';
 import { MyTicketsComponent } from '@app/features/my-tickets/my-tickets.component';
+import { WatchlistComponent } from '@app/features/watchlist/watchlist.component';
+import { OrdersComponent } from '@app/features/orders/orders.component';
 
 const routes: Routes = [
   {
     path: paths.home,
     canActivate: [IsNotAdminGuard],
     children: [
-      { path: paths.home, component: HomeViewComponent },
-      { path: paths.buyTicket, component: BuyTicketViewComponent },
+      { path: paths.home, pathMatch: 'full', component: RepertoireViewComponent },
+      { path: `${paths.repertoire}/:date`, pathMatch: 'full', component: RepertoireViewComponent },
+      { path: paths.confirmation, component: BuyTicketViewComponent },
       { path: `${paths.reservation}/:id/:day/:hour`, component: ReservationViewComponent },
-      { path: paths.summary, component: SummaryViewComponent },
+      { path: `${paths.summary}/:id`, component: SummaryViewComponent },
       { path: paths.basket, component: BasketComponent },
       { path: paths.myTickets, component: MyTicketsComponent },
+      { path: `${paths.orders}/:id`, component: OrdersComponent },
+      { path: paths.watchlist, component: WatchlistComponent },
     ],
   },
   {
