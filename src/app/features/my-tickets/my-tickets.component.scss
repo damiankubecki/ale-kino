@@ -1,6 +1,7 @@
 @import '../../../theme/globalStyle.scss';
 
 .title {
+  margin-bottom: 30px;
   color: $white;
   font-weight: normal;
   text-align: center;
@@ -8,13 +9,18 @@
 }
 
 .order-item {
-  margin: 25px 0;
+  padding: 10px 0;
   display: flex;
-  flex-direction: column;
+  border-bottom: 2px solid $disabled;
+
+  &.last {
+    border: none;
+  }
 
   & > h3 {
-    color: $orange;
-    font-size: $font-L;
+    color: $white;
+    font-size: $font-M;
+    font-weight: normal;
   }
 
   & > p {
@@ -22,13 +28,10 @@
     font-size: $font-M;
   }
 
-  .movie {
-    margin: 15px 0 8px;
-    text-align: center;
-  }
-
-  .order-ticket {
-    color: $white;
+  .details-link {
+    flex-grow: 1;
+    color: $orange;
     font-size: $font-M;
+    text-align: right;
   }
 }

@@ -1,15 +1,12 @@
 <ng-container *ngIf="(myOrders$ | async)?.length; else empty">
   <h2 class="title">Poniżej znajdują się twoje wszystkie zamówienia</h2>
-  <div *ngFor="let order of myOrders$ | async; let i = index" class="order-item">
+  <div
+    *ngFor="let order of myOrders$ | async; let i = index; let last = last"
+    [class.last]="last"
+    class="order-item"
+  >
     <h3>{{ i + 1 }}. Zamówienie z dnia: {{ order.date }}</h3>
-    <p class="movie">
-      "{{ order.movie.title }}" w dniu {{ order.showing.day }}, {{ order.showing.hour }}, sala
-      {{ order.roomId }}
-    </p>
-    <p *ngFor="let ticket of order.reservedSeats; let i = index" class="order-ticket">
-      {{ i + 1 }}. Bilet {{ ticket.ticketType.name }}, rząd {{ ticket.row }}, miejsce
-      {{ ticket.seat }}
-    </p>
+    <a [routerLink]="['/' + paths.orders, order.id]" class="details-link">Szczegóły</a>
   </div>
 </ng-container>
 

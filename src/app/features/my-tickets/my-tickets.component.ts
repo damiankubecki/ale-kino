@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { API_URL } from '@app/shared/data/api/api';
+import { paths } from '@app/shared/router/paths';
 import { TopbarService } from '@app/topbar.service';
 import { filter, map, Observable, of, switchMap } from 'rxjs';
 import { UserService } from '../auth/user/user.service';
@@ -16,6 +17,7 @@ export class MyTicketsComponent {
   private topbarService = inject(TopbarService);
   private userService = inject(UserService);
 
+  paths = paths
   myOrders$!: Observable<IOrder[]>;
 
   constructor() {
