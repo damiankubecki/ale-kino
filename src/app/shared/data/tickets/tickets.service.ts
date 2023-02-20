@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, tap } from 'rxjs';
 import { API_URL, TICKETS_TYPES_ENDPOINT } from '../api/api';
 
 export interface ITicketType {
@@ -13,26 +13,21 @@ export interface ITicketType {
 @Injectable({
   providedIn: 'root',
 })
-export class TicketsService implements OnDestroy {
+export class TicketsService {
   private http = inject(HttpClient);
   private ticketsTypes$$ = new BehaviorSubject<ITicketType[]>([]);
-  private subscription$: Subscription;
 
   get ticketsTypes$() {
     return this.ticketsTypes$$.asObservable();
   }
 
   constructor() {
-    this.subscription$ = this.fetchTicketsTypes().subscribe(response => {
-      this.ticketsTypes$$.next(response);
-    });
+    this.fetchTicketsTypes()
+      .pipe(tap(response => this.ticketsTypes$$.next(response)))
+      .subscribe();
   }
 
   private fetchTicketsTypes() {
     return this.http.get<ITicketType[]>(`${API_URL}/${TICKETS_TYPES_ENDPOINT}`);
-  }
-
-  ngOnDestroy() {
-    this.subscription$.unsubscribe();
   }
 }

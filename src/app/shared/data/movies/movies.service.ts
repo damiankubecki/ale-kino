@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { IMovie, IMovieRepertoire } from '@app/shared/types/interfaces';
+import { IMovie, IMovieRate, IMovieRepertoire } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject} from 'rxjs';
+import { BehaviorSubject, map, reduce } from 'rxjs';
 import { API_URL, MOVIES_ENDPOINT } from '@app/shared/data/api/api';
 import { notFoundImageURL } from '@app/shared/assets/imagesURL';
 import * as moment from 'moment';
@@ -43,6 +43,14 @@ export class MoviesService {
 
   getMovieById(id: number) {
     return this.moviesCollection$$.value.find(movie => movie.id == id);
+  }
+
+  getMovieAvgRate(movieId: number) {
+    return this.http
+      .get<IMovieRate[]>(`${API_URL}/rates?movieId=${movieId}`)
+      .pipe(
+        map(response => response.reduce((acc, current) => acc + current.rate, 0) / response.length)
+      );
   }
 
   fetchMovies() {
