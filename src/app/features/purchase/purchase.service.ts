@@ -36,7 +36,11 @@ export interface IOrderInProgress {
 export interface IOrder {
   id: number;
   movie: IMovie;
-  owner: IOrderOwner;
+  owner: {
+    email: string;
+    name: string;
+    phone?: number;
+  };
   showing: {
     day: LongDate;
     hour: Hour;
@@ -139,7 +143,7 @@ export class PurchaseService {
 
   constructor() {
     this.order$$.pipe(skip(1)).subscribe(value => {
-      window.localStorage.setItem('order-in-progress', JSON.stringify(value));
+      window.localStorage.setItem('order-in-progress', JSON.stringify(value || ''));
     });
 
     const savedOrder = JSON.parse(window.localStorage.getItem('order-in-progress') || '');

@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { TopbarService } from '@app/topbar.service';
 import { UserService } from '@app/features/auth/user/user.service';
 import { IUserInfo } from '@app/shared/types/interfaces';
 import { IReservedSeat, PurchaseService } from '../purchase.service';
-import { map } from 'rxjs';
+import { combineLatest, map, of, Subscription, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { paths } from '@app/shared/router/paths';
+import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 
 type Form = FormGroup<{
   firstname: FormControl<string>;
@@ -21,18 +22,21 @@ type Form = FormGroup<{
   templateUrl: './confirmation-view.component.html',
   styleUrls: ['./confirmation-view.component.scss'],
 })
-export class BuyTicketViewComponent {
+export class BuyTicketViewComponent implements OnDestroy {
   private builder = inject(NonNullableFormBuilder);
   private router = inject(Router);
   private userService = inject(UserService);
   private topbarService = inject(TopbarService);
   private purchaseService = inject(PurchaseService);
+  private repertoireService = inject(RepertoireService);
 
   reservedSeats: IReservedSeat[] = [];
   orderPrice = 0;
   userInfo: IUserInfo | null = null;
   form!: Form;
   message = '';
+
+  subscription$!: Subscription;
 
   constructor() {
     this.topbarService.setTopbarContent('Potwierdzenie');
@@ -69,6 +73,10 @@ export class BuyTicketViewComponent {
     });
   }
 
+  ngOnDestroy() {
+    if (this.subscription$) this.subscription$.unsubscribe();
+  }
+
   handleSubmit() {
     this.form.markAllAsTouched();
 
@@ -83,7 +91,16 @@ export class BuyTicketViewComponent {
         email: this.form.controls['email'].value,
       });
 
-      this.router.navigate([paths.summary]);
+      this.subscription$ = this.sendOrder()
+        .pipe(
+          tap(response => {
+            this.router.navigate([paths.summary, response?.id]).then(() => {
+              window.location.reload();
+              this.purchaseService.clearOrder();
+            });
+          })
+        )
+        .subscribe();
     }
   }
 
@@ -119,5 +136,61 @@ export class BuyTicketViewComponent {
     });
 
     return form;
+  }
+
+  sendOrder() {
+    return this.purchaseService.order$.pipe(
+      switchMap(order => {
+        if (order.movie && order.showing) {
+          const seatsInOrderIds = order.reservedSeats.map(seat => seat.seatId);
+
+          const updatedShowings = this.repertoireService.repertoire
+            .filter(item => item.id === order.movie?.id)
+            .map(item => item.showings)
+            .map(item => {
+              return item.map(showing => {
+                const dayToUpdate = showing.day === order.showing?.day;
+                if (dayToUpdate) {
+                  return {
+                    ...showing,
+                    occupiedSeatsIds: showing.occupiedSeatsIds.map(item => {
+                      if (!order.showing?.hour) return item;
+                      return item[order.showing?.hour]
+                        ? {
+                            [order.showing.hour]: [
+                              ...item[order.showing?.hour],
+                              ...seatsInOrderIds,
+                            ],
+                          }
+                        : item;
+                    }),
+                  };
+                } else {
+                  return showing;
+                }
+              });
+            })
+            .flat();
+
+          const movieId = order.movie.id;
+
+          return this.purchaseService.sendOrder().pipe(
+            switchMap(order => {
+              return combineLatest([
+                this.userService.assignOrderToUser(order.id) || of(null),
+                of(order),
+              ]);
+            }),
+            switchMap(([result, order]) => {
+              return combineLatest([
+                this.repertoireService.updateShowings(movieId, updatedShowings),
+                of(order),
+              ]);
+            }),
+            map(([result, order]) => order)
+          );
+        } else return of(null);
+      })
+    );
   }
 }

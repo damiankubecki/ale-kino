@@ -1,5 +1,8 @@
 <h2 class="title">Dziękujemy za zamówienie</h2>
 <p class="text">
-  Twoje bilety zostały wysłane na adres email <span class="text-email">{{ orderEmail }}</span>
+  Twoje bilety zostały wysłane na adres email <span class="text-email">{{ ownerEmail }}</span>
 </p>
-<a [routerLink]="[paths.home]" class="link">Wróć na stronę główną</a>
+<div class="buttons-container">
+  <app-button [routerLink]="[paths.home]" [secondary]="true">Strona główna</app-button>
+  <app-button [routerLink]="['/' + paths.orders, orderId]">Szczegóły zamówienia</app-button>
+</div>

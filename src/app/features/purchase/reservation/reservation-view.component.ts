@@ -47,7 +47,7 @@ export class ReservationViewComponent {
   }
 
   handleSubmit() {
-    this.router.navigate([paths.buyTicket]);
+    this.router.navigate([paths.confirmation]);
   }
 
   handleSeatClick(event: Event) {
