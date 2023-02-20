@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { TopbarService } from '@app/topbar.service';
 import { UserService } from '@app/features/auth/user/user.service';
+import { tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { paths } from '@app/shared/router/paths';
 
 type Form = FormGroup<{
   email: FormControl<string>;
@@ -15,6 +17,7 @@ type Form = FormGroup<{
   styleUrls: ['./login-view.component.scss'],
 })
 export class LoginViewComponent {
+  private router = inject(Router);
   private builder = inject(NonNullableFormBuilder);
   private userService = inject(UserService);
   private topbarService = inject(TopbarService);
@@ -33,7 +36,10 @@ export class LoginViewComponent {
     const email = this.form.controls['email'].value;
     const password = this.form.controls['password'].value;
 
-    this.userService.auth(email, password);
+    this.userService
+      .auth(email, password)
+      .pipe(tap(() => this.router.navigate([paths.home])))
+      .subscribe();
   }
 
   private createForm() {
