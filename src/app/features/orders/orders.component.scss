@@ -1,0 +1,36 @@
+@import '../../../theme/globalStyle.scss';
+
+.title {
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+.order-details-container {
+  padding: 25px 0;
+  width: 500px;
+
+  .text,
+  .ticket {
+    margin: 5px 0;
+    color: $white;
+    font-size: $font-M;
+  }
+
+  .tickets-container {
+    margin: 20px 0;
+
+    .ticket {
+      font-size: $font-L;
+      padding: 0 10px;
+      border-left: 3px solid $orange;
+    }
+  }
+
+  .price {
+    color: $white;
+    font-size: $font-L;
+    text-align: right;
+  }
+}

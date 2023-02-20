@@ -1,0 +1,19 @@
+<ng-container *ngIf="order">
+  <h2 class="title">Zamówienie #{{ order.id }}</h2>
+  <div class="order-details-container">
+    <p class="text">Data zamówienia: {{ order.date }}</p>
+    <p class="text">Właściciel: {{ order.owner.name }} ({{ order.owner.email }})</p>
+    <p class="text">Data seansu: {{ order.showing.day }} {{ order.showing.hour }}</p>
+    <p class="text">
+      Film: {{ order.movie.title }} {{ order.movie.minAge ? '(' + order.movie.minAge + '+)' : '' }}
+    </p>
+    <p class="text">Sala: {{ order.roomId }}</p>
+    <div class="tickets-container">
+      <p *ngFor="let ticket of order.reservedSeats; let i = index" class="ticket">
+        Bilet {{ ticket.ticketType.name }}, rząd {{ ticket.row }}, miejsce {{ ticket.seat }} -
+        {{ ticket.ticketType.price }}zł
+      </p>
+    </div>
+    <p class="price">Łączna cena: {{ ticketsPrice }}zł</p>
+  </div>
+</ng-container>
