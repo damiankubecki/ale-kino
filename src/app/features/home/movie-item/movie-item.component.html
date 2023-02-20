@@ -30,7 +30,7 @@
     </div>
     <div class="movieItem__details-hours">
       <a
-        [routerLink]="[paths.reservation, movie.id, movie.day, hour]"
+        [routerLink]="['/' + paths.reservation, movie.id, movie.day, hour]"
         class="movieItem__details-hours-btn"
         *ngFor="let hour of movie.hours"
       >
@@ -39,10 +39,36 @@
     </div>
   </div>
 
-  <div class="movieItem__rates">
-    <p class="movieItem__rates-rate">Ocena filmu:</p>
-    <p class="movieItem__rates-rate">{{ movie.rate }}/10</p>
-    <button class="movieItem__rates-btn" *ngIf="isUserLogged">Oceń ten film!</button>
-    <button class="movieItem__rates-btn" *ngIf="isUserLogged">Chcę zobaczyć</button>
+  <div class="movie-stats-container">
+    <p *ngIf="movieAvgRating$ | async as rate" class="movie-rate-text">
+      Średnia ocena: {{ rate }}/5
+    </p>
+
+    <ng-container *ngIf="user$ | async as user">
+      <ng-container *ngIf="user.role !== 'guest'">
+        <p class="rate-movie-text">Twoja ocena:</p>
+        <div class="stars-container">
+          <fa-icon
+            *ngFor="let option of ratingOptions"
+            [icon]="starIcon"
+            (click)="addMovieRate(option)"
+            [class.active]="(userRateOfMovie$ | async) === option"
+          ></fa-icon>
+        </div>
+
+        <app-button
+          *ngIf="!user.info?.wantToWatchIds?.includes(movie.id); else onList"
+          (click)="addMovieToWatchlist()"
+        >
+          Chcę obejrzeć
+        </app-button>
+
+        <ng-template #onList>
+          <app-button (click)="removeMovieFromWatchlist()" [secondary]="true">
+            Nie chcę obejrzeć
+          </app-button>
+        </ng-template>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

@@ -88,15 +88,15 @@
 
       &-btn {
         width: 80px;
-        padding: 7px 15px;
-        border: 1px solid $primary;
-        border-radius: 5px;
-        background-color: $orange;
+        padding: 4px 15px;
+        border: none;
+        border-bottom: 2px solid $orange;
+        background-color: transparent;
         font-size: $font-M;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
-        color: $primary;
+        color: $orange;
         cursor: pointer;
         transition: 0.1s;
 
@@ -106,35 +106,63 @@
       }
     }
   }
+}
 
-  &__rates {
-    margin-top: 20px;
-    flex-grow: 1;
+.movie-stats-container {
+  position: relative;
+  margin-top: 20px;
+  padding-top: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .rate-movie-text,
+  .movie-rate-text {
+    padding: 5px 0;
+    color: $white;
+    font-size: $font-M;
+    animation: 0.3s showText linear both;
+  }
+
+  .movie-rate-text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+  }
+
+  .stars-container {
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
 
-    &-rate {
-      text-align: center;
-      color: $white;
-      font-size: $font-L;
-    }
-
-    &-btn {
-      margin: 10px 0 0;
-      width: 160px;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: $secondary;
-      color: $white;
-      font-size: $font-M;
-      cursor: pointer;
+    fa-icon {
+      color: $disabled;
       transition: 0.1s;
+      cursor: pointer;
+
+      &.active {
+        color: rgb(200, 211, 42);
+      }
 
       &:hover {
-        opacity: 0.7;
+        color: rgb(200, 211, 42);
+        opacity: 0.8;
+
+        &.active {
+          opacity: 1;
+        }
       }
     }
+  }
+}
+
+@keyframes showText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
