@@ -1,0 +1,39 @@
+@import '../../../theme/globalStyle.scss';
+
+.title {
+  margin-bottom: 20px;
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+.list-item {
+  max-width: 750px;
+  color: $white;
+  font-size: $font-M;
+
+  .movie-title {
+    margin: 20px 0 10px;
+    font-size: $font-L;
+  }
+
+  .container {
+    align-items: flex-start;
+    display: flex;
+    padding: 0 10px;
+
+    img {
+      width: 125px;
+    }
+
+    p {
+      margin-right: 20px;
+    }
+  }
+
+  .button-container {
+    margin: 20px 0 40px;
+    text-align: center;
+  }
+}

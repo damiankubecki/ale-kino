@@ -1,0 +1,24 @@
+<ng-container *ngIf="(moviesOnWatchlist$ | async)?.length; else empty">
+  <h2 class="title">Lista filmów do obejrzenia</h2>
+
+  <div *ngFor="let movie of moviesOnWatchlist$ | async; let i = index" class="list-item">
+    <p class="movie-title">{{ i + 1 }}. {{ movie.title }}</p>
+
+    <div class="container">
+      <div>
+        <p>{{ movie.description.short }}</p>
+        <p>{{ movie.description.long }}</p>
+      </div>
+
+      <img [src]="movie.imageURL" alt="" />
+    </div>
+
+    <div class="button-container">
+      <app-button (click)="removeFromList(movie.id)" [secondary]="true">Usuń z listy</app-button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #empty>
+  <h2 class="title">Brak filmów na liście</h2>
+</ng-template>
