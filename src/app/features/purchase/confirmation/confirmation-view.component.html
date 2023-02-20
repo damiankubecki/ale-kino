@@ -45,7 +45,13 @@
     <ng-container *ngIf="form.controls['phone'] as control">
       <div class="form__itemContainer">
         <label class="form__label">Numer telefonu (opcjonalne):</label>
-        <input formControlName="phone" type="text" class="form__input" placeholder="333444555" />
+        <input
+          formControlName="phone"
+          type="text"
+          class="form__input"
+          placeholder="333444555"
+          appOnlyNumbers
+        />
         <ng-container *ngIf="control.touched && form.controls['phone'].errors as error">
           <p *ngIf="error['minlength']" class="form__errorParagraph">liczba wymaganych znaków: 9</p>
           <p *ngIf="error['maxlength']" class="form__errorParagraph">liczba wymaganych znaków: 9</p>

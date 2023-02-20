@@ -31,6 +31,7 @@ import { MyTicketsComponent } from './features/my-tickets/my-tickets.component';
 import { WatchlistComponent } from './features/watchlist/watchlist.component';
 import { OrdersComponent } from './features/orders/orders.component';
 import { ConfirmationFormComponent } from './features/purchase/confirmation/confirmation-form/confirmation-form.component';
+import { OnlyNumbersDirective } from './shared/directives/only-numbers.directive';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ConfirmationFormComponent } from './features/purchase/confirmation/conf
     WatchlistComponent,
     OrdersComponent,
     ConfirmationFormComponent,
+    OnlyNumbersDirective,
   ],
   imports: [
     BrowserModule,
