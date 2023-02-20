@@ -1,5 +1,5 @@
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
 export const icons = {
   shoppingCart: faShoppingCart,
@@ -7,4 +7,5 @@ export const icons = {
   instagram: faInstagram,
   youtube: faYoutube,
   trash: faTrash,
+  star: faStar,
 };
