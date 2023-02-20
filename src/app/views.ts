@@ -1,15 +1,12 @@
-import { AdminViewComponent } from './features/admin/admin-view.component';
-import { HomeViewComponent } from './features/home/home-view.component';
-import { BuyTicketViewComponent } from './features/purchase/confirmation/confirmation-view.component';
-import { ReservationViewComponent } from './features/purchase/reservation/reservation-view.component';
-import { SummaryViewComponent } from './features/purchase/summary/summary-view.component';
-import { NotFoundComponent } from './features/not-found/not-found.component';
-
-export {
-  AdminViewComponent,
-  HomeViewComponent,
-  BuyTicketViewComponent,
-  ReservationViewComponent,
-  SummaryViewComponent,
-  NotFoundComponent,
-};
+export * from './features/admin/admin-view.component';
+export * from './features/home/repertoire-view.component';
+export * from './features/purchase/confirmation/confirmation-view.component';
+export * from './features/purchase/reservation/reservation-view.component';
+export * from './features/purchase/summary/summary-view.component';
+export * from './features/not-found/not-found.component';
+export * from '@app/features/auth/logout/logout-view.component';
+export * from '@app/features/purchase/basket/basket.component';
+export * from '@app/features/my-tickets/my-tickets.component';
+export * from '@app/features/watchlist/watchlist.component';
+export * from '@app/features/orders/orders.component';
+export * from '@app/features/auth/login/login-view.component';

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginViewComponent } from '@app/features/auth/login/login-view.component';
 import {
   RepertoireViewComponent,
   AdminViewComponent,
@@ -8,16 +7,17 @@ import {
   ReservationViewComponent,
   SummaryViewComponent,
   NotFoundComponent,
+  BasketComponent,
+  MyTicketsComponent,
+  OrdersComponent,
+  WatchlistComponent,
+  LoginViewComponent,
+  LogoutViewComponent,
 } from '@app/views';
 import { IsAdminGuard } from './guards/is-admin.guard';
 import { IsNotAdminGuard } from './guards/is-not-admin.guard';
 import { IsGuestGuard } from './guards/is-guest.guard';
 import { paths } from './paths';
-import { LogoutViewComponent } from '@app/features/auth/logout/logout-view.component';
-import { BasketComponent } from '@app/features/purchase/basket/basket.component';
-import { MyTicketsComponent } from '@app/features/my-tickets/my-tickets.component';
-import { WatchlistComponent } from '@app/features/watchlist/watchlist.component';
-import { OrdersComponent } from '@app/features/orders/orders.component';
 
 const routes: Routes = [
   {
