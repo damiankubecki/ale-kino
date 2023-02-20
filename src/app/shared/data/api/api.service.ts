@@ -7,14 +7,14 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
+  private repertoireService = inject(RepertoireService);
+  private moviesService = inject(MoviesService);
+
   private status$$ = new BehaviorSubject({ isLoading: true });
 
   get status$() {
     return this.status$$.asObservable();
   }
-
-  private repertoireService = inject(RepertoireService);
-  private moviesService = inject(MoviesService);
 
   constructor() {
     this.repertoireService.fetchRepertoire();
