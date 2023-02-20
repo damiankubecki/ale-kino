@@ -15,6 +15,13 @@ export interface IMovie {
   rate: string;
 }
 
+export interface IMovieRate {
+  id: number;
+  userId: number;
+  movieId: number;
+  rate: number;
+}
+
 interface OccupiedSeats {
   [hour: Hour]: number[];
 }
@@ -43,18 +50,8 @@ export interface ITicket {
   codeQR: string;
 }
 
-export interface IOrder {
-  firstname: IUserInfo['firstname'];
-  lastname: IUserInfo['lastname'];
-  email: IUserInfo['email'];
-  sendPromo: boolean;
-  totalPrice: number;
-  phone?: IUserInfo['phone'];
-  discountCode?: string;
-}
-
 export interface IRatedMovie {
-  id: IMovie['id'];
+  movieId: IMovie['id'];
   rate: number;
 }
 
