@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './shared/router/app-routing.module';
-import { HomeViewComponent } from './features/home/home-view.component';
+import { RepertoireViewComponent } from './features/home/repertoire-view.component';
 import { AdminViewComponent } from './features/admin/admin-view.component';
 import { ReservationViewComponent } from './features/purchase/reservation/reservation-view.component';
 import { BuyTicketViewComponent } from './features/purchase/confirmation/confirmation-view.component';
@@ -28,11 +28,14 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
 import { BasketComponent } from './features/purchase/basket/basket.component';
 import { OrderItemsListComponent } from './features/purchase/shared/order-items-list/order-items-list.component';
 import { MyTicketsComponent } from './features/my-tickets/my-tickets.component';
+import { WatchlistComponent } from './features/watchlist/watchlist.component';
+import { OrdersComponent } from './features/orders/orders.component';
+import { ConfirmationFormComponent } from './features/purchase/confirmation/confirmation-form/confirmation-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeViewComponent,
+    RepertoireViewComponent,
     AdminViewComponent,
     ReservationViewComponent,
     BuyTicketViewComponent,
@@ -52,6 +55,9 @@ import { MyTicketsComponent } from './features/my-tickets/my-tickets.component';
     BasketComponent,
     OrderItemsListComponent,
     MyTicketsComponent,
+    WatchlistComponent,
+    OrdersComponent,
+    ConfirmationFormComponent,
   ],
   imports: [
     BrowserModule,
