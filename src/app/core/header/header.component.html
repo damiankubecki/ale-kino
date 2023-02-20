@@ -4,7 +4,7 @@
   </a>
 
   <div class="buttonsContainer">
-    <ng-container *ngIf="user.role === 'guest' || user.role === 'user'">
+    <ng-container *ngIf="user.role === 'user'">
       <app-nav-button [link]="paths.basket" [icon]="icons.shoppingCart"
         >Koszyk {{ '(' + seatsInBasket + ')' }}</app-nav-button
       >

@@ -15,7 +15,7 @@ export class HeaderComponent {
   private userService = inject(UserService);
   private purchaseService = inject(PurchaseService);
 
-  user: IUser = { role: 'guest', info: null };
+  user: IUser = { id: NaN, role: 'guest', info: null };
   menuItems: IHeaderNavigation = config.headerNavigation;
   seatsInBasket = 0;
   paths = paths;
