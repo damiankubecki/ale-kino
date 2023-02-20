@@ -5,6 +5,7 @@
       *ngFor="let button of buttonsCollection"
       [class.active]="button.date === this.activeDay"
       [disabled]="button.disabled"
+      [routerLink]="['/' + paths.repertoire, button.date]"
       (click)="setDayToDisplay(button.date)"
     >
       {{ button.content }}

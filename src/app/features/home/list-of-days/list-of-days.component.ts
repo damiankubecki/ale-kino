@@ -3,6 +3,7 @@ import { RepertoireService } from '@app/shared/data/repertoire/repertoire.servic
 import { ShortDate, LongDate } from '@app/shared/types/types';
 import { config } from '@app/config';
 import * as moment from 'moment';
+import { paths } from '@app/shared/router/paths';
 
 interface IButton {
   content: ShortDate | string;
@@ -18,6 +19,7 @@ interface IButton {
 export class ListOfDaysComponent {
   activeDay: string = '';
   buttonsCollection: IButton[] = [];
+  paths = paths;
 
   constructor(private RepertoireService: RepertoireService) {}
 
