@@ -43,8 +43,8 @@ export const config: IConfig = {
   },
   headerNavigation: {
     user: [
-      { title: 'Moje bilety', path: '/' },
-      { title: 'Chcę obejrzeć', path: '/' },
+      { title: 'Moje bilety', path: paths.myTickets },
+      { title: 'Chcę obejrzeć', path: paths.watchlist },
       { title: 'Wyloguj', path: paths.logout },
     ],
     admin: [
