@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { IUser, UserService } from '@app/features/auth/user/user.service';
+import { UserService } from '@app/features/auth/user/user.service';
 import { paths } from '@app/shared/router/paths';
-import { debounceTime, filter, map, skip, switchMap, tap } from 'rxjs';
+import { filter, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IsGuestGuard implements CanActivate {
-  userService = inject(UserService);
-  router = inject(Router);
+  private userService = inject(UserService);
+  private router = inject(Router);
 
   canActivate() {
     return this.checkUserRole();
