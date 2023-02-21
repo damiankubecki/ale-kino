@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaymentViewComponent } from '@app/features/purchase/payment-view/payment-view.component';
 import {
   RepertoireViewComponent,
-  AdminViewComponent,
   BuyTicketViewComponent,
   ReservationViewComponent,
   SummaryViewComponent,
@@ -38,7 +37,7 @@ const routes: Routes = [
   {
     path: paths.admin,
     canActivate: [IsAdminGuard],
-    component: AdminViewComponent,
+    loadChildren: () => import('../../features/admin/admin.module').then(x => x.AdminModule),
   },
   {
     path: paths.login,

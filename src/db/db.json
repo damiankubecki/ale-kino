@@ -36,7 +36,7 @@
           "wantToWatchIds": [],
           "ratedMovies": [
             {
-              "rate": 5,
+              "rate": 3,
               "movieId": 1
             },
             {
@@ -1135,7 +1135,7 @@
     {
       "userId": 2,
       "movieId": 1,
-      "rate": 5,
+      "rate": 3,
       "id": 1
     },
     {

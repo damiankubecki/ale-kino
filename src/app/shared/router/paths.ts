@@ -8,7 +8,7 @@ export const paths = {
   payment: 'payment',
   summary: 'summary',
   myTickets: 'my-tickets',
-  orders: 'orders',
+  orders: 'order',
   watchlist: 'watchlist',
   login: 'auth',
   logout: 'logout',

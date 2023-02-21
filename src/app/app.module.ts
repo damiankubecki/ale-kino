@@ -38,7 +38,6 @@ import { PaymentViewComponent } from './features/purchase/payment-view/payment-v
   declarations: [
     AppComponent,
     RepertoireViewComponent,
-    AdminViewComponent,
     ReservationViewComponent,
     BuyTicketViewComponent,
     SummaryViewComponent,
