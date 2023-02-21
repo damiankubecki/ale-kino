@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { IMenuItem } from '@app/core/header/nav-button/nav-button.component';
 import { paths } from './shared/router/paths';
+import { ADMIN_PATHS } from './features/admin/admin-paths';
 
 export interface IRepertoireConfig {
   dayToDisplayOnInit: LongDate;
@@ -48,9 +49,8 @@ export const config: IConfig = {
       { title: 'Wyloguj', path: paths.logout },
     ],
     admin: [
-      { title: 'Sale kinowe', path: '/' },
-      { title: 'Repertuar', path: '/' },
-      { title: 'Kody zniżkowe', path: '/' },
+      { title: 'Sale kinowe', path: `${paths.admin}/${ADMIN_PATHS.rooms}` },
+      { title: 'Repertuar', path: `${paths.admin}/${ADMIN_PATHS.repertoire}` },
       { title: 'Wyloguj', path: paths.logout },
     ],
   },
