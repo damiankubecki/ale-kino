@@ -1,0 +1,134 @@
+@import '../../../../../theme/globalStyle.scss';
+
+.title {
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+.repertoire-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .repertoire-item {
+    width: 400px;
+    display: flex;
+    margin: 10px 0;
+
+    & > div {
+      flex-grow: 1;
+    }
+
+    p {
+      color: $white;
+      font-size: $font-M;
+    }
+
+    .remove-button {
+      width: 50px;
+      margin-left: 25px;
+      background-color: transparent;
+      cursor: pointer;
+
+      &:hover {
+        mat-icon {
+          color: $red;
+        }
+      }
+
+      mat-icon {
+        color: $white;
+        transition: 0.1s;
+      }
+    }
+  }
+
+  .add-showing-container {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    .title {
+      margin: 30px 0 10px;
+      flex-basis: 100%;
+      font-size: $font-M;
+      color: $orange;
+      font-weight: bold;
+    }
+
+    .hours {
+      width: 130px;
+      line-height: 20px;
+      text-align: center;
+      color: $white;
+      font-size: $font-M;
+    }
+
+    mat-label {
+      display: block;
+      margin: 10px 8px;
+      color: $white;
+      font-size: $font-M;
+    }
+
+    input {
+      padding: 8px 15px;
+      height: 36px;
+    }
+
+    mat-form-field {
+      height: 58px;
+      margin: 0 auto;
+      display: block;
+      width: 140px;
+    }
+
+    .button-new-hour {
+      width: 100%;
+      margin: 5px 0;
+      padding: 5px 0;
+      text-align: center;
+      background-color: transparent;
+      color: $orange;
+      cursor: pointer;
+    }
+
+    mat-select {
+      margin: 0 auto;
+      height: 36px;
+      width: 80px;
+      background-color: $primaryLight;
+      border-bottom: 3px solid $disabled;
+      line-height: 36px;
+      text-align: center;
+    }
+
+    .button-confirm {
+      margin-top: 30px;
+    }
+  }
+}
+
+::ng-deep .mat-select-value {
+  display: block;
+  color: $white !important;
+  margin: 10px 15px;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: $primary !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: $primary !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: $primary !important;
+}
