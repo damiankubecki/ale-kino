@@ -20,4 +20,8 @@ export class RoomsService {
   getRoomById(roomId: number) {
     return this.http.get<IRoom>(`${API_URL}/${ROOMS_ENDPOINT}/${roomId}`);
   }
+
+  getAllRooms() {
+    return this.http.get<IRoom[]>(`${API_URL}/${ROOMS_ENDPOINT}`);
+  }
 }
