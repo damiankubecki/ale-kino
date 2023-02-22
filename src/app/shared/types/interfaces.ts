@@ -22,7 +22,7 @@ export interface IMovieRate {
   rate: number;
 }
 
-interface OccupiedSeats {
+export interface OccupiedSeats {
   [hour: Hour]: number[];
 }
 
