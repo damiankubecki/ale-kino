@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import './theme.scss';
 
 *,
@@ -45,7 +47,8 @@ body {
   border-radius: 25px;
 }
 
-input {
+input,
+textarea {
   padding: 8px 15px;
   border: none;
   border-bottom: 3px solid $disabled;
@@ -62,4 +65,16 @@ input {
 
 button {
   border: none;
+  width: 150px;
+  padding: 6px 20px;
+  background-color: $secondary;
+  border-radius: 3px;
+  color: $white;
+  cursor: pointer;
+  font-size: $font-M;
+  transition: 0.1s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
