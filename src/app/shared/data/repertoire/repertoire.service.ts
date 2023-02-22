@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { IMovieRepertoire, IShowing } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import { config } from '@app/config';
 import { API_URL, REPERTOIRE_ENDPOINT } from '@app/shared/data/api/api';
 import { PurchaseService } from '@app/features/purchase/purchase.service';
@@ -76,6 +76,28 @@ export class RepertoireService {
       occupiedSeatsIds: Object.values(showingOccupiedSeats)[0],
       roomId: showing.roomId,
     };
+  }
+
+  addShowing(movieId: number, showing: IShowing) {
+    return this.http.get<IMovieRepertoire>(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`).pipe(
+      switchMap(response => {
+        return this.http.patch<IShowing>(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`, {
+          ...response,
+          showings: [...response.showings, showing],
+        });
+      })
+    );
+  }
+
+  removeShowing(movieId: number, day: LongDate) {
+    return this.http.get<IMovieRepertoire>(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`).pipe(
+      switchMap(response => {
+        return this.http.patch<IShowing>(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`, {
+          ...response,
+          showings: response.showings.filter(showing => showing.day !== day),
+        });
+      })
+    );
   }
 
   fetchRepertoire() {
