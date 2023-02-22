@@ -1,8 +1,32 @@
 @import '../../../../theme/theme.scss';
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .title {
   color: $white;
   font-weight: normal;
   text-align: center;
   font-size: $font-L;
+}
+
+mat-list {
+  margin: 20px 0;
+}
+
+a {
+  display: block;
+  margin: 0 auto 10px;
+  text-align: center;
+  color: $white;
+  font-size: $font-L;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button {
+  margin: 20px auto;
 }
