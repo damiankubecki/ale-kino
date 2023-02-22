@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
@@ -67,6 +69,8 @@ import { PaymentViewComponent } from './features/purchase/payment-view/payment-v
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
+
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
   ],
