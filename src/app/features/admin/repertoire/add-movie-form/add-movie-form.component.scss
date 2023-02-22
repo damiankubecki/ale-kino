@@ -1,0 +1,62 @@
+@import '../../../../../theme/theme.scss';
+
+.dialog {
+  text-align: center;
+  width: 400px;
+
+  .title {
+    margin: 15px auto 0;
+    color: $orange;
+    font-size: $font-M;
+  }
+
+  label {
+    margin: 15px auto 3px;
+    display: block;
+    color: $white;
+    font-size: $font-M;
+  }
+
+  textarea,
+  input {
+    min-width: 300px;
+    max-width: 300px;
+    border: none;
+    border-bottom: 3px solid $disabled;
+    background-color: $primaryLight;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.description-short {
+      height: 80px;
+    }
+
+    &.description-long {
+      height: 150px;
+    }
+  }
+
+  .narrow {
+    min-width: 150px;
+    max-width: 150px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      margin: 4px;
+      height: 25px;
+      width: 50px;
+      padding: 0;
+    }
+  }
+
+  .confirm-button {
+    margin: 30px 0;
+  }
+}
