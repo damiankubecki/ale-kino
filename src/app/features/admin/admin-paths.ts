@@ -1,5 +1,5 @@
 export const ADMIN_PATHS = {
   default: '',
   rooms: 'rooms',
-  repertoire: 'repertoire',
+  movies: 'movies',
 } as const;
