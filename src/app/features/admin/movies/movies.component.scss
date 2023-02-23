@@ -1,0 +1,63 @@
+@import '../../../../theme/theme.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+mat-list {
+  margin: 20px 0;
+}
+
+.movie-item {
+  height: 40px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .delete-movie-button {
+    margin: 0 0 0 30px;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+
+    &:hover {
+      mat-icon {
+        color: $red;
+      }
+    }
+
+    mat-icon {
+      color: $white;
+      transition: 0.1s;
+    }
+  }
+
+  a {
+    display: block;
+    flex-grow: 1;
+    text-align: left;
+    color: $white;
+    font-size: $font-L;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+.toggle-movie-button {
+  margin: 20px auto;
+}

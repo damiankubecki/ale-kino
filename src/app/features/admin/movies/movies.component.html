@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <h3 class="title">Lista filmów w bazie:</h3>
+
+  <mat-list role="list">
+    <div *ngFor="let movie of moviesCollection$ | async" class="movie-item">
+      <a [routerLink]="['/admin/' + paths.movies, movie.id]"> {{ movie.title }}</a>
+      <button (click)="deleteMovie(movie.id)" class="delete-movie-button">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-list>
+
+  <button (click)="this.toggleFormActivity()" class="toggle-form-button">
+    {{ isFormActive ? 'Ukryj formularz' : 'Dodaj film' }}
+  </button>
+</div>
+
+<app-add-movie-form *ngIf="isFormActive" (formValues)="addMovie($event)"></app-add-movie-form>
