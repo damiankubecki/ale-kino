@@ -7,13 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  MatButtonModule,
-  MatIconModule,
-  MatInputModule,
-  MatSelectChange,
-  MatSelectModule,
-} from '@angular/material';
+import { MatButtonModule, MatIconModule, MatInputModule, MatSelectModule } from '@angular/material';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MoviesService } from '@app/shared/data/movies/movies.service';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
@@ -65,7 +59,7 @@ export class MovieShowingsComponent {
   now = new Date().toISOString().substring(0, 10);
 
   constructor() {
-    this.topbarService.setTopbarContent('Repertuar');
+    this.topbarService.setTopbarContent('Seanse');
 
     this.activatedRoute.params
       .pipe(
