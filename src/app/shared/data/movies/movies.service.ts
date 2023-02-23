@@ -2,10 +2,11 @@ import { inject, Injectable } from '@angular/core';
 import { IMovie, IMovieRate, IMovieRepertoire } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, reduce } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, of, reduce, switchMap, tap } from 'rxjs';
 import { API_URL, MOVIES_ENDPOINT } from '@app/shared/data/api/api';
 import { notFoundImageURL } from '@app/shared/assets/imagesURL';
 import * as moment from 'moment';
+import { RepertoireService } from '../repertoire/repertoire.service';
 
 export interface IMovieExpanded extends IMovie {
   day: LongDate;
@@ -18,6 +19,7 @@ export interface IMovieExpanded extends IMovie {
 })
 export class MoviesService {
   private http = inject(HttpClient);
+  private repertoireService = inject(RepertoireService);
 
   private moviesToDisplay$$ = new BehaviorSubject<IMovieExpanded[]>([]);
   private moviesCollection$$ = new BehaviorSubject<IMovie[]>([]);
@@ -39,6 +41,19 @@ export class MoviesService {
         .filter(movie => movie.hours.length)
         .filter(movie => this.isMoviePlayToday(dayToDisplay, movie, repertoire))
     );
+  }
+
+  addMovie(movie: IMovie) {
+    return this.http.post<IMovie>(`${API_URL}/${MOVIES_ENDPOINT}`, movie).pipe(
+      switchMap(movie => {
+        return combineLatest([of(movie), this.repertoireService.initMovieRepertoire(movie.id)]);
+      }),
+      tap(([movie]) => this.moviesCollection$$.value.push(movie))
+    );
+  }
+
+  deleteMovie(movieId: number) {
+    return this.http.delete(`${API_URL}/${MOVIES_ENDPOINT}/${movieId}`);
   }
 
   getMovieById(id: number) {

@@ -1,13 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { IMovieRepertoire, IShowing } from '@app/shared/types/interfaces';
+import { IMovie, IMovieRepertoire, IShowing } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { config } from '@app/config';
 import { API_URL, REPERTOIRE_ENDPOINT } from '@app/shared/data/api/api';
-import { PurchaseService } from '@app/features/purchase/purchase.service';
-import { Router } from '@angular/router';
-import { paths } from '@app/shared/router/paths';
 
 export interface ISingleShowing {
   day: LongDate;
@@ -21,7 +18,6 @@ export interface ISingleShowing {
 })
 export class RepertoireService {
   private http = inject(HttpClient);
-  private purchaseService = inject(PurchaseService);
 
   private dayToDisplay$$ = new BehaviorSubject<LongDate>(config.repertoire.dayToDisplayOnInit);
   private repertoire$$ = new BehaviorSubject<IMovieRepertoire[]>([]);
@@ -49,6 +45,19 @@ export class RepertoireService {
   getMovieRepertoire(id: number) {
     return this.repertoire$$.value.find(movie => movie.id === id);
   }
+
+  initMovieRepertoire(movieId: number) {
+    return this.http
+      .post<IMovieRepertoire>(`${API_URL}/${REPERTOIRE_ENDPOINT}`, {
+        movieId,
+        showings: [],
+      })
+      .pipe(tap(repertoire => this.repertoire$$.value.push(repertoire)));
+  }
+
+  // deleteMovieRepertoire(movieId: number) {
+  //   return this.http.delete(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`);
+  // }
 
   getShowing(movieId: number, day: LongDate, hour: Hour): ISingleShowing | null {
     const movieRepertoire = this.getMovieRepertoire(movieId);
