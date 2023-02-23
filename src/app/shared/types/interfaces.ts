@@ -12,7 +12,6 @@ export interface IMovie {
   minAge: number | null;
   imageURL: string | null;
   genres: string[];
-  rate: string;
 }
 
 export interface IMovieRate {
