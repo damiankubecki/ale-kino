@@ -50,7 +50,7 @@ export const config: IConfig = {
     ],
     admin: [
       { title: 'Sale kinowe', path: `${paths.admin}/${ADMIN_PATHS.rooms}` },
-      { title: 'Repertuar', path: `${paths.admin}/${ADMIN_PATHS.repertoire}` },
+      { title: 'Filmy', path: `${paths.admin}/${ADMIN_PATHS.movies}` },
       { title: 'Wyloguj', path: paths.logout },
     ],
   },
