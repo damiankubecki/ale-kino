@@ -1,0 +1,57 @@
+<div class="dialog">
+  <h3 class="title">Dodaj nowy film do bazy</h3>
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div *ngIf="form.controls['title'] as control" class="form-field">
+      <label>Tytuł filmu:</label>
+      <input type="text" formControlName="title" />
+      <p *ngIf="control.hasError('required') && control.touched" class="error-text">*obowiązkowe</p>
+    </div>
+
+    <div *ngIf="form.controls['isPremiere'] as control" class="form-field">
+      <label>Premiera:</label>
+      <input type="checkbox" formControlName="isPremiere" class="narrow" />
+      <p *ngIf="control.hasError('required') && control.touched" class="error-text">*obowiązkowe</p>
+    </div>
+
+    <div *ngIf="form.controls['shortDescription'] as control" class="form-field">
+      <label>Opis krótki:</label>
+      <textarea class="description-short" formControlName="shortDescription"></textarea>
+      <p *ngIf="control.hasError('required') && control.touched" class="error-text">*obowiązkowe</p>
+    </div>
+
+    <div *ngIf="form.controls['longDescription'] as control" class="form-field">
+      <label>Opis długi:</label>
+      <textarea class="description-long" formControlName="longDescription"></textarea>
+      <p *ngIf="control.hasError('required') && control.touched" class="error-text">*obowiązkowe</p>
+    </div>
+
+    <div *ngIf="form.controls['imageURL'] as control" class="form-field">
+      <label>Link do zdjęcia:</label>
+      <input type="text" formControlName="imageURL" />
+    </div>
+
+    <div *ngIf="form.controls['duration'] as control" class="form-field">
+      <label>Czas trwania (min):</label>
+      <input type="number" formControlName="duration" min="1" class="narrow" />
+      <p *ngIf="control.hasError('required') && control.touched" class="error-text">*obowiązkowe</p>
+    </div>
+
+    <div *ngIf="form.controls['minAge'] as control" class="form-field">
+      <label>Minimalny wiek:</label>
+      <input type="number" formControlName="minAge" min="1" class="narrow" />
+    </div>
+
+    <div *ngIf="form.controls['genre'] as control" class="form-field">
+      <label>Gatunki:</label>
+      <input type="text" [(ngModel)]="form.value.genre" formControlName="genre" class="narrow" />
+      <p class="genre-item">
+        <span (click)="removeGenre(genre)" *ngFor="let genre of genres; let last = last"
+          >{{ genre }}{{ last ? '' : ', ' }}</span
+        >
+      </p>
+      <button (click)="addGenre()" type="button">+</button>
+    </div>
+
+    <button type="submit" class="confirm-button">Potwierdź</button>
+  </form>
+</div>

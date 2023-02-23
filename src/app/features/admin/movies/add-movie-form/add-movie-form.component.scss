@@ -59,4 +59,15 @@
   .confirm-button {
     margin: 30px 0;
   }
+
+  .genre-item {
+    padding: 3px 0s;
+    color: $white;
+    font-size: $font-M;
+  }
+
+  .error-text {
+    color: $red;
+    font-size: $font-S;
+  }
 }
