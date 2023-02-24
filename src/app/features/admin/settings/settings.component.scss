@@ -1,0 +1,67 @@
+@import '../../../../theme/theme.scss';
+
+.title {
+  margin-bottom: 30px;
+  color: $white;
+  font-weight: normal;
+  text-align: center;
+  font-size: $font-L;
+}
+
+form {
+  .setting-item {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid $orange;
+
+    &.no-border {
+      border: none;
+    }
+
+    label {
+      padding: 0 0 10px;
+      color: $white;
+      font-size: $font-M;
+    }
+
+    input {
+      width: 150px;
+    }
+
+    .action-button {
+      margin-bottom: 15px;
+    }
+
+    .link-container {
+      min-width: 300px;
+
+      .link-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 0;
+        color: $white;
+        font-size: $font-M;
+        border-bottom: 2px solid $disabled;
+      }
+
+      .remove-link-button {
+        background-color: transparent;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+
+    .text {
+      color: $white;
+      font-size: $font-M;
+    }
+  }
+}

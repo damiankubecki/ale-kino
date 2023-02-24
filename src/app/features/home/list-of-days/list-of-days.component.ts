@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 import { ShortDate, LongDate } from '@app/shared/types/types';
 import { config } from '@app/config';
 import * as moment from 'moment';
 import { paths } from '@app/shared/router/paths';
+import { Store } from '@ngrx/store';
+import { selectNumberOfDaysToDisplay } from '@app/core/config/config.selectors';
+import { tap } from 'rxjs';
 
 interface IButton {
   content: ShortDate | string;
@@ -17,23 +20,30 @@ interface IButton {
   styleUrls: ['./list-of-days.component.scss'],
 })
 export class ListOfDaysComponent {
-  activeDay: string = '';
+  private store = inject(Store);
+  private repertoireService = inject(RepertoireService);
+
+  activeDay: LongDate = '01/01/2023';
   buttonsCollection: IButton[] = [];
   paths = paths;
 
-  constructor(private RepertoireService: RepertoireService) {}
-
   ngOnInit() {
-    this.activeDay = this.RepertoireService.dayToDisplay;
-
-    for (let i = 0; i <= config.repertoire.numberOfDaysToDisplay - 1; i++) {
-      this.buttonsCollection.push(this.getButtonProps(i));
-    }
+    this.repertoireService.dayToDisplay$.pipe(tap(day => (this.activeDay = day))).subscribe();
+    this.store
+      .select(selectNumberOfDaysToDisplay)
+      .pipe(
+        tap(number => {
+          for (let i = 0; i <= number - 1; i++) {
+            this.buttonsCollection.push(this.getButtonProps(i));
+          }
+        })
+      )
+      .subscribe();
   }
 
   setDayToDisplay(date: LongDate) {
     this.activeDay = date;
-    this.RepertoireService.setDayToDisplay(date);
+    this.repertoireService.setDayToDisplay(date);
   }
 
   private getButtonProps(dayFromToday: number) {

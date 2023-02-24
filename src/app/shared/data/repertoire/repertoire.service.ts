@@ -1,11 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { IMovie, IMovieRepertoire, IShowing } from '@app/shared/types/interfaces';
+import { IMovieRepertoire, IShowing } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
-import { config } from '@app/config';
 import { API_URL, REPERTOIRE_ENDPOINT } from '@app/shared/data/api/api';
-
 export interface ISingleShowing {
   day: LongDate;
   hour: Hour;
@@ -19,7 +17,7 @@ export interface ISingleShowing {
 export class RepertoireService {
   private http = inject(HttpClient);
 
-  private dayToDisplay$$ = new BehaviorSubject<LongDate>(config.repertoire.dayToDisplayOnInit);
+  private dayToDisplay$$ = new BehaviorSubject<LongDate>('01/01/2023');
   private repertoire$$ = new BehaviorSubject<IMovieRepertoire[]>([]);
 
   get dayToDisplay$() {
@@ -54,10 +52,6 @@ export class RepertoireService {
       })
       .pipe(tap(repertoire => this.repertoire$$.value.push(repertoire)));
   }
-
-  // deleteMovieRepertoire(movieId: number) {
-  //   return this.http.delete(`${API_URL}/${REPERTOIRE_ENDPOINT}/${movieId}`);
-  // }
 
   getShowing(movieId: number, day: LongDate, hour: Hour): ISingleShowing | null {
     const movieRepertoire = this.getMovieRepertoire(movieId);

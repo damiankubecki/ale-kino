@@ -31,17 +31,24 @@
             10,
             11,
             12,
-            13
+            13,
+            14
           ],
-          "wantToWatchIds": [],
+          "wantToWatchIds": [
+            3
+          ],
           "ratedMovies": [
             {
-              "rate": 3,
+              "rate": 4,
               "movieId": 1
             },
             {
-              "rate": 3,
+              "rate": 2,
               "movieId": 2
+            },
+            {
+              "rate": 5,
+              "movieId": 4
             }
           ]
         }
@@ -364,6 +371,35 @@
             }
           ],
           "roomId": 1
+        },
+        {
+          "day": "25/02/2023",
+          "hours": [
+            "14:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "14:00": []
+            }
+          ],
+          "roomId": 1
+        },
+        {
+          "day": "23/02/2023",
+          "hours": [
+            "16:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "16:00": [
+                72,
+                70,
+                68,
+                69
+              ]
+            }
+          ],
+          "roomId": 2
         }
       ]
     },
@@ -467,8 +503,60 @@
             }
           ],
           "roomId": 2
+        },
+        {
+          "day": "26/02/2023",
+          "hours": [
+            "12:00",
+            "17:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "12:00": []
+            },
+            {
+              "17:00": []
+            }
+          ],
+          "roomId": 2
         }
       ]
+    },
+    {
+      "id": 3,
+      "movieId": 3,
+      "showings": [
+        {
+          "day": "24/02/2023",
+          "hours": [
+            "12:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "12:00": []
+            }
+          ],
+          "roomId": 2
+        }
+      ]
+    },
+    {
+      "movieId": 4,
+      "showings": [
+        {
+          "day": "25/02/2023",
+          "hours": [
+            "16:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "16:00": []
+            }
+          ],
+          "roomId": 2
+        }
+      ],
+      "id": 4
     }
   ],
   "movies": [
@@ -504,6 +592,37 @@
         "Obyczajowy"
       ],
       "imageURL": null
+    },
+    {
+      "title": "Shrek Forever",
+      "description": {
+        "short": "Film jest czwartą częścią serii, po filmach Shrek z 2001, Shrek 2 z 2004 i Shrek Trzeci z 2007. Początkowo planowano, że będzie ostatnią częścią serii, jednakże w 2016 DreamWorks zapowiedziało realizację piątej części.",
+        "long": "Król Harold i królowa Lilian, chcąc zdjąć klątwę z Fiony, odwiedzają Rumpelstiltskina. Małżonkowie zgadzają się oddać mu tron w zamian za zdjęcie przekleństwa. Jednak tuż przed podpisaniem umowy dowiadują się, że Fionę odczarował, pocałunkiem prawdziwej miłości, ogr Shrek i do podpisania umowy nie dochodzi.\n\nFilm przenosi się do czasów, kiedy Shrek ma rodzinę i przyjaciół, ale tęskni za dawnym życiem, kiedy każdy się go bał i mógł robić, co chciał. Podczas przyjęcia urodzinowego ogrzątek, Shrek pod wpływem emocji wpada w gniew, niszczy tort, psuje uroczystość i ją opuszcza. Spotyka Rumpelstiltskina, opowiada mu o swoim życiu i podpisuje z nim kontrakt, w którym zgadza się na oddanie jednej doby ze swojego życia w zamian za otrzymanie jednego dnia dawnego, „ogrzego” życia.\n\nOgr zostaje przeniesiony do alternatywnej rzeczywistości, gdzie jego dom to zwyczajna nora, a wieśniacy i inni mieszkańcy Zasiedmiogórogrodu na nowo się go boją. Shrekowi bardzo się to podoba, póki nie przypomina sobie o Fionie, której nigdzie nie może znaleźć. Wtedy czarownice zabierają go do pałacu Rumpelstiltskina, gdzie okazuje się, że ten zabrał mu dzień narodzin. Shrek nigdy więc nie uwolnił Fiony, nie spotkał Osła ani nie zapoznał się z teściami. Shrek postanawia odnaleźć Fionę i dawnych przyjaciół oraz odczarować pakt, by znów wrócić do prawdziwej rzeczywistości. Niestety, może to nie być proste – bajkowe postacie, które wielokrotnie pomagały Shrekowi, teraz go nie znają, Osioł się go boi, Puszek nie jest już walecznym kotem, a otyłym leniuchem, a Fiona to samodzielna wojowniczka, która sama uwolniła się z wieży i jest obecnie liderką ogrzego rezerwatu, w którym Shrek ma okazję poznać liczne grono nowych ogrów, o których istnieniu nie miał wcześniej pojęcia. Co gorsza, kontrakt odczarować może jedynie pocałunek prawdziwej miłości, a Fiona nie widzi w nim wybranka swojego serca. Jeżeli Shrekowi nie uda się jej rozkochać w ciągu dwudziestu czterech godzin, już nigdy nie wróci do realnego świata."
+      },
+      "isPremiere": false,
+      "duration": "93",
+      "minAge": null,
+      "imageURL": "https://fwcdn.pl/fpo/39/25/133925/7327696.3.jpg",
+      "genres": [
+        "Komedia",
+        "Animowany"
+      ],
+      "id": 3
+    },
+    {
+      "title": "Split",
+      "description": {
+        "short": "Mężczyzna o mnogiej osobowości porywa trzy nastolatki. Okazuje się, że jedna z jaźni zaczyna dominować nad innymi.",
+        "long": "Trzy dziewczyny, Casey, Claire i Marcia, zostają porwane przez człowieka o 23 osobowościach (McAvoy). Muszą uciec nim ujawni się dwudziesta czwarta osobowość, zwana „Bestią”."
+      },
+      "isPremiere": false,
+      "duration": 116,
+      "minAge": 16,
+      "imageURL": "https://fwcdn.pl/fpo/02/58/750258/7773797.6.jpg",
+      "genres": [
+        "Thriller"
+      ],
+      "id": 4
     }
   ],
   "ticketTypes": [
@@ -1129,13 +1248,78 @@
       },
       "roomId": 1,
       "date": "20/02/2023 18:23"
+    },
+    {
+      "id": 14,
+      "movie": {
+        "id": 1,
+        "title": "Apokawixa",
+        "minAge": 13
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 72,
+          "row": 6,
+          "seat": 11
+        },
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 70,
+          "row": 6,
+          "seat": 10
+        },
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 68,
+          "row": 6,
+          "seat": 8
+        },
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 69,
+          "row": 6,
+          "seat": 9
+        }
+      ],
+      "showing": {
+        "day": "23/02/2023",
+        "hour": "16:00"
+      },
+      "roomId": 2,
+      "date": "23/02/2023 14:22"
     }
   ],
   "rates": [
     {
       "userId": 2,
       "movieId": 1,
-      "rate": 3,
+      "rate": 4,
       "id": 1
     },
     {
@@ -1147,8 +1331,36 @@
     {
       "userId": 2,
       "movieId": 2,
-      "rate": 3,
+      "rate": 2,
       "id": 3
+    },
+    {
+      "userId": 2,
+      "movieId": 4,
+      "rate": 5,
+      "id": 4
     }
-  ]
+  ],
+  "config": {
+    "dayToDisplayOnInit": 0,
+    "numberOfDaysToDisplay": 14,
+    "footerLinks": [
+      {
+        "link": "#",
+        "name": "O nas"
+      },
+      {
+        "name": "Praca",
+        "link": "#"
+      },
+      {
+        "name": "Regulamin",
+        "link": "#"
+      },
+      {
+        "name": "Wynajem sal",
+        "link": "#"
+      }
+    ]
+  }
 }

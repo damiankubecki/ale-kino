@@ -7,7 +7,7 @@
     </nav>
 
     <nav class="navigation__others">
-      <ng-container *ngFor="let item of otherLinks; last as last">
+      <ng-container *ngFor="let item of links$ | async; last as last">
         <a [href]="item.link" class="navigation__others-link">{{ item.name }}</a>
         {{ !last ? ' | ' : '' }}
       </ng-container>

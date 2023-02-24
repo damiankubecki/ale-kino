@@ -2,15 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './shared/router/app-routing.module';
 import { RepertoireViewComponent } from './features/home/repertoire-view.component';
-import { AdminViewComponent } from './features/admin/admin-view.component';
 import { ReservationViewComponent } from './features/purchase/reservation/reservation-view.component';
 import { BuyTicketViewComponent } from './features/purchase/confirmation/confirmation-view.component';
 import { SummaryViewComponent } from './features/purchase/summary/summary-view.component';
@@ -35,6 +34,8 @@ import { OrdersComponent } from './features/orders/orders.component';
 import { ConfirmationFormComponent } from './features/purchase/confirmation/confirmation-form/confirmation-form.component';
 import { OnlyNumbersDirective } from './shared/directives/only-numbers.directive';
 import { PaymentViewComponent } from './features/purchase/payment-view/payment-view.component';
+import { configReducer } from './core/config/config.reducer';
+import { ConfigEffects } from './core/config/config.effects';
 
 @NgModule({
   declarations: [
@@ -69,10 +70,11 @@ import { PaymentViewComponent } from './features/purchase/payment-view/payment-v
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    StoreModule.forRoot({ config: configReducer }),
+    EffectsModule.forRoot([ConfigEffects]),
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

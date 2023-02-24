@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { config, IFooterLinkItem, ISocialMediaItem } from '@app/config';
+import { Component, inject } from '@angular/core';
+import { config, ISocialMediaItem } from '@app/config';
+import { Store } from '@ngrx/store';
+import { selectFooterLinks } from '../config/config.selectors';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +9,9 @@ import { config, IFooterLinkItem, ISocialMediaItem } from '@app/config';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
+  private store = inject(Store);
+
   socialMediaItems: ISocialMediaItem[] = config.socialMedia.filter(item => item.inFooter);
-  otherLinks: IFooterLinkItem[] = config.footerLinks;
+
+  links$ = this.store.select(selectFooterLinks);
 }
