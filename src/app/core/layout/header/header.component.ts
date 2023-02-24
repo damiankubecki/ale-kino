@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IUser, UserService } from '@app/features/auth/user/user.service';
 import { config, IHeaderNavigation } from '@app/config';
 import { paths } from '@app/shared/router/paths';

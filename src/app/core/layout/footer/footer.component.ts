@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { config, ISocialMediaItem } from '@app/config';
 import { Store } from '@ngrx/store';
-import { selectFooterLinks } from '../config/config.selectors';
+import { selectFooterLinks } from '../../config/config.selectors';
 
 @Component({
   selector: 'app-footer',

@@ -550,7 +550,12 @@
           ],
           "occupiedSeatsIds": [
             {
-              "16:00": []
+              "16:00": [
+                5,
+                6,
+                7,
+                8
+              ]
             }
           ],
           "roomId": 2
@@ -1313,6 +1318,71 @@
       },
       "roomId": 2,
       "date": "23/02/2023 14:22"
+    },
+    {
+      "id": 15,
+      "movie": {
+        "id": 4,
+        "title": "Split",
+        "minAge": 16
+      },
+      "owner": {
+        "name": "Sebastian Wystrzelony",
+        "email": "seba@wystrzal.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 5,
+          "row": 1,
+          "seat": 5
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 6,
+          "row": 1,
+          "seat": 6
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 7,
+          "row": 1,
+          "seat": 7
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 8,
+          "row": 1,
+          "seat": 8
+        }
+      ],
+      "showing": {
+        "day": "25/02/2023",
+        "hour": "16:00"
+      },
+      "roomId": 2,
+      "date": "24/02/2023 15:04"
     }
   ],
   "rates": [
