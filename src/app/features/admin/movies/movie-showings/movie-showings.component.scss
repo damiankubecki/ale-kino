@@ -105,14 +105,18 @@
     }
 
     .hours {
+      width: 100%;
       display: flex;
 
       .existing-hours {
-        padding: 3px 0;
-        flex-grow: 1;
+        width: 100%;
+        padding: 4px 0;
         text-align: center;
         color: $white;
         font-size: $font-M;
+        p {
+          width: 100%;
+        }
       }
     }
 

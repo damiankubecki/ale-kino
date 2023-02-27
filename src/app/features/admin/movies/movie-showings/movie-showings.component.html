@@ -58,7 +58,7 @@
         <p *ngFor="let showing of existingShowingsHours">
           {{
             !(hours$$ | async)?.includes(showing.hour)
-              ? showing.hour + '(' + showing.duration + ' min)'
+              ? showing.hour + ' (' + showing.duration + ' min)'
               : ''
           }}
         </p>
