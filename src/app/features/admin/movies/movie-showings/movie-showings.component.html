@@ -1,6 +1,6 @@
-<h3 class="title">Seanse dla: {{ movie?.title }}</h3>
+<h3 class="title">Seanse dla: {{ movie?.title }} ({{ movie?.duration }}min)</h3>
 <div class="repertoire-container" *ngIf="repertoire">
-  <div class="repertoire-item" *ngFor="let showing of repertoire.showings">
+  <div class="repertoire-item" *ngFor="let showing of movieRepertoire?.showings">
     <div>
       <p>Dzień: {{ showing.day }}</p>
       <p>
@@ -19,38 +19,52 @@
   <form (ngSubmit)="submit()" [formGroup]="form" class="add-showing-container">
     <h4 class="title">Dodaj nowy seans</h4>
 
-    <mat-form-field *ngIf="form.controls['date'] as control">
-      <mat-label>Dzień:</mat-label>
-      <input [min]="now" type="date" matInput formControlName="date" />
-      <mat-error *ngIf="control.hasError('required')">*obowiązkowe </mat-error>
-    </mat-form-field>
+    <div class="section">
+      <mat-form-field *ngIf="form.controls['date'] as control">
+        <mat-label>Dzień:</mat-label>
+        <input [min]="now" type="date" matInput formControlName="date" (change)="clearHours()" />
+        <mat-error *ngIf="control.hasError('required')">*obowiązkowe </mat-error>
+      </mat-form-field>
 
-    <div>
+      <mat-form-field *ngIf="form.controls['room'] as control">
+        <mat-label>Sala:</mat-label>
+        <mat-select formControlName="room" (valueChange)="clearHours()">
+          <mat-option *ngFor="let room of rooms$ | async" [value]="room.id">
+            {{ room.id }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="control.hasError('required')">*obowiązkowe</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="isHourInputActive" class="hours">
       <mat-form-field *ngIf="form.controls['hour'] as control">
         <mat-label>Nowa godzina:</mat-label>
         <input type="time" matInput formControlName="hour" />
+        <button (click)="addHour()" type="button" class="button-new-hour">
+          Dodaj
+          <mat-icon>add</mat-icon>
+        </button>
+        <p *ngIf="hours$$.value.length" class="added-hours">
+          Godziny seansów:
+          <span *ngFor="let hour of hours$$.value; let last = last"
+            >{{ hour }}{{ last ? '' : ', ' }}</span
+          >
+        </p>
       </mat-form-field>
-      <button (click)="addHour()" type="button" class="button-new-hour">
-        <mat-icon>add</mat-icon>
-      </button>
-      <p *ngIf="hours$$.value.length" class="hours">
-        Godziny seansów:
-        <span *ngFor="let hour of hours$$.value; let last = last"
-          >{{ hour }}{{ last ? '' : ', ' }}</span
-        >
-      </p>
+
+      <div class="existing-hours" *ngIf="existingShowingsHours.length">
+        <p>Istniejące seanse:</p>
+        <p *ngFor="let showing of existingShowingsHours">
+          {{
+            !(hours$$ | async)?.includes(showing.hour)
+              ? showing.hour + '(' + showing.duration + ' min)'
+              : ''
+          }}
+        </p>
+      </div>
     </div>
 
-    <mat-form-field *ngIf="form.controls['room'] as control">
-      <mat-label>Sala:</mat-label>
-      <mat-select formControlName="room">
-        <mat-option *ngFor="let room of rooms$ | async" [value]="room.id">
-          {{ room.id }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="control.hasError('required')">*obowiązkowe</mat-error>
-    </mat-form-field>
-
-    <button type="submit" class="button-confirm">Dodaj</button>
+    <button type="submit" *ngIf="isHourInputActive" class="button-confirm">Zatwierdź</button>
   </form>
 </div>

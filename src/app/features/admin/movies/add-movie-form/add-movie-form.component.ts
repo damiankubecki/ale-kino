@@ -65,7 +65,7 @@ export class AddMovieFormComponent {
         long: longDescription as string,
       },
       isPremiere,
-      duration,
+      duration: Number(duration),
       minAge: Number(minAge) || null,
       imageURL,
       genres: this.genres,

@@ -8,7 +8,7 @@ export interface IMovie {
     long: string;
   };
   isPremiere: boolean;
-  duration: string;
+  duration: number;
   minAge: number | null;
   imageURL: string | null;
   genres: string[];
@@ -34,6 +34,7 @@ export interface IShowing {
 
 export interface IMovieRepertoire {
   id: IMovie['id'];
+  movieId: number;
   showings: IShowing[];
 }
 

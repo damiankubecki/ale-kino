@@ -67,7 +67,8 @@
           "ordersIds": [
             12,
             13,
-            14
+            14,
+            16
           ],
           "wantToWatchIds": [
             1
@@ -260,7 +261,7 @@
       "movieId": 1,
       "showings": [
         {
-          "day": "20/02/2023",
+          "day": "27/02/2023",
           "hours": [
             "12:00",
             "18:55"
@@ -295,7 +296,7 @@
           "roomId": 1
         },
         {
-          "day": "21/02/2023",
+          "day": "28/02/2023",
           "hours": [
             "08:00",
             "19:15"
@@ -332,7 +333,7 @@
           "roomId": 1
         },
         {
-          "day": "22/02/2023",
+          "day": "01/03/2023",
           "hours": [
             "14:20",
             "20:15"
@@ -373,7 +374,7 @@
           "roomId": 1
         },
         {
-          "day": "25/02/2023",
+          "day": "03/03/2023",
           "hours": [
             "14:00"
           ],
@@ -385,7 +386,7 @@
           "roomId": 1
         },
         {
-          "day": "23/02/2023",
+          "day": "04/03/2023",
           "hours": [
             "16:00"
           ],
@@ -408,7 +409,7 @@
       "movieId": 2,
       "showings": [
         {
-          "day": "20/02/2023",
+          "day": "27/02/2023",
           "hours": [
             "08:00",
             "17:15"
@@ -438,7 +439,7 @@
           "roomId": 1
         },
         {
-          "day": "22/02/2023",
+          "day": "28/02/2023",
           "hours": [
             "07:00",
             "18:20"
@@ -467,7 +468,7 @@
           "roomId": 1
         },
         {
-          "day": "24/02/2023",
+          "day": "02/03/2023",
           "hours": [
             "09:50",
             "19:15"
@@ -505,7 +506,7 @@
           "roomId": 2
         },
         {
-          "day": "26/02/2023",
+          "day": "03/03/2023",
           "hours": [
             "12:00",
             "17:00"
@@ -527,7 +528,7 @@
       "movieId": 3,
       "showings": [
         {
-          "day": "24/02/2023",
+          "day": "05/03/2023",
           "hours": [
             "12:00"
           ],
@@ -544,21 +545,44 @@
       "movieId": 4,
       "showings": [
         {
-          "day": "25/02/2023",
+          "day": "01/03/2023",
           "hours": [
-            "16:00"
+            "09:00"
           ],
           "occupiedSeatsIds": [
             {
-              "16:00": [
-                5,
-                6,
-                7,
-                8
+              "09:00": []
+            }
+          ],
+          "roomId": 1
+        },
+        {
+          "day": "02/03/2023",
+          "hours": [
+            "12:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "12:00": [
+                52,
+                53,
+                54
               ]
             }
           ],
           "roomId": 2
+        },
+        {
+          "day": "28/02/2023",
+          "hours": [
+            "12:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "12:00": []
+            }
+          ],
+          "roomId": 1
         }
       ],
       "id": 4
@@ -1383,6 +1407,60 @@
       },
       "roomId": 2,
       "date": "24/02/2023 15:04"
+    },
+    {
+      "id": 16,
+      "movie": {
+        "id": 4,
+        "title": "Split",
+        "minAge": 16
+      },
+      "owner": {
+        "name": "Majkel Dziwny",
+        "email": "user2@user2.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 52,
+          "row": 5,
+          "seat": 4
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 53,
+          "row": 5,
+          "seat": 5
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 54,
+          "row": 5,
+          "seat": 6
+        }
+      ],
+      "showing": {
+        "day": "02/03/2023",
+        "hour": "12:00"
+      },
+      "roomId": 2,
+      "date": "27/02/2023 16:02"
     }
   ],
   "rates": [
@@ -1413,7 +1491,7 @@
   ],
   "config": {
     "dayToDisplayOnInit": 0,
-    "numberOfDaysToDisplay": 14,
+    "numberOfDaysToDisplay": 7,
     "footerLinks": [
       {
         "link": "#",
