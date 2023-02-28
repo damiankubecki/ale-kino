@@ -1,7 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 import { ShortDate, LongDate } from '@app/shared/types/types';
-import { config } from '@app/config';
 import * as moment from 'moment';
 import { paths } from '@app/shared/router/paths';
 import { Store } from '@ngrx/store';

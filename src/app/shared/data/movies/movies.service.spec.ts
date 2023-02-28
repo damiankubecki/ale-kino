@@ -1,8 +1,5 @@
-import { EnvironmentInjector } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { IMovie } from '@app/shared/types/interfaces';
 import { BehaviorSubject, Observable, of, skip } from 'rxjs';
-import { MoviesService } from './movies.service';
 
 describe('MoviesService', () => {
   const moviesCollectionMock$$ = new BehaviorSubject<IMovie[]>([

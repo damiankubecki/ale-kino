@@ -22,20 +22,10 @@ export class HeaderComponent {
   icons = icons;
 
   constructor() {
-    this.userService.user$
-      .pipe(
-        tap(user => {
-          this.user = user;
-        })
-      )
-      .subscribe();
+    this.userService.user$.pipe(tap(user => (this.user = user))).subscribe();
 
     this.purchaseService.order$
-      .pipe(
-        tap(order => {
-          this.seatsInBasket = order.reservedSeats.length;
-        })
-      )
+      .pipe(tap(order => (this.seatsInBasket = order.reservedSeats.length)))
       .subscribe();
   }
 }

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 import { IMovieExpanded, MoviesService } from '@app/shared/data/movies/movies.service';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-list-of-movies',
@@ -14,14 +15,14 @@ export class ListOfMoviesComponent {
   moviesToDisplay: IMovieExpanded[] = [];
 
   constructor() {
-    this.repertoireService.dayToDisplay$.subscribe({
-      next: newDay => {
-        this.moviesService.setMoviesToDisplay(newDay, this.repertoireService.repertoire);
+    this.repertoireService.dayToDisplay$
+      .pipe(
+        tap(day => this.moviesService.setMoviesToDisplay(day, this.repertoireService.repertoire))
+      )
+      .subscribe();
 
-        this.moviesService.moviesToDisplay$.subscribe(movies => {
-          this.moviesToDisplay = movies;
-        });
-      },
-    });
+    this.moviesService.moviesToDisplay$
+      .pipe(tap(movies => (this.moviesToDisplay = movies)))
+      .subscribe();
   }
 }

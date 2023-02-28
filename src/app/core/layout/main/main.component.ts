@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { TopbarContent, TopbarService } from '@app/topbar.service';
+import { Component, inject } from '@angular/core';
+import { TopbarService } from '@app/topbar.service';
 
 @Component({
   selector: 'app-main',
@@ -7,13 +7,7 @@ import { TopbarContent, TopbarService } from '@app/topbar.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent {
-  topbarContent: TopbarContent = null;
+  private topbarService = inject(TopbarService);
 
-  constructor(private topbarService: TopbarService) {
-    this.topbarService.topbarContent$.subscribe({
-      next: content => {
-        this.topbarContent = content;
-      },
-    });
-  }
+  topbarContent$ = this.topbarService.topbarContent$;
 }
