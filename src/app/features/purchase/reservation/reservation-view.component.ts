@@ -8,7 +8,7 @@ import { IRoom, RoomsService } from '@app/shared/data/rooms/rooms.service';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 import { ITicketType, TicketsService } from '@app/shared/data/tickets/tickets.service';
 import { IOrderInProgress, IReservedSeat, PurchaseService } from '../purchase.service';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-view',
@@ -114,8 +114,8 @@ export class ReservationViewComponent {
         switchMap(room => {
           return this.roomsService.getReservedSeatsInRoom(room.id, hour, day);
         }),
-        tap(reservedSeats => {
-          this.reservedSeatsIds = reservedSeats.seatsIds;
+        tap(response => {
+          if (response) this.reservedSeatsIds = response.seatsIds;
         })
       )
       .subscribe();

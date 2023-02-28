@@ -119,9 +119,6 @@ export class PurchaseService {
   }
 
   clearOrder() {
-    this.order$$.value.reservedSeats.forEach(seat =>
-      this.setSeatsAsUnreserved(seat.seatId).subscribe()
-    );
     this.order$$.next({ reservedSeats: [], owner: this.order$$.value.owner });
   }
 

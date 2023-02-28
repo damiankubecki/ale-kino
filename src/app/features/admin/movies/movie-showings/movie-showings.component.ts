@@ -156,32 +156,41 @@ export class MovieShowingsComponent {
       const currentShowingStart = moment(item.hour, 'HH:mm');
       const currentShowingEnd = moment(item.hour, 'HH:mm').add(item.duration, 'minutes');
 
-      if (index === showingsHours.length - 1) {
-        const lastShowingEnd = moment(showingsHours[index - 1].hour, 'HH:mm').add(
-          item.duration,
-          'minutes'
-        );
+      if (showingsHours.length > 1) {
+        if (index === showingsHours.length - 1) {
+          const lastShowingEnd = moment(showingsHours[index - 1].hour, 'HH:mm').add(
+            item.duration,
+            'minutes'
+          );
 
-        if (
-          inputShowingStart.isAfter(currentShowingEnd) ||
-          (inputShowingStart.isAfter(lastShowingEnd) &&
-            inputShowingEnd.isBefore(currentShowingStart))
-        ) {
-          isValid = true;
-        }
-      } else if (index === 0) {
-        if (inputShowingEnd.isBefore(currentShowingStart)) {
-          isValid = true;
+          if (
+            inputShowingStart.isAfter(currentShowingEnd) ||
+            (inputShowingStart.isAfter(lastShowingEnd) &&
+              inputShowingEnd.isBefore(currentShowingStart))
+          ) {
+            isValid = true;
+          }
+        } else if (index === 0) {
+          if (inputShowingEnd.isBefore(currentShowingStart)) {
+            isValid = true;
+          }
+        } else {
+          const lastShowingEnd = moment(showingsHours[index - 1].hour, 'HH:mm').add(
+            item.duration,
+            'minutes'
+          );
+
+          if (
+            inputShowingStart.isAfter(lastShowingEnd) &&
+            inputShowingEnd.isBefore(currentShowingStart)
+          ) {
+            isValid = true;
+          }
         }
       } else {
-        const lastShowingEnd = moment(showingsHours[index - 1].hour, 'HH:mm').add(
-          item.duration,
-          'minutes'
-        );
-
         if (
-          inputShowingStart.isAfter(lastShowingEnd) &&
-          inputShowingEnd.isBefore(currentShowingStart)
+          inputShowingEnd.isBefore(currentShowingStart) ||
+          inputShowingStart.isAfter(currentShowingEnd)
         ) {
           isValid = true;
         }
