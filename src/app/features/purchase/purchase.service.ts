@@ -1,12 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { API_URL } from '@app/shared/data/api/api';
 import { MoviesService } from '@app/shared/data/movies/movies.service';
+import { RoomsService } from '@app/shared/data/rooms/rooms.service';
 import { ITicketType } from '@app/shared/data/tickets/tickets.service';
 import { IMovie } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import * as moment from 'moment';
-import { BehaviorSubject, skip, Subscription } from 'rxjs';
+import { BehaviorSubject, skip, switchMap } from 'rxjs';
+
+export interface IReservationsItem {
+  id: number;
+  roomId: number;
+  date: LongDate;
+  hour: Hour;
+  seatsIds: number[];
+}
 
 export interface IReservedSeat {
   seatId: number;
@@ -56,13 +65,63 @@ export interface IOrder {
 export class PurchaseService {
   private http = inject(HttpClient);
   private moviesService = inject(MoviesService);
+  private roomService = inject(RoomsService);
   private order$$ = new BehaviorSubject<IOrderInProgress>({ reservedSeats: [] });
 
   get order$() {
     return this.order$$.asObservable();
   }
 
+  constructor() {
+    this.order$$.pipe(skip(1)).subscribe(value => {
+      window.localStorage.setItem('order-in-progress', JSON.stringify(value || ''));
+    });
+
+    const savedOrder = JSON.parse(window.localStorage.getItem('order-in-progress') || '');
+    if (savedOrder) {
+      this.order$$.next(savedOrder);
+    }
+  }
+
+  setSeatsAsReserved(seatsIds: number[]) {
+    const { showing, roomId } = this.order$$.value;
+
+    return this.roomService.getReservedSeatsInRoom(roomId || 0, showing!.hour, showing!.day).pipe(
+      switchMap(response => {
+        if (response) {
+          return this.http.patch<IReservationsItem>(`${API_URL}/reservations/${response.id}`, {
+            ...response,
+            seatsIds: [...response.seatsIds, ...seatsIds],
+          });
+        } else {
+          return this.http.post<IReservationsItem>(`${API_URL}/reservations`, {
+            date: showing?.day,
+            hour: showing?.hour,
+            roomId,
+            seatsIds,
+          });
+        }
+      })
+    );
+  }
+
+  setSeatsAsUnreserved(seatId: number) {
+    const { showing, roomId } = this.order$$.value;
+
+    return this.roomService.getReservedSeatsInRoom(roomId || 0, showing!.hour, showing!.day).pipe(
+      switchMap(response => {
+        return this.http.patch<IReservationsItem>(`${API_URL}/reservations/${response.id}`, {
+          ...response,
+          seatsIds: response.seatsIds.filter(id => id !== seatId),
+        });
+      })
+    );
+  }
+
   clearOrder() {
+    this.order$$.value.reservedSeats.forEach(seat =>
+      this.setSeatsAsUnreserved(seat.seatId).subscribe()
+    );
     this.order$$.next({ reservedSeats: [], owner: this.order$$.value.owner });
   }
 
@@ -80,6 +139,8 @@ export class PurchaseService {
   }
 
   removeSeat(seatId: number) {
+    this.setSeatsAsUnreserved(seatId).subscribe();
+
     this.order$$.next({
       ...this.order$$.value,
       reservedSeats: [
@@ -139,16 +200,5 @@ export class PurchaseService {
       roomId,
       date: `${moment().format('DD/MM/YYYY')} ${moment().format('HH:mm')}`,
     });
-  }
-
-  constructor() {
-    this.order$$.pipe(skip(1)).subscribe(value => {
-      window.localStorage.setItem('order-in-progress', JSON.stringify(value || ''));
-    });
-
-    const savedOrder = JSON.parse(window.localStorage.getItem('order-in-progress') || '');
-    if (savedOrder) {
-      this.order$$.next(savedOrder);
-    }
   }
 }

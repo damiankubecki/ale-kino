@@ -32,10 +32,13 @@
             11,
             12,
             13,
-            14
+            14,
+            17,
+            18
           ],
           "wantToWatchIds": [
-            3
+            3,
+            4
           ],
           "ratedMovies": [
             {
@@ -70,13 +73,15 @@
             14,
             16
           ],
-          "wantToWatchIds": [
-            1
-          ],
+          "wantToWatchIds": [],
           "ratedMovies": [
             {
-              "rate": 4,
+              "rate": 3,
               "movieId": 1
+            },
+            {
+              "rate": 1,
+              "movieId": 2
             }
           ]
         }
@@ -261,41 +266,6 @@
       "movieId": 1,
       "showings": [
         {
-          "day": "27/02/2023",
-          "hours": [
-            "12:00",
-            "18:55"
-          ],
-          "occupiedSeatsIds": [
-            {
-              "12:00": [
-                2,
-                3,
-                42,
-                43
-              ]
-            },
-            {
-              "18:55": [
-                1,
-                2,
-                3,
-                42,
-                41,
-                43,
-                40,
-                39,
-                44,
-                11,
-                12,
-                7,
-                8
-              ]
-            }
-          ],
-          "roomId": 1
-        },
-        {
           "day": "28/02/2023",
           "hours": [
             "08:00",
@@ -326,7 +296,9 @@
                 40,
                 39,
                 4,
-                5
+                5,
+                45,
+                44
               ]
             }
           ],
@@ -401,6 +373,18 @@
             }
           ],
           "roomId": 2
+        },
+        {
+          "day": "12/03/2023",
+          "hours": [
+            "12:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "12:00": []
+            }
+          ],
+          "roomId": 2
         }
       ]
     },
@@ -461,7 +445,9 @@
                 18,
                 33,
                 34,
-                42
+                42,
+                41,
+                40
               ]
             }
           ],
@@ -538,6 +524,18 @@
             }
           ],
           "roomId": 2
+        },
+        {
+          "day": "01/03/2023",
+          "hours": [
+            "15:00"
+          ],
+          "occupiedSeatsIds": [
+            {
+              "15:00": []
+            }
+          ],
+          "roomId": 2
         }
       ]
     },
@@ -566,7 +564,11 @@
               "12:00": [
                 52,
                 53,
-                54
+                54,
+                12,
+                11,
+                23,
+                24
               ]
             }
           ],
@@ -1461,6 +1463,157 @@
       },
       "roomId": 2,
       "date": "27/02/2023 16:02"
+    },
+    {
+      "id": 17,
+      "movie": {
+        "id": 2,
+        "title": "Co w duszy gra",
+        "minAge": null
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 41,
+          "row": 4,
+          "seat": 5
+        },
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 40,
+          "row": 4,
+          "seat": 4
+        }
+      ],
+      "showing": {
+        "day": "28/02/2023",
+        "hour": "18:20"
+      },
+      "roomId": 1,
+      "date": "28/02/2023 09:25"
+    },
+    {
+      "id": 18,
+      "movie": {
+        "id": 4,
+        "title": "Split",
+        "minAge": 16
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 12,
+          "row": 1,
+          "seat": 12
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 11,
+          "row": 1,
+          "seat": 11
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 23,
+          "row": 2,
+          "seat": 11
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 24,
+          "row": 2,
+          "seat": 12
+        }
+      ],
+      "showing": {
+        "day": "02/03/2023",
+        "hour": "12:00"
+      },
+      "roomId": 2,
+      "date": "28/02/2023 14:41"
+    },
+    {
+      "id": 19,
+      "movie": {
+        "id": 1,
+        "title": "Apokawixa",
+        "minAge": 13
+      },
+      "owner": {
+        "name": "Damian Kubecki",
+        "email": "damian_094@wp.pl",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 45,
+          "row": 4,
+          "seat": 9
+        },
+        {
+          "ticketType": {
+            "id": 2,
+            "name": "ulgowy",
+            "description": "Bilet dla uczniów",
+            "price": 15
+          },
+          "seatId": 44,
+          "row": 4,
+          "seat": 8
+        }
+      ],
+      "showing": {
+        "day": "28/02/2023",
+        "hour": "19:15"
+      },
+      "roomId": 1,
+      "date": "28/02/2023 16:01"
     }
   ],
   "rates": [
@@ -1473,7 +1626,7 @@
     {
       "userId": 3,
       "movieId": 1,
-      "rate": 4,
+      "rate": 3,
       "id": 2
     },
     {
@@ -1487,11 +1640,49 @@
       "movieId": 4,
       "rate": 5,
       "id": 4
+    },
+    {
+      "userId": 3,
+      "movieId": 2,
+      "rate": 1,
+      "id": 5
+    }
+  ],
+  "reservations": [
+    {
+      "id": 1,
+      "date": "02/03/2023",
+      "hour": "12:00",
+      "seatsIds": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        12,
+        11,
+        23,
+        24
+      ],
+      "roomId": 2
+    },
+    {
+      "date": "28/02/2023",
+      "hour": "19:15",
+      "roomId": 1,
+      "seatsIds": [
+        45,
+        44,
+        45,
+        44
+      ],
+      "id": 2
     }
   ],
   "config": {
     "dayToDisplayOnInit": 0,
-    "numberOfDaysToDisplay": 8,
+    "numberOfDaysToDisplay": 7,
     "footerLinks": [
       {
         "link": "#",

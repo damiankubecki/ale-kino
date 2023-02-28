@@ -8,7 +8,7 @@ import { IRoom, RoomsService } from '@app/shared/data/rooms/rooms.service';
 import { RepertoireService } from '@app/shared/data/repertoire/repertoire.service';
 import { ITicketType, TicketsService } from '@app/shared/data/tickets/tickets.service';
 import { IOrderInProgress, IReservedSeat, PurchaseService } from '../purchase.service';
-import { switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-view',
@@ -28,6 +28,7 @@ export class ReservationViewComponent {
   order: IOrderInProgress | null = null;
   ticketsTypes: ITicketType[] = [];
   occupiedSeatsIds: number[] = [];
+  reservedSeatsIds: number[] = [];
   room: IRoom | null = null;
 
   constructor() {
@@ -47,7 +48,20 @@ export class ReservationViewComponent {
   }
 
   handleSubmit() {
-    this.router.navigate([paths.confirmation]);
+    const reservedSeatsIds = this.order!.reservedSeats.map(item => item.seatId);
+
+    if (!this.order) return;
+    const { roomId, showing } = this.order;
+
+    this.roomsService
+      .getReservedSeatsInRoom(roomId || 0, showing!.hour, showing!.day)
+      .pipe(
+        switchMap(() => {
+          return this.purchaseService.setSeatsAsReserved(reservedSeatsIds);
+        }),
+        tap(() => this.router.navigate([paths.confirmation]))
+      )
+      .subscribe();
   }
 
   handleSeatClick(event: Event) {
@@ -96,6 +110,12 @@ export class ReservationViewComponent {
         tap(room => {
           this.room = room;
           this.purchaseService.setRoom(room.id);
+        }),
+        switchMap(room => {
+          return this.roomsService.getReservedSeatsInRoom(room.id, hour, day);
+        }),
+        tap(reservedSeats => {
+          this.reservedSeatsIds = reservedSeats.seatsIds;
         })
       )
       .subscribe();

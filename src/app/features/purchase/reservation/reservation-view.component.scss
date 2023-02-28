@@ -41,13 +41,19 @@
     cursor: pointer;
     transform: 0.1s;
 
+    &.reserved {
+      background-color: rgb(158, 144, 11);
+    }
+
+    &.occupied {
+      background-color: $red;
+    }
+
     &.inOrder {
       background-color: $green;
     }
 
     &:disabled {
-      background-color: $red;
-      color: $white;
       cursor: default;
 
       &:hover {

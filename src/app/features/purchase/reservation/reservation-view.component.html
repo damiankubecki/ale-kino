@@ -13,8 +13,10 @@
         [attr.data-id]="id"
         [attr.data-row-index]="rowIndex"
         [attr.data-col-index]="colIndex"
-        [disabled]="occupiedSeatsIds.includes(id)"
+        [disabled]="occupiedSeatsIds.includes(id) || (reservedSeatsIds.includes(id) && !isSeatInOrder(id))"
         [class.inOrder]="isSeatInOrder(id)"
+        [class.reserved]="reservedSeatsIds.includes(id)"
+        [class.occupied]="occupiedSeatsIds.includes(id)"
         class="seat"
       >
         {{ colIndex + 1 }}
