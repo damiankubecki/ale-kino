@@ -1,8 +1,8 @@
-import { inject, Injectable, Type } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
-export type TopbarContent = Type<unknown> | string | null;
+export type TopbarContent = string | null;
 
 @Injectable({
   providedIn: 'root',

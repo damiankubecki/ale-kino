@@ -2,9 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { IMovieRepertoire, IShowing } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, skip, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { API_URL, REPERTOIRE_ENDPOINT } from '@app/shared/data/api/api';
-import * as moment from 'moment';
+
 export interface ISingleShowing {
   day: LongDate;
   hour: Hour;
