@@ -34,15 +34,17 @@
             13,
             14,
             17,
-            18
+            18,
+            20
           ],
           "wantToWatchIds": [
             3,
-            4
+            4,
+            1
           ],
           "ratedMovies": [
             {
-              "rate": 4,
+              "rate": 3,
               "movieId": 1
             },
             {
@@ -368,7 +370,9 @@
                 72,
                 70,
                 68,
-                69
+                69,
+                7,
+                8
               ]
             }
           ],
@@ -1614,13 +1618,56 @@
       },
       "roomId": 1,
       "date": "28/02/2023 16:01"
+    },
+    {
+      "id": 20,
+      "movie": {
+        "id": 1,
+        "title": "Apokawixa",
+        "minAge": 13
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 7,
+          "row": 1,
+          "seat": 7
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 8,
+          "row": 1,
+          "seat": 8
+        }
+      ],
+      "showing": {
+        "day": "04/03/2023",
+        "hour": "16:00"
+      },
+      "roomId": 2,
+      "date": "28/02/2023 16:57"
     }
   ],
   "rates": [
     {
       "userId": 2,
       "movieId": 1,
-      "rate": 4,
+      "rate": 3,
       "id": 1
     },
     {
@@ -1678,11 +1725,23 @@
         44
       ],
       "id": 2
+    },
+    {
+      "date": "04/03/2023",
+      "hour": "16:00",
+      "roomId": 2,
+      "seatsIds": [
+        7,
+        8,
+        7,
+        8
+      ],
+      "id": 3
     }
   ],
   "config": {
     "dayToDisplayOnInit": 0,
-    "numberOfDaysToDisplay": 7,
+    "numberOfDaysToDisplay": 10,
     "footerLinks": [
       {
         "link": "#",
