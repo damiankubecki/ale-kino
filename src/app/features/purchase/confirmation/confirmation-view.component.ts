@@ -78,6 +78,7 @@ export class BuyTicketViewComponent {
 
     if (this.form.controls['email'].value !== this.form.controls['emailConfirm'].value) {
       this.message = 'Podane maile są różne';
+      return;
     } else {
       this.purchaseService.setOwner({
         firstname: this.form.controls['firstname'].value,

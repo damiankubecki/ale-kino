@@ -77,13 +77,13 @@ export class PurchaseService {
       window.localStorage.setItem('order-in-progress', JSON.stringify(value || ''));
     });
 
-    const savedOrder = JSON.parse(window.localStorage.getItem('order-in-progress') || '');
-    if (savedOrder) {
-      this.order$$.next(savedOrder);
+    const orderInProgressLocalStorage = window.localStorage.getItem('order-in-progress');
+    if (orderInProgressLocalStorage) {
+      this.order$$.next(JSON.parse(orderInProgressLocalStorage));
     }
   }
 
-  setSeatsAsReserved(seatsIds: number[]) {
+  setSeatAsReserved(seatId: number) {
     const { showing, roomId } = this.order$$.value;
 
     return this.roomService.getReservedSeatsInRoom(roomId || 0, showing!.hour, showing!.day).pipe(
@@ -91,21 +91,21 @@ export class PurchaseService {
         if (response) {
           return this.http.patch<IReservationsItem>(`${API_URL}/reservations/${response.id}`, {
             ...response,
-            seatsIds: [...response.seatsIds, ...seatsIds],
+            seatsIds: [...response.seatsIds, seatId],
           });
         } else {
           return this.http.post<IReservationsItem>(`${API_URL}/reservations`, {
             date: showing?.day,
             hour: showing?.hour,
             roomId,
-            seatsIds,
+            seatsIds: [seatId],
           });
         }
       })
     );
   }
 
-  setSeatsAsUnreserved(seatId: number) {
+  setSeatAsUnreserved(seatId: number) {
     const { showing, roomId } = this.order$$.value;
 
     return this.roomService.getReservedSeatsInRoom(roomId || 0, showing!.hour, showing!.day).pipe(
@@ -136,7 +136,7 @@ export class PurchaseService {
   }
 
   removeSeat(seatId: number) {
-    this.setSeatsAsUnreserved(seatId).subscribe();
+    this.setSeatAsUnreserved(seatId).subscribe();
 
     this.order$$.next({
       ...this.order$$.value,

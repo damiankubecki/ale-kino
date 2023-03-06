@@ -36,6 +36,7 @@ import { OnlyNumbersDirective } from './shared/directives/only-numbers.directive
 import { PaymentViewComponent } from './features/purchase/payment-view/payment-view.component';
 import { configReducer } from './core/config/config.reducer';
 import { ConfigEffects } from './core/config/config.effects';
+import { NoWhitespaceDirective } from './shared/directives/no-whitespace.directive';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ConfigEffects } from './core/config/config.effects';
     OrdersComponent,
     ConfirmationFormComponent,
     OnlyNumbersDirective,
+    NoWhitespaceDirective,
     PaymentViewComponent,
   ],
   imports: [

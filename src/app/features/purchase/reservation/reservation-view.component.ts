@@ -48,20 +48,9 @@ export class ReservationViewComponent {
   }
 
   handleSubmit() {
-    const reservedSeatsIds = this.order!.reservedSeats.map(item => item.seatId);
+    if (!this.order?.reservedSeats.length) return;
 
-    if (!this.order) return;
-    const { roomId, showing } = this.order;
-
-    this.roomsService
-      .getReservedSeatsInRoom(roomId || 0, showing!.hour, showing!.day)
-      .pipe(
-        switchMap(() => {
-          return this.purchaseService.setSeatsAsReserved(reservedSeatsIds);
-        }),
-        tap(() => this.router.navigate([paths.confirmation]))
-      )
-      .subscribe();
+    this.router.navigate([paths.confirmation]);
   }
 
   handleSeatClick(event: Event) {
@@ -75,6 +64,7 @@ export class ReservationViewComponent {
 
     const choosenSeat: IReservedSeat = { ticketType, seatId, row, seat };
 
+    this.purchaseService.setSeatAsReserved(seatId).subscribe();
     this.purchaseService.addSeat(choosenSeat);
   }
 

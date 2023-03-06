@@ -3,21 +3,23 @@
     <h1 class="title">Ale kino!</h1>
   </a>
 
-  <div class="buttonsContainer">
-    <ng-container *ngIf="user.role === 'user'">
-      <app-nav-button [link]="paths.basket" [icon]="icons.shoppingCart"
-        >Koszyk {{ '(' + seatsInBasket + ')' }}</app-nav-button
-      >
-    </ng-container>
+  <ng-container *ngIf="user$ | async as user">
+    <div class="buttonsContainer">
+      <ng-container *ngIf="user.role === 'user'">
+        <app-nav-button [link]="paths.basket" [icon]="icons.shoppingCart"
+          >Koszyk {{ '(' + (seatsInBasket$ | async) + ')' }}</app-nav-button
+        >
+      </ng-container>
 
-    <ng-container *ngIf="user.role === 'guest'">
-      <app-nav-button [link]="paths.login">Zaloguj</app-nav-button>
-    </ng-container>
+      <ng-container *ngIf="user.role === 'guest'">
+        <app-nav-button [link]="paths.login">Zaloguj</app-nav-button>
+      </ng-container>
 
-    <ng-container *ngIf="user.role === 'user' || user.role === 'admin'">
-      <app-nav-button [menuItems]="menuItems[user.role]">
-        {{ user.role === 'user' ? 'Witaj, ' + user.info!.firstname : 'Panel administratora' }}
-      </app-nav-button>
-    </ng-container>
-  </div>
+      <ng-container *ngIf="user.role === 'user' || user.role === 'admin'">
+        <app-nav-button [menuItems]="menuItems[user.role]">
+          {{ user.role === 'user' ? 'Witaj, ' + user.info!.firstname : 'Panel administratora' }}
+        </app-nav-button>
+      </ng-container>
+    </div>
+  </ng-container>
 </header>

@@ -51,12 +51,22 @@ export class AddMovieFormComponent {
   }
 
   handleSubmit() {
-    this.form.markAllAsTouched();
-
-    if (this.form.invalid) return;
-
     const { title, shortDescription, longDescription, isPremiere, duration, minAge, imageURL } =
       this.form.value;
+
+    this.form.markAllAsTouched();
+
+    if (
+      !title?.trim() ||
+      !shortDescription?.trim() ||
+      !longDescription?.trim() ||
+      !duration?.trim() ||
+      !minAge?.trim() ||
+      !imageURL?.trim()
+    )
+      window.alert('Pola nie mogą być wypełnione spacjami');
+
+    if (this.form.invalid) return;
 
     const movieDTO: Partial<Omit<IMovie, 'id'>> = {
       title,

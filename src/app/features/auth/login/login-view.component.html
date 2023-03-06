@@ -6,8 +6,9 @@
         <input
           formControlName="email"
           type="email"
-          class="form__input form__input-narrow"  
+          class="form__input form__input-narrow"
           placeholder="example@example.com"
+          noWhitespace
         />
         <ng-container *ngIf="control.touched && form.controls['email'].errors as error">
           <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
@@ -23,6 +24,7 @@
           type="password"
           class="form__input"
           placeholder="********"
+          noWhitespace
         />
         <ng-container *ngIf="control.touched && form.controls['password'].errors as error">
           <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>

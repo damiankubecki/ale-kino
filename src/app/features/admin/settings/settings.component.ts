@@ -12,7 +12,8 @@ import { ConfigState } from '@app/core/config/config.interface';
 import { selectFooterLinks, selectConfig } from '@app/core/config/config.selectors';
 import { TopbarService } from '@app/topbar.service';
 import { Store } from '@ngrx/store';
-import { skip, tap } from 'rxjs';
+import { config } from 'process';
+import { map, skip, tap } from 'rxjs';
 
 export type Form = FormGroup<{
   dayToDisplayOnInit: FormControl<string>;
@@ -35,48 +36,44 @@ export class SettingsComponent {
   private topbarService = inject(TopbarService);
 
   footerLinks$ = this.store.select(selectFooterLinks);
-  form: Form = this.createForm(null);
+  form$ = this.store.select(selectConfig).pipe(
+    skip(1),
+    map(config => this.createForm(config))
+  );
 
   constructor() {
     this.topbarService.setTopbarContent('Ustawienia');
 
     this.store.dispatch(ConfigActions.getConfig());
-
-    this.store
-      .select(selectConfig)
-      .pipe(
-        skip(1),
-        tap(config => {
-          this.form = this.createForm(config);
-        })
-      )
-      .subscribe();
   }
 
-  setDayToDisplayOnInit() {
-    this.store.dispatch(
-      ConfigActions.setDayToDisplayOnInit({
-        daysFromToday: Number(this.form.value.dayToDisplayOnInit),
-      })
-    );
+  setDayToDisplayOnInit(control: FormControl<string>) {
+    const value = Number(control.value);
+
+    if (value >= 0) {
+      this.store.dispatch(ConfigActions.setDayToDisplayOnInit({ daysFromToday: value }));
+    } else window.alert('Wyświetlany dzień nie może być przeszły');
   }
 
-  setNumberOfDaysToDisplay() {
-    const value = Number(this.form.value.numberOfDaysToDisplay);
+  setNumberOfDaysToDisplay(control: FormControl<string>) {
+    const value = Number(control.value);
 
-    if (value < 7) return window.alert('Liczba dni nie może być mniejsza niż 7');
-    this.store.dispatch(
-      ConfigActions.setNumberOfDaysToDisplay({
-        daysNumber: value,
-      })
-    );
-  }
-
-  addFooterLink() {
-    const { footerName, footerLink } = this.form.value;
-    if (footerName && footerLink) {
+    if (value >= 7) {
       this.store.dispatch(
-        ConfigActions.addFooterLink({ link: { link: footerLink, name: footerName } })
+        ConfigActions.setNumberOfDaysToDisplay({
+          daysNumber: value,
+        })
+      );
+    } else window.alert('Liczba dni nie może być mniejsza niż 7');
+  }
+
+  addFooterLink({ name, link }: { name: FormControl<string>; link: FormControl<string> }) {
+    const nameValue = name.value;
+    const linkValue = link.value;
+
+    if (nameValue && linkValue) {
+      this.store.dispatch(
+        ConfigActions.addFooterLink({ link: { link: linkValue, name: nameValue } })
       );
     }
   }

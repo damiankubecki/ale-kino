@@ -1,5 +1,5 @@
 <div class="app">
-  <div *ngIf="!isLoading" class="wrapper">
+  <div *ngIf="!(isLoading$ | async)" class="wrapper">
     <app-header></app-header>
     <app-main>
       <router-outlet></router-outlet>

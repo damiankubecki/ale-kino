@@ -23,6 +23,7 @@
           type="text"
           class="form__input form__input-narrow"
           placeholder="Jan"
+          noWhitespace
         />
         <ng-container *ngIf="control.touched && form.controls['firstname'].errors as error">
           <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
@@ -34,7 +35,13 @@
     <ng-container *ngIf="form.controls['lastname'] as control">
       <div class="form__itemContainer narrow">
         <label class="form__label">Nazwisko:</label>
-        <input formControlName="lastname" type="text" class="form__input" placeholder="Kowalski" />
+        <input
+          formControlName="lastname"
+          type="text"
+          class="form__input"
+          placeholder="Kowalski"
+          noWhitespace
+        />
         <ng-container *ngIf="control.touched && form.controls['lastname'].errors as error">
           <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
           <p *ngIf="error['minlength']" class="form__errorParagraph">wymagana liczba znaków 3-99</p>
@@ -51,6 +58,7 @@
           class="form__input"
           placeholder="333444555"
           appOnlyNumbers
+          noWhitespace
         />
         <ng-container *ngIf="control.touched && form.controls['phone'].errors as error">
           <p *ngIf="error['minlength']" class="form__errorParagraph">liczba wymaganych znaków: 9</p>
@@ -73,6 +81,7 @@
           type="text"
           class="form__input"
           placeholder="jan.kowalski@xyz.com"
+          noWhitespace
         />
         <ng-container *ngIf="control.touched && form.controls['email'].errors as error">
           <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
@@ -89,6 +98,7 @@
           type="text"
           class="form__input"
           placeholder="jan.kowalski@xyz.com"
+          noWhitespace
         />
         <ng-container *ngIf="control.touched && form.controls['emailConfirm'].errors as error">
           <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>

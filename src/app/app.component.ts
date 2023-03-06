@@ -14,13 +14,9 @@ export class AppComponent {
   private api = inject(ApiService);
   private store = inject(Store);
 
-  isLoading = true;
+  isLoading$ = this.api.status$.pipe(map(status => status.isLoading));
 
   constructor() {
     this.store.dispatch(ConfigActions.getConfig());
-
-    this.api.status$
-      .pipe(map(status => status.isLoading))
-      .subscribe(isLoading => (this.isLoading = isLoading));
   }
 }

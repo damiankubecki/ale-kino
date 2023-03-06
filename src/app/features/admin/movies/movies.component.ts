@@ -1,11 +1,11 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatIcon, MatIconModule, MatListModule } from '@angular/material';
+import { MatIconModule, MatListModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { MoviesService } from '@app/shared/data/movies/movies.service';
 import { IMovie } from '@app/shared/types/interfaces';
 import { TopbarService } from '@app/topbar.service';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { ADMIN_PATHS } from '../admin-paths';
 import { AddMovieFormComponent } from './add-movie-form/add-movie-form.component';
 

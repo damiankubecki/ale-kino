@@ -1,22 +1,42 @@
 <h3 class="title">Edytuj ustawienia</h3>
-<form [formGroup]="form">
+<form *ngIf="form$ | async as form" [formGroup]="form">
   <div class="setting-item">
     <label>Domyślnie wyświetlany dzień (0 - dziś, 1 - jutro itd...):</label>
     <input type="number" formControlName="dayToDisplayOnInit" />
-    <button type="button" (click)="setDayToDisplayOnInit()" class="action-button">Zmień</button>
+    <button
+      type="button"
+      (click)="setDayToDisplayOnInit(form.controls['dayToDisplayOnInit'])"
+      class="action-button"
+    >
+      Zmień
+    </button>
   </div>
 
   <div class="setting-item">
     <label>Liczba dni do wyświelenia w repertuarze:</label>
     <input type="number" formControlName="numberOfDaysToDisplay" />
-    <button type="button" (click)="setNumberOfDaysToDisplay()" class="action-button">Zmień</button>
+    <button
+      type="button"
+      (click)="setNumberOfDaysToDisplay(form.controls['numberOfDaysToDisplay'])"
+      class="action-button"
+    >
+      Zmień
+    </button>
   </div>
 
   <div class="setting-item no-border">
     <label>Odnośniki w stopce:</label>
     <input type="text" placeholder="Nazwa" formControlName="footerName" />
     <input type="text" placeholder="Adres URL" formControlName="footerLink" />
-    <button type="button" (click)="addFooterLink()" class="action-button">Dodaj</button>
+    <button
+      type="button"
+      (click)="
+        addFooterLink({ name: form.controls['footerName'], link: form.controls['footerLink'] })
+      "
+      class="action-button"
+    >
+      Dodaj
+    </button>
 
     <div class="link-container">
       <p class="text">Istniejące:</p>

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL, CONFIG_ENDPOINT } from '@app/shared/data/api/api';
 import { Config, FooterLink } from './config.interface';
-import { config, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ConfigService {
