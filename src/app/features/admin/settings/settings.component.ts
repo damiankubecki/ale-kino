@@ -12,8 +12,7 @@ import { ConfigState } from '@app/core/config/config.interface';
 import { selectFooterLinks, selectConfig } from '@app/core/config/config.selectors';
 import { TopbarService } from '@app/topbar.service';
 import { Store } from '@ngrx/store';
-import { config } from 'process';
-import { map, skip, tap } from 'rxjs';
+import { map, skip } from 'rxjs';
 
 export type Form = FormGroup<{
   dayToDisplayOnInit: FormControl<string>;
