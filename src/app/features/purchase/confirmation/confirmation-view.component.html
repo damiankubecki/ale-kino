@@ -1,4 +1,4 @@
-<section class="wrapper">
+<section class="wrapper" *ngIf="order$ | async as order">
   <h3 class="title">Uzupełnij formularz, aby złożyć zamówienie</h3>
 
   <div class="order-container">
@@ -10,7 +10,7 @@
     </div>
     <div class="order-summary">
       <p>Ilość biletów: {{ reservedSeats.length }}</p>
-      <p>Cena całkowita: {{ orderPrice }}zł</p>
+      <p>Cena całkowita: {{ order.amount }}zł</p>
     </div>
   </div>
 
@@ -104,6 +104,26 @@
           <p *ngIf="error['required']" class="form__errorParagraph">*obowiązkowe</p>
           <p *ngIf="error['pattern']" class="form__errorParagraph">podaj poprawny adres email</p>
         </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="discountControl as control">
+      <div class="form__itemContainer narrow">
+        <label class="form__label">Kod zniżkowy:</label>
+        <input
+          [formControl]="discountControl"
+          type="text"
+          class="form__input"
+          placeholder="Kod"
+          noWhitespace
+        />
+        <ng-container *ngIf="discountControl.errors as error">
+          <p *ngIf="error['invalid']" class="form__errorParagraph">Podaj poprawny kod</p>
+        </ng-container>
+        <button class="button-discount" (click)="addDiscount(discountControl)">Sprawdź</button>
+        <p *ngIf="(order$ | async)?.discount as discount" class="used-discount-text">
+          Zaaplikowano kod {{ discount.name }}
+        </p>
       </div>
     </ng-container>
 

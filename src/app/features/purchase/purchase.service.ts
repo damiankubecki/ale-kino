@@ -7,7 +7,8 @@ import { ITicketType } from '@app/shared/data/tickets/tickets.service';
 import { IMovie } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import * as moment from 'moment';
-import { BehaviorSubject, skip, switchMap } from 'rxjs';
+import { BehaviorSubject, skip, switchMap, tap } from 'rxjs';
+import { IDiscount } from './discount.service';
 
 export interface IReservationsItem {
   id: number;
@@ -32,6 +33,7 @@ export interface IOrderOwner {
 }
 
 export interface IOrderInProgress {
+  reservedSeats: IReservedSeat[];
   movie?: IMovie;
   owner?: IOrderOwner;
   showing?: {
@@ -39,7 +41,8 @@ export interface IOrderInProgress {
     hour: Hour;
   };
   roomId?: number;
-  reservedSeats: IReservedSeat[];
+  discount?: IDiscount;
+  amount?: number;
 }
 
 export interface IOrder {
@@ -57,6 +60,7 @@ export interface IOrder {
   reservedSeats: IReservedSeat[];
   date: string;
   roomId: number;
+  amount?: number;
 }
 
 @Injectable({
@@ -73,8 +77,8 @@ export class PurchaseService {
   }
 
   constructor() {
-    this.order$$.pipe(skip(1)).subscribe(value => {
-      window.localStorage.setItem('order-in-progress', JSON.stringify(value || ''));
+    this.order$$.pipe(skip(1)).subscribe(order => {
+      window.localStorage.setItem('order-in-progress', JSON.stringify(order || ''));
     });
 
     const orderInProgressLocalStorage = window.localStorage.getItem('order-in-progress');
@@ -122,28 +126,43 @@ export class PurchaseService {
     this.order$$.next({ reservedSeats: [], owner: this.order$$.value.owner });
   }
 
+  addDiscount(discount: IDiscount) {
+    this.order$$.next({ ...this.order$$.value, discount });
+    this.calcOrderAmount();
+  }
+
   addSeat(seat: IReservedSeat) {
     const { seatId } = seat;
 
     if (this.order$$.value?.reservedSeats.find(item => item.seatId === seatId)) {
       this.removeSeat(seatId);
     } else {
+      const updatedSeats = [...this.order$$.value.reservedSeats, seat].sort(
+        (a, b) => a.row - b.row
+      );
+
       this.order$$.next({
         ...this.order$$.value,
-        reservedSeats: [...this.order$$.value.reservedSeats, seat].sort((a, b) => a.row - b.row),
+        reservedSeats: updatedSeats,
       });
+
+      this.calcOrderAmount();
     }
   }
 
   removeSeat(seatId: number) {
     this.setSeatAsUnreserved(seatId).subscribe();
 
+    const updatedSeats = [
+      ...this.order$$.value.reservedSeats.filter(seat => seat.seatId !== seatId),
+    ].sort((a, b) => a.row - b.row);
+
     this.order$$.next({
       ...this.order$$.value,
-      reservedSeats: [
-        ...this.order$$.value.reservedSeats.filter(seat => seat.seatId !== seatId),
-      ].sort((a, b) => a.row - b.row),
+      reservedSeats: updatedSeats,
     });
+
+    this.calcOrderAmount();
   }
 
   setOwner(person: IOrderOwner) {
@@ -172,6 +191,8 @@ export class PurchaseService {
         seat.seatId === seatId ? { ...seat, ticketType: selectedTicket } : seat
       ),
     });
+
+    this.calcOrderAmount();
   }
 
   setRoom(roomId: number) {
@@ -182,7 +203,7 @@ export class PurchaseService {
   }
 
   sendOrder() {
-    const { movie, owner, reservedSeats, showing, roomId } = this.order$$.value;
+    const { movie, owner, reservedSeats, showing, roomId, amount } = this.order$$.value;
 
     return this.http.post<IOrder>(`${API_URL}/orders`, {
       id: NaN,
@@ -194,8 +215,26 @@ export class PurchaseService {
       },
       reservedSeats,
       showing,
+      amount,
       roomId,
       date: `${moment().format('DD/MM/YYYY')} ${moment().format('HH:mm')}`,
     });
+  }
+
+  private calcOrderAmount() {
+    const orderAmount = this.order$$.value.reservedSeats.reduce(
+      (acc, current) => acc + current.ticketType.price,
+      0
+    );
+    const discount = this.order$$.value.discount;
+
+    if (!orderAmount) return;
+
+    if (discount) {
+      const newAmount = orderAmount * (1 - discount.discount * 0.01);
+      this.order$$.next({ ...this.order$$.value, amount: Number(newAmount.toFixed(2)) });
+    } else {
+      this.order$$.next({ ...this.order$$.value, amount: orderAmount });
+    }
   }
 }

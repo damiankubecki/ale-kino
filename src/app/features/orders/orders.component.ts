@@ -33,13 +33,12 @@ export class OrdersComponent {
         }),
         tap(response => {
           this.order = response;
-          this.ticketsPrice = response.reservedSeats.reduce(
-            (acc, current) => acc + current.ticketType.price,
-            0
-          );
+          this.ticketsPrice =
+            response.amount ||
+            response.reservedSeats.reduce((acc, current) => acc + current.ticketType.price, 0);
         }),
         catchError(() => {
-          // this.router.navigate([paths.notFound]);
+          this.router.navigate([paths.notFound]);
 
           return of(null);
         })

@@ -44,12 +44,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
 
-  &__narrowInputsContainer {
-    display: flex;
-    justify-content: space-between;
-  }
-
   &__itemContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 5px 0;
@@ -101,4 +97,20 @@
 .button-container {
   margin: 25px auto 0;
   text-align: center;
+}
+
+.button-discount {
+  position: absolute;
+  top: 23px;
+  left: 100%;
+  width: 100px;
+  border-bottom: 3px solid $disabled;
+  border-radius: 0;
+  height: 35px;
+  background-color: transparent;
+}
+
+.used-discount-text {
+  color: $green;
+  font-size: $font-S;
 }
