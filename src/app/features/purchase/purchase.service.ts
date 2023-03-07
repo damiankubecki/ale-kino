@@ -77,9 +77,14 @@ export class PurchaseService {
   }
 
   constructor() {
-    this.order$$.pipe(skip(1)).subscribe(order => {
-      window.localStorage.setItem('order-in-progress', JSON.stringify(order || ''));
-    });
+    this.order$$
+      .pipe(
+        skip(1),
+        tap(order => {
+          window.localStorage.setItem('order-in-progress', JSON.stringify(order || ''));
+        })
+      )
+      .subscribe();
 
     const orderInProgressLocalStorage = window.localStorage.getItem('order-in-progress');
     if (orderInProgressLocalStorage) {
