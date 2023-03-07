@@ -31,12 +31,13 @@ import { OrderItemsListComponent } from './features/purchase/shared/order-items-
 import { MyTicketsComponent } from './features/my-tickets/my-tickets.component';
 import { WatchlistComponent } from './features/watchlist/watchlist.component';
 import { OrdersComponent } from './features/orders/orders.component';
-import { ConfirmationFormComponent } from './features/purchase/confirmation/confirmation-form/confirmation-form.component';
 import { OnlyNumbersDirective } from './shared/directives/only-numbers.directive';
 import { PaymentViewComponent } from './features/purchase/payment-view/payment-view.component';
 import { configReducer } from './core/config/config.reducer';
 import { ConfigEffects } from './core/config/config.effects';
 import { NoWhitespaceDirective } from './shared/directives/no-whitespace.directive';
+import { discountCodesReducer } from './features/purchase/shared/discount-codes/discount-codes.reducer';
+import { DiscountCodesEffects } from './features/purchase/shared/discount-codes/discount-codes.effects';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,6 @@ import { NoWhitespaceDirective } from './shared/directives/no-whitespace.directi
     MyTicketsComponent,
     WatchlistComponent,
     OrdersComponent,
-    ConfirmationFormComponent,
     OnlyNumbersDirective,
     NoWhitespaceDirective,
     PaymentViewComponent,
@@ -75,8 +75,8 @@ import { NoWhitespaceDirective } from './shared/directives/no-whitespace.directi
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    StoreModule.forRoot({ config: configReducer }),
-    EffectsModule.forRoot([ConfigEffects]),
+    StoreModule.forRoot({ config: configReducer, discountCodes: discountCodesReducer }),
+    EffectsModule.forRoot([ConfigEffects, DiscountCodesEffects]),
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

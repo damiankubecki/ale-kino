@@ -1,13 +1,16 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { TopbarService } from '@app/topbar.service';
 import { UserService } from '@app/features/auth/user/user.service';
 import { IUserInfo } from '@app/shared/types/interfaces';
-import { IReservedSeat, PurchaseService } from '../purchase.service';
-import { map, skip, Subscription, tap } from 'rxjs';
+import { PurchaseService } from '../purchase.service';
+import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { paths } from '@app/shared/router/paths';
-import { DiscountService, IDiscount } from '../discount.service';
+import { Store } from '@ngrx/store';
+import { DiscountActions } from '../shared/discount-codes/discount-codes.actions';
+import { selectDiscountCodes } from '../shared/discount-codes/discount-codes.selectors';
+import { DiscountCodes } from '../shared/discount-codes/discount-codes.interface';
 
 type Form = FormGroup<{
   firstname: FormControl<string>;
@@ -28,56 +31,21 @@ export class BuyTicketViewComponent {
   private userService = inject(UserService);
   private topbarService = inject(TopbarService);
   private purchaseService = inject(PurchaseService);
-  private discountService = inject(DiscountService);
+  private store = inject(Store);
 
-  reservedSeats: IReservedSeat[] = [];
-  orderPrice = 0;
-  userInfo: IUserInfo | null = null;
   form!: Form;
-  message = '';
   order$ = this.purchaseService.order$;
-  discountCodes: IDiscount[] | null = null;
+  discountCodes$ = this.store.select(selectDiscountCodes);
   discountControl = new FormControl();
-
-  subscription$!: Subscription;
 
   constructor() {
     this.topbarService.setTopbarContent('Potwierdzenie');
 
-    this.discountService.discountCodes$
-      .pipe(tap(codes => (this.discountCodes = codes)))
+    this.store.dispatch(DiscountActions.getDiscountCodes());
+
+    this.userService.user$
+      .pipe(tap(user => (this.form = this.createForm(user.info || null))))
       .subscribe();
-
-    this.purchaseService.order$
-      .pipe(
-        map(state => ({
-          ...state,
-          reservedSeats: state.reservedSeats.sort((a, b) => a.row - b.row),
-        }))
-      )
-      .subscribe(state => {
-        this.orderPrice = state.reservedSeats.reduce(
-          (acc, current) => acc + current.ticketType.price,
-          0
-        );
-        this.reservedSeats = state.reservedSeats;
-      });
-
-    this.userService.user$.subscribe({
-      next: user => {
-        if (user.role === 'user' && user?.info) {
-          this.userInfo = user.info;
-        }
-
-        this.form = this.createForm(this.userInfo || null);
-      },
-    });
-
-    this.form.valueChanges.subscribe({
-      next: () => {
-        this.message = '';
-      },
-    });
   }
 
   handleSubmit() {
@@ -86,7 +54,7 @@ export class BuyTicketViewComponent {
     if (this.form.invalid) return;
 
     if (this.form.controls['email'].value !== this.form.controls['emailConfirm'].value) {
-      this.message = 'Podane maile są różne';
+      window.alert('Błąd. Podane maile są różne');
       return;
     } else {
       this.purchaseService.setOwner({
@@ -99,8 +67,8 @@ export class BuyTicketViewComponent {
     this.router.navigate([paths.payment]);
   }
 
-  addDiscount(control: FormControl<string>) {
-    const discount = this.discountCodes?.find(discount => discount.name === control.value);
+  addDiscount(control: FormControl<string>, discountCodes: DiscountCodes) {
+    const discount = discountCodes.find(discount => discount.name === control.value);
 
     if (discount) {
       this.purchaseService.addDiscount(discount);

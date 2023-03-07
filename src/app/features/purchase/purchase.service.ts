@@ -8,8 +8,7 @@ import { IMovie } from '@app/shared/types/interfaces';
 import { Hour, LongDate } from '@app/shared/types/types';
 import * as moment from 'moment';
 import { BehaviorSubject, skip, switchMap, tap } from 'rxjs';
-import { IDiscount } from './discount.service';
-
+import { DiscountCode } from './shared/discount-codes/discount-codes.interface';
 export interface IReservationsItem {
   id: number;
   roomId: number;
@@ -41,7 +40,7 @@ export interface IOrderInProgress {
     hour: Hour;
   };
   roomId?: number;
-  discount?: IDiscount;
+  discount?: DiscountCode;
   amount?: number;
 }
 
@@ -131,7 +130,7 @@ export class PurchaseService {
     this.order$$.next({ reservedSeats: [], owner: this.order$$.value.owner });
   }
 
-  addDiscount(discount: IDiscount) {
+  addDiscount(discount: DiscountCode) {
     this.order$$.next({ ...this.order$$.value, discount });
     this.calcOrderAmount();
   }

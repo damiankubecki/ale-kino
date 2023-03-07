@@ -42,7 +42,8 @@
             25,
             26,
             27,
-            28
+            28,
+            29
           ],
           "wantToWatchIds": [],
           "ratedMovies": [
@@ -526,7 +527,10 @@
               "10:00": []
             },
             {
-              "22:20": []
+              "22:20": [
+                17,
+                18
+              ]
             }
           ],
           "roomId": 1
@@ -2012,6 +2016,50 @@
       "amount": 36,
       "roomId": 2,
       "date": "06/03/2023 16:45"
+    },
+    {
+      "id": 29,
+      "movie": {
+        "id": 3,
+        "title": "Shrek Forever",
+        "minAge": null
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 17,
+          "row": 2,
+          "seat": 5
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 18,
+          "row": 2,
+          "seat": 6
+        }
+      ],
+      "showing": {
+        "day": "07/03/2023",
+        "hour": "22:20"
+      },
+      "amount": 42,
+      "roomId": 1,
+      "date": "07/03/2023 16:23"
     }
   ],
   "rates": [
@@ -2209,7 +2257,11 @@
       "hour": "22:20",
       "roomId": 1,
       "seatsIds": [
-        17
+        17,
+        18,
+        43,
+        42,
+        11
       ],
       "id": 13
     }
@@ -2238,12 +2290,14 @@
   },
   "discountCodes": [
     {
+      "id": 1,
       "name": "PROMO10",
       "discount": 10
     },
     {
-      "name": "PROMO25",
-      "discount": 25
+      "id": 2,
+      "name": "PROMO30",
+      "discount": 30
     }
   ]
 }

@@ -2,14 +2,18 @@
   <h3 class="title">Uzupełnij formularz, aby złożyć zamówienie</h3>
 
   <div class="order-container">
-    <div *ngFor="let item of reservedSeats; last as last" [class.last]="last" class="order-item">
+    <div
+      *ngFor="let item of order.reservedSeats; last as last"
+      [class.last]="last"
+      class="order-item"
+    >
       <p>Rząd: {{ item.row }}</p>
       <p>Miejsce: {{ item.seat }}</p>
       <p>bilet {{ item.ticketType.name }}</p>
       <p>Cena: {{ item.ticketType.price }}zł</p>
     </div>
     <div class="order-summary">
-      <p>Ilość biletów: {{ reservedSeats.length }}</p>
+      <p>Ilość biletów: {{ order.reservedSeats.length }}</p>
       <p>Cena całkowita: {{ order.amount }}zł</p>
     </div>
   </div>
@@ -120,16 +124,19 @@
         <ng-container *ngIf="discountControl.errors as error">
           <p *ngIf="error['invalid']" class="form__errorParagraph">Podaj poprawny kod</p>
         </ng-container>
-        <button class="button-discount" (click)="addDiscount(discountControl)">Sprawdź</button>
+        <button
+          *ngIf="discountCodes$ | async as discountCodes"
+          (click)="addDiscount(discountControl, discountCodes)"
+          type="button"
+          class="button-discount"
+        >
+          Sprawdź
+        </button>
         <p *ngIf="(order$ | async)?.discount as discount" class="used-discount-text">
-          Zaaplikowano kod {{ discount.name }}
+          Dodano kod {{ discount.name }} (-{{ discount.discount }}%)
         </p>
       </div>
     </ng-container>
-
-    <div *ngIf="message" class="form__itemContainer">
-      <p class="form__messageParagraph">Błąd! {{ message }}</p>
-    </div>
   </form>
 
   <div class="button-container">
