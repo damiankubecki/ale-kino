@@ -43,7 +43,8 @@
             26,
             27,
             28,
-            29
+            29,
+            30
           ],
           "wantToWatchIds": [],
           "ratedMovies": [
@@ -52,7 +53,7 @@
               "movieId": 1
             },
             {
-              "rate": 2,
+              "rate": 3,
               "movieId": 2
             },
             {
@@ -79,7 +80,9 @@
             14,
             16
           ],
-          "wantToWatchIds": [],
+          "wantToWatchIds": [
+            1
+          ],
           "ratedMovies": [
             {
               "rate": 3,
@@ -272,47 +275,6 @@
       "movieId": 1,
       "showings": [
         {
-          "day": "07/03/2023",
-          "hours": [
-            "14:20",
-            "20:15"
-          ],
-          "occupiedSeatsIds": [
-            {
-              "14:20": [
-                2,
-                3,
-                25,
-                26,
-                27,
-                28,
-                44,
-                45,
-                37,
-                38,
-                11,
-                10,
-                9
-              ]
-            },
-            {
-              "20:15": [
-                1,
-                2,
-                3,
-                18,
-                19,
-                20,
-                25,
-                26,
-                45,
-                44
-              ]
-            }
-          ],
-          "roomId": 1
-        },
-        {
           "day": "09/03/2023",
           "hours": [
             "14:00"
@@ -366,67 +328,6 @@
       "id": 2,
       "movieId": 2,
       "showings": [
-        {
-          "day": "06/03/2023",
-          "hours": [
-            "08:00",
-            "17:15"
-          ],
-          "occupiedSeatsIds": [
-            {
-              "08:00": [
-                2,
-                3
-              ]
-            },
-            {
-              "17:15": [
-                1,
-                2,
-                3,
-                45,
-                44,
-                43,
-                42,
-                12,
-                37,
-                38
-              ]
-            }
-          ],
-          "roomId": 1
-        },
-        {
-          "day": "08/03/2023",
-          "hours": [
-            "07:00",
-            "18:20"
-          ],
-          "occupiedSeatsIds": [
-            {
-              "07:00": [
-                2,
-                3
-              ]
-            },
-            {
-              "18:20": [
-                1,
-                2,
-                3,
-                15,
-                16,
-                18,
-                33,
-                34,
-                42,
-                41,
-                40
-              ]
-            }
-          ],
-          "roomId": 1
-        },
         {
           "day": "09/03/2023",
           "hours": [
@@ -488,18 +389,6 @@
       "movieId": 3,
       "showings": [
         {
-          "day": "06/03/2023",
-          "hours": [
-            "12:00"
-          ],
-          "occupiedSeatsIds": [
-            {
-              "12:00": []
-            }
-          ],
-          "roomId": 2
-        },
-        {
           "day": "10/03/2023",
           "hours": [
             "15:00"
@@ -517,20 +406,21 @@
           "roomId": 2
         },
         {
-          "day": "07/03/2023",
+          "day": "12/03/2023",
           "hours": [
-            "10:00",
-            "22:20"
+            "12:00",
+            "15:00",
+            "20:00"
           ],
           "occupiedSeatsIds": [
             {
-              "10:00": []
+              "12:00": []
             },
             {
-              "22:20": [
-                17,
-                18
-              ]
+              "15:00": []
+            },
+            {
+              "20:00": []
             }
           ],
           "roomId": 1
@@ -540,38 +430,6 @@
     {
       "movieId": 4,
       "showings": [
-        {
-          "day": "06/03/2023",
-          "hours": [
-            "12:00"
-          ],
-          "occupiedSeatsIds": [
-            {
-              "12:00": [
-                52,
-                53,
-                54,
-                12,
-                11,
-                23,
-                24
-              ]
-            }
-          ],
-          "roomId": 2
-        },
-        {
-          "day": "08/02/2023",
-          "hours": [
-            "12:00"
-          ],
-          "occupiedSeatsIds": [
-            {
-              "12:00": []
-            }
-          ],
-          "roomId": 1
-        },
         {
           "day": "10/03/2023",
           "hours": [
@@ -602,7 +460,10 @@
             {
               "16:00": [
                 43,
-                44
+                44,
+                59,
+                58,
+                60
               ]
             }
           ],
@@ -2060,6 +1921,105 @@
       "amount": 42,
       "roomId": 1,
       "date": "07/03/2023 16:23"
+    },
+    {
+      "id": 30,
+      "movie": {
+        "id": 3,
+        "title": "Shrek Forever",
+        "minAge": null
+      },
+      "owner": {
+        "name": "Andrzej Kowalski",
+        "email": "user@user.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 43,
+          "row": 4,
+          "seat": 7
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 42,
+          "row": 4,
+          "seat": 6
+        }
+      ],
+      "showing": {
+        "day": "07/03/2023",
+        "hour": "22:20"
+      },
+      "amount": 54,
+      "roomId": 1,
+      "date": "07/03/2023 16:45"
+    },
+    {
+      "id": 31,
+      "movie": {
+        "id": 4,
+        "title": "Split",
+        "minAge": 16
+      },
+      "owner": {
+        "name": "dasdas dasdas",
+        "email": "jankowal@gmail.com",
+        "phone": null
+      },
+      "reservedSeats": [
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 59,
+          "row": 5,
+          "seat": 11
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 58,
+          "row": 5,
+          "seat": 10
+        },
+        {
+          "ticketType": {
+            "id": 1,
+            "name": "normalny",
+            "description": "Zwykły bilet",
+            "price": 30
+          },
+          "seatId": 60,
+          "row": 5,
+          "seat": 12
+        }
+      ],
+      "showing": {
+        "day": "11/03/2023",
+        "hour": "16:00"
+      },
+      "amount": 22.5,
+      "roomId": 2,
+      "date": "08/03/2023 15:04"
     }
   ],
   "rates": [
@@ -2078,7 +2038,7 @@
     {
       "userId": 2,
       "movieId": 2,
-      "rate": 2,
+      "rate": 3,
       "id": 3
     },
     {
@@ -2238,7 +2198,10 @@
       "roomId": 2,
       "seatsIds": [
         43,
-        44
+        44,
+        59,
+        58,
+        60
       ],
       "id": 11
     },
@@ -2248,7 +2211,8 @@
       "roomId": 1,
       "seatsIds": [
         8,
-        9
+        9,
+        43
       ],
       "id": 12
     },
@@ -2268,7 +2232,7 @@
   ],
   "config": {
     "dayToDisplayOnInit": 0,
-    "numberOfDaysToDisplay": 8,
+    "numberOfDaysToDisplay": 10,
     "footerLinks": [
       {
         "link": "#",
@@ -2291,13 +2255,23 @@
   "discountCodes": [
     {
       "id": 1,
-      "name": "PROMO10",
-      "discount": 10
+      "name": "PROMO12",
+      "discount": 12
     },
     {
       "id": 2,
       "name": "PROMO30",
       "discount": 30
+    },
+    {
+      "name": "PROMO50",
+      "discount": 50,
+      "id": 3
+    },
+    {
+      "name": "PROMO75",
+      "discount": 75,
+      "id": 5
     }
   ]
 }

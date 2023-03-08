@@ -45,7 +45,7 @@
 
     <div class="form-buttons-container">
       <button *ngIf="editedCode$$ | async" (click)="closeCodeEditor()" type="button">Powrót</button>
-      <button>{{ (editedCode$$ | async) ? 'Edytuj' : 'Dodaj' }}</button>
+      <button>{{ (editedCode$$ | async) ? 'Zatwierdź' : 'Dodaj' }}</button>
     </div>
   </form>
 </section>

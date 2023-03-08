@@ -81,12 +81,12 @@ export class SettingsComponent {
     this.store.dispatch(ConfigActions.deleteFooterLink({ name }));
   }
 
-  private createForm(config: ConfigState | null) {
+  private createForm(config: ConfigState) {
     const create = this.builder;
 
     const form: Form = create.group({
-      dayToDisplayOnInit: create.control(config?.dayToDisplayOnInit.toString() || ''),
-      numberOfDaysToDisplay: create.control(config?.numberOfDaysToDisplay.toString() || ''),
+      dayToDisplayOnInit: create.control(config.dayToDisplayOnInit.toString()),
+      numberOfDaysToDisplay: create.control(config.numberOfDaysToDisplay.toString()),
       footerName: create.control(''),
       footerLink: create.control(''),
     });
