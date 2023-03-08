@@ -16,5 +16,10 @@
     display: block;
     color: $white;
     font-size: $font-L;
+    transition: 0.1s;
+
+    &:hover {
+      color: $orange;
+    }
   }
 }

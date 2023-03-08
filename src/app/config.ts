@@ -33,6 +33,7 @@ export const config: IConfig = {
       { title: 'Ustawienia', path: `${paths.admin}/${ADMIN_PATHS.settings}` },
       // { title: 'Sale kinowe', path: `${paths.admin}/${ADMIN_PATHS.rooms}` },
       { title: 'Filmy', path: `${paths.admin}/${ADMIN_PATHS.movies}` },
+      { title: 'Kody zniżkowe', path: `${paths.admin}/${ADMIN_PATHS.discountCodes}` },
       { title: 'Wyloguj', path: paths.logout },
     ],
   },

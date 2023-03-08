@@ -27,7 +27,7 @@
 
     <div *ngIf="form.controls['imageURL'] as control" class="form-field">
       <label>Link do zdjęcia:</label>
-      <input type="text" formControlName="imageURL" />
+      <input type="text" formControlName="imageURL" noWhitespace/>
     </div>
 
     <div *ngIf="form.controls['duration'] as control" class="form-field">

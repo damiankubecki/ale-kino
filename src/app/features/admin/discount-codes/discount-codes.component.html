@@ -1,0 +1,51 @@
+<section class="wrapper">
+  <ng-container *ngIf="!(editedCode$$ | async) as code">
+    <table class="discount-codes-table">
+      <tr class="table-row">
+        <th>Kod</th>
+        <th>Zniżka</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let discountCode of discountCodes$ | async" class="table-row">
+        <td>{{ discountCode.name }}</td>
+        <td>{{ discountCode.discount }}%</td>
+        <td>
+          <mat-icon (click)="openCodeEditor(discountCode)">edit</mat-icon
+          ><mat-icon (click)="deleteCode(discountCode.id)">delete</mat-icon>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="add-discount-form">
+    <h4 class="form-title">
+      {{ (editedCode$$ | async) ? 'Edycja kodu zniżkowego' : 'Dodaj nowy kod zniżkowy' }}
+    </h4>
+
+    <ng-container *ngIf="form.controls['name'] as control">
+      <label class="form-label">Nazwa: </label>
+      <input type="text" formControlName="name" placeholder="Zniżka30" noWhitespace />
+      <mat-error *ngIf="control.touched && control.hasError('required')">*obowiązkowe</mat-error>
+    </ng-container>
+
+    <ng-container *ngIf="form.controls['discount'] as control">
+      <label class="form-label">Zniżka (%): </label>
+      <input
+        type="number"
+        formControlName="discount"
+        placeholder="30"
+        class="discount-value-input"
+        noWhitespace
+      />
+      <mat-error *ngIf="control.touched && control.hasError('required')">*obowiązkowe</mat-error>
+      <mat-error *ngIf="control.touched && (control.hasError('min') || control.hasError('max'))"
+        >dozwolna wartość 1-100</mat-error
+      >
+    </ng-container>
+
+    <div class="form-buttons-container">
+      <button *ngIf="editedCode$$ | async" (click)="closeCodeEditor()" type="button">Powrót</button>
+      <button>{{ (editedCode$$ | async) ? 'Edytuj' : 'Dodaj' }}</button>
+    </div>
+  </form>
+</section>

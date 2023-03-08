@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { MatDialogModule, MatListModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { NoWhitespaceStandaloneDirective } from '@app/shared/directives/no-whitespace-standalone.directive';
 import { IMovie } from '@app/shared/types/interfaces';
 
 export type Form = FormGroup<{
@@ -32,6 +33,7 @@ export type Form = FormGroup<{
     NgIf,
     NgFor,
     AsyncPipe,
+    NoWhitespaceStandaloneDirective,
     ReactiveFormsModule,
   ],
   templateUrl: './add-movie-form.component.html',
@@ -61,8 +63,7 @@ export class AddMovieFormComponent {
       !shortDescription?.trim() ||
       !longDescription?.trim() ||
       !duration?.trim() ||
-      !minAge?.trim() ||
-      !imageURL?.trim()
+      !minAge?.trim()
     )
       window.alert('Pola nie mogą być wypełnione spacjami');
 

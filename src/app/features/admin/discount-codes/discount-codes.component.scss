@@ -1,0 +1,83 @@
+@import '../../../../theme/theme.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.discount-codes-table {
+  color: $white;
+  margin-bottom: 40px;
+
+  .table-row {
+    th {
+      padding: 8px 0;
+      font-size: $font-L;
+    }
+
+    td {
+      width: 125px;
+      padding: 3px 0;
+      text-align: center;
+      font-size: $font-M;
+
+      &:nth-of-type(2) {
+        width: 75px;
+      }
+
+      &:nth-of-type(3) {
+        width: 75px;
+        display: flex;
+        justify-content: space-around;
+
+        mat-icon {
+          color: $white;
+          cursor: pointer;
+          transition: 0.1s;
+
+          &:hover {
+            color: $orange;
+          }
+        }
+      }
+    }
+  }
+}
+
+.add-discount-form {
+  display: flex;
+  flex-direction: column;
+
+  .form-title {
+    align-self: center;
+    padding: 0 0 15px;
+    color: $white;
+    font-size: $font-M;
+  }
+
+  .form-label {
+    padding: 10px 0 4px;
+    color: $white;
+    font-size: $font-S;
+  }
+
+  .discount-value-input {
+    width: 100px;
+  }
+
+  mat-error {
+    padding: 3px 5px;
+    font-size: $font-XS;
+  }
+
+  .form-buttons-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      width: 100px;
+    }
+  }
+}
